@@ -1,0 +1,40 @@
+.pull_left {
+    float: left !important;
+}
+
+.post_content .post_container {
+    padding: 20px;
+}
+
+.post_content {
+    border-radius: 4px;
+    width: 100%;
+    border: 1px solid #f1f2f2;
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+}
+
+.post_content .post_container .post_detail {
+    margin-left: 65px;
+    position: relative;
+}
+
+.post_content .post_container .post_detail .post_text {
+    line-height: 24px;
+    margin: 15px;
+}
+
+.text_muted {
+    color: #939598;
+}
+
+img.profile_photo_md {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.main_like {
+    float: left;
+    padding: 10px 0;
+}

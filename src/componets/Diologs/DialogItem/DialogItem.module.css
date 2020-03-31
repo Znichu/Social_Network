@@ -1,0 +1,21 @@
+.friendDialog {
+    margin: 20px auto;
+}
+
+.friendDialog li img {
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    background-color: #f3f3f3;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.friendDialog li {
+    list-style: none;
+}
+
+.friendDialog li a {
+    text-decoration: none;
+    padding-left: 15px;
+    color: #0f0f0f;
+}

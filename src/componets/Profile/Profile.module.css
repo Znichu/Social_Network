@@ -1,0 +1,35 @@
+.profile_card {
+    background: linear-gradient(to bottom, rgba(39, 170, 225, .8),
+    rgba(28, 117, 188, .8)), url("https://www.antoineguilbert.fr/wp-content/uploads/2013/01/995000_46458615.jpg") no-repeat;
+    background-size: auto, auto;
+    background-size: cover;
+    width: 100%;
+    min-height: 90px;
+    padding: 10px 0;
+    color: white;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
+}
+
+.profile_card h5 {
+    text-align: center;
+    font-size: 18px;
+}
+
+.profile_card img.profile_photo {
+    border: 5px solid #1c75bc;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: -30px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+}
+ul.my_profile li {
+    list-style: none;
+    font-size: 12px;
+    text-align: left;
+}
