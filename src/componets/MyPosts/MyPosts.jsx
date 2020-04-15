@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {addPostActionCreator, onPostChangeActionCreator} from "../../redux/state";
 
 
 const MyPosts = (props) => {
@@ -11,13 +12,13 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => { // функция обработки onClick
-        props.addPost(); //
-    }
+        props.dispatch(addPostActionCreator()); //
+    };
 
     let onPostChange = () => { //обработчик onChange
         let text = newPostElement.current.value; //берет текст из значения поля для ввода
-        props.updatePostText(text); //значение textarea передается в аргументы функции, которая находится в state и прокинута сюда через пропс
-    }
+        props.dispatch(onPostChangeActionCreator(text)); //значение textarea передается в аргументы функции, которая находится в state и прокинута сюда через пропс
+    };
 
     return (
         <div className="container">

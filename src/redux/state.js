@@ -1,3 +1,7 @@
+const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
+const ADD_POST = "ADD-POST";
+
+
 let store = {
     _state: {
         myPostsPage: {
@@ -46,26 +50,32 @@ let store = {
             ]
         }
     },
+
     getState() {
       return this._state;
     },
+    subscribe (observer) {
+        this._callSubscriber = observer
+    },
+
     _callSubscriber () {
         console.log('State changed');
     },
-    addPost () {   //функция для добавления нвого поста в стэйт
-        let newPost = {
-            id: 4,
-            message: this._state.myPostsPage.newPostText,
-            likesCount: 0
-        };
-        this._state.myPostsPage.posts.push(newPost); //добавляет новый пост в state для добавления используеться метод push()
-        this._state.myPostsPage.newPostText = ''; //обнуление, зачищает поле ввода поста
-        this._callSubscriber(this._state);
-    },
-    updatePostText (newText) {
-        this._state.myPostsPage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
+
+    // addPost () {   //функция для добавления нвого поста в стэйт
+    //     let newPost = {
+    //         id: 4,
+    //         message: this._state.myPostsPage.newPostText,
+    //         likesCount: 0
+    //     };
+    //     this._state.myPostsPage.posts.push(newPost); //добавляет новый пост в state для добавления используеться метод push()
+    //     this._state.myPostsPage.newPostText = ''; //обнуление, зачищает поле ввода поста
+    //     this._callSubscriber(this._state);
+    // },
+    // updatePostText (newText) {
+    //     this._state.myPostsPage.newPostText = newText;
+    //     this._callSubscriber(this._state);
+    // },
     addMessage () {
         let newMessage = {
             id: 7,
@@ -79,10 +89,28 @@ let store = {
         this._state.messagesPage.newMessageText = newTextMessage;
         this._callSubscriber(this._state);
     },
-    subscribe (observer) {
-        this._callSubscriber = observer
+
+    dispatch (action) {
+        if (action.type === "ADD-POST"){
+            let newPost = {
+                id: 4,
+                message: this._state.myPostsPage.newPostText,
+                likesCount: 0
+            };
+            this._state.myPostsPage.posts.push(newPost); //добавляет новый пост в state для добавления используеться метод push()
+            this._state.myPostsPage.newPostText = ''; //обнуление, зачищает поле ввода поста
+            this._callSubscriber(this._state);
+        } else if (action.type === "UPDATE-POST-TEXT") {
+            this._state.myPostsPage.newPostText =  action.newText;
+            this._callSubscriber(this._state);
+        }
+
     },
+
 };
+
+export const addPostActionCreator = () => ( {type: ADD_POST} );
+export const onPostChangeActionCreator = (text) => ( {type: UPDATE_POST_TEXT, newText: text} );
 
 window.state = store;
 export default store;

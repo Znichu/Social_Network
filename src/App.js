@@ -28,8 +28,7 @@ const App = (props) => {
                 <div className="col-lg-8">
                     <div className="mainContent">
                         <Route path="/myposts" render={() => <MyPosts state={props.state.myPostsPage}
-                                                                      addPost={props.addPost}
-                                                                      updatePostText={props.updatePostText}/>}/>
+                                                                      dispatch={props.dispatch}/>}/>
                         <Route path="/dialogs" render={() => <Dialogs state={props.state.messagesPage}
                                                                       updateMessageText={props.updateMessageText}
                                                                       addMessage={props.addMessage}/>}/>
