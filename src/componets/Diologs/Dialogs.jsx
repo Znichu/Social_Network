@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import {addMessageActionCreator, onMessageChangeActionCreator} from "../../redux/messages-reducer";
 
 
 const Dialogs = (props) => {
@@ -14,13 +15,13 @@ const Dialogs = (props) => {
     let newMessageSend = React.createRef(); //создаем реф для отработки клика по кнопке реф прописываем в textarea
 
     let sendNewMessage = () => { //отправка сообщения
-        props.addMessage ();
-    }
+        props.dispatch(addMessageActionCreator());
+    };
 
     let onMessageChange = () => {
         let text = newMessageSend.current.value;
-        props.updateMessageText(text);
-    }
+        props.dispatch(onMessageChangeActionCreator(text));
+    };
 
 
     return (

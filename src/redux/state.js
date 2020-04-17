@@ -1,5 +1,5 @@
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
-const ADD_POST = "ADD-POST";
+import PostsReducer from "./posts-reducer";
+import MessageReducer from "./messages-reducer";
 
 
 let store = {
@@ -76,41 +76,29 @@ let store = {
     //     this._state.myPostsPage.newPostText = newText;
     //     this._callSubscriber(this._state);
     // },
-    addMessage () {
-        let newMessage = {
-            id: 7,
-            message: this._state.messagesPage.newMessageText
-        };
-        this._state.messagesPage.messages.push(newMessage);
-        this._state.messagesPage.newMessageText = '';
-        this._callSubscriber(this._state);
-    },
-    updateMessageText (newTextMessage) {
-        this._state.messagesPage.newMessageText = newTextMessage;
-        this._callSubscriber(this._state);
-    },
+    // addMessage () {
+    //     let newMessage = {
+    //         id: 7,
+    //         message: this._state.messagesPage.newMessageText
+    //     };
+    //     this._state.messagesPage.messages.push(newMessage);
+    //     this._state.messagesPage.newMessageText = '';
+    //     this._callSubscriber(this._state);
+    // },
+    // updateMessageText (newTextMessage) {
+    //     this._state.messagesPage.newMessageText = newTextMessage;
+    //     this._callSubscriber(this._state);
+    // },
 
     dispatch (action) {
-        if (action.type === "ADD-POST"){
-            let newPost = {
-                id: 4,
-                message: this._state.myPostsPage.newPostText,
-                likesCount: 0
-            };
-            this._state.myPostsPage.posts.push(newPost); //добавляет новый пост в state для добавления используеться метод push()
-            this._state.myPostsPage.newPostText = ''; //обнуление, зачищает поле ввода поста
-            this._callSubscriber(this._state);
-        } else if (action.type === "UPDATE-POST-TEXT") {
-            this._state.myPostsPage.newPostText =  action.newText;
-            this._callSubscriber(this._state);
-        }
+        this._state.myPostsPage = PostsReducer(action, this._state.myPostsPage);
+        this._state.messagesPage = MessageReducer(action, this._state.messagesPage);
 
+        this._callSubscriber(this._state);
     },
 
 };
 
-export const addPostActionCreator = () => ( {type: ADD_POST} );
-export const onPostChangeActionCreator = (text) => ( {type: UPDATE_POST_TEXT, newText: text} );
 
 window.state = store;
 export default store;
