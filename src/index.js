@@ -7,17 +7,16 @@ import './index.css';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.css';
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 
 let rerenderTree = (state) => {
 
     ReactDOM.render(
-        < BrowserRouter>
-            <App
-                store={store}
-                state={state}
-                dispatch={store.dispatch.bind(store)}
-            />
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />
+            </Provider>
         </BrowserRouter>, document.getElementById('root'));
 
 }

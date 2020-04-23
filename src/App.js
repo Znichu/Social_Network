@@ -11,6 +11,7 @@ import {Route} from "react-router-dom";
 import Friends from "./componets/Friends/Friends";
 import MyPostsContainer from "./componets/MyPosts/MyPostsContainer";
 import DialogsContainer from "./componets/Diologs/DialogsContainer";
+import FriendsContainer from "./componets/Friends/FriendsContainer";
 
 
 const App = (props) => {
@@ -23,12 +24,12 @@ const App = (props) => {
                 <div className="col-lg-4">
                     <Profile/>
                     <Navbar/>
-                    <Friends state={props.state.friendsBlock}/>
+                    <FriendsContainer />
                 </div>
                 <div className="col-lg-8">
                     <div className="mainContent">
-                        <Route path="/myposts" render={() => <MyPostsContainer store={props.store}/>}/>
-                        <Route path="/dialogs" render={() => <DialogsContainer store={props.store} />}/>
+                        <Route path="/myposts" render={() => <MyPostsContainer />}/>
+                        <Route path="/dialogs" render={() => <DialogsContainer />}/>
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/setting" component={Setting}/>
