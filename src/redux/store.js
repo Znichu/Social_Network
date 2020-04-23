@@ -1,5 +1,6 @@
 import PostsReducer from "./posts-reducer";
 import MessageReducer from "./messages-reducer";
+import friendsReducer from "./friend-reducer";
 
 
 let store = {
@@ -93,6 +94,8 @@ let store = {
     dispatch (action) {
         this._state.myPostsPage = PostsReducer(action, this._state.myPostsPage);
         this._state.messagesPage = MessageReducer(action, this._state.messagesPage);
+        this._state.friendsBlock = friendsReducer(action, this._state.friendsBlock);
+
 
         this._callSubscriber(this._state);
     },

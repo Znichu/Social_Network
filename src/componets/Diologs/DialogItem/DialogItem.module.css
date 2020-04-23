@@ -2,6 +2,9 @@
     margin: 20px auto;
 }
 
+.friendDialog{
+    display: inline-table;
+}
 .friendDialog li img {
     border-radius: 50%;
     height: 55px;
@@ -16,6 +19,5 @@
 
 .friendDialog li a {
     text-decoration: none;
-    padding-left: 15px;
     color: #0f0f0f;
 }

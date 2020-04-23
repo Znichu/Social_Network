@@ -24,7 +24,8 @@
 }
 
 textarea.form_control {
-    height: 100px;
+    height: 50px;
+    padding: 10px;
 }
 
 .create_post .form_group .form_control {
