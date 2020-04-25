@@ -19,23 +19,28 @@ let initialState = {
             likesCount: 105
         }
     ],
-        newPostText:''
+        newPostText: ''
 };
 
 const PostsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            let newPost = {
-                id: 4,
-                message: state.newPostText,
-                likesCount: 0
+        case ADD_POST: {
+            return {
+                ...state,
+                newPostText: '',
+                posts: [...state.posts, {
+                    id: 4,
+                    message: state.newPostText,
+                    likesCount: 0
+                }]
             };
-            state.posts.push(newPost); //добавляет новый пост в state для добавления используеться метод push()
-            state.newPostText = ''; //обнуление, зачищает поле ввода поста
-            return state;
-        case  UPDATE_POST_TEXT:
-            state.newPostText =  action.newText;
-            return state;
+        }
+        case  UPDATE_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText
+            };
+        }
         default:
             return state;
     }

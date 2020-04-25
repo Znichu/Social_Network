@@ -4,7 +4,6 @@ import Post from "./Post/Post";
 
 
 const MyPosts = (props) => {
-
     let postsElement =
         props.posts.posts.map(p => <Post message={p.message} likes={p.likesCount}/>);
 
@@ -27,7 +26,8 @@ const MyPosts = (props) => {
                 <div className={s.form_group}>
                     <textarea onChange={onPostChange} ref={newPostElement} className={s.form_control}
                               name="texts" id="exampleTextarea" cols="30"
-                              rows="1" value={props.newPostText} placeholder='Что у Вас нового?'/>
+                              rows="1" value={props.posts.newPostText} placeholder='Что у Вас нового?'/>
+
                     <button onClick={onAddPost} className={s.btn_primary}>Опубликовать</button>
                 </div>
             </div>
@@ -40,5 +40,6 @@ const MyPosts = (props) => {
 
 
     );
+    debugger;
 }
 export default MyPosts;

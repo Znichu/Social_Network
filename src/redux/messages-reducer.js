@@ -21,18 +21,24 @@ let initialState = {
 };
 
 const MessageReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        case ADD_MESSAGE:
-            let newMessage = {
-                id: 7,
-                message: state.newMessageText
+        case ADD_MESSAGE: {
+            //сразу возвращаем новый объект
+            //раскукоживаем стэйт, и записываем туда обнуленный инпут
+            //делаем глубокую копию стэйта и сразу записываем туда новой сообщение
+            return  {
+              ...state,
+              newMessageText: '',
+              messages: [...state.messages, {id: 7, message: state.newMessageText}]
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
-        case  UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newTextMessage;
-            return state;
+        }
+        case  UPDATE_MESSAGE_TEXT: {
+            return {
+              ...state,
+              newMessageText: action.newTextMessage
+            };
+        }
         default:
             return state;
     }
