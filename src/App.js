@@ -12,6 +12,7 @@ import Friends from "./componets/Friends/Friends";
 import MyPostsContainer from "./componets/MyPosts/MyPostsContainer";
 import DialogsContainer from "./componets/Diologs/DialogsContainer";
 import FriendsContainer from "./componets/Friends/FriendsContainer";
+import UsersContainer from "./componets/Users/UsersContainer";
 
 
 const App = (props) => {
@@ -30,6 +31,7 @@ const App = (props) => {
                     <div className="mainContent">
                         <Route path="/myposts" render={() => <MyPostsContainer />}/>
                         <Route path="/dialogs" render={() => <DialogsContainer />}/>
+                        <Route path="/users" render={() => <UsersContainer />}/>
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/setting" component={Setting}/>

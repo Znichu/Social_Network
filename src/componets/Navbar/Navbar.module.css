@@ -24,4 +24,8 @@ ul.main_nav li a {
     text-decoration: none;
 }
 
+a.active {
+    border-bottom: 2px solid #1A73E8;
+}
+
 
