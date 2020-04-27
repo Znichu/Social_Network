@@ -5,14 +5,15 @@ import smallAvatar from './../../assets/images/avatar-chase.png'
 
 
 const Users = (props) => {
-
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                const users = response.data.items;
-                props.setUsers(users)
-            })
-    }
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    const users = response.data.items;
+                    props.setUsers(users)
+                })
+        }
+    };
 
 
     let user = props.users.map( u =>
@@ -34,6 +35,7 @@ const Users = (props) => {
     return (
         <div className="container">
             <div className="row">
+                <button onClick={getUsers}>Get Users</button>
                 {user}
             </div>
         </div>
