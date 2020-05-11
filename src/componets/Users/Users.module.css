@@ -28,7 +28,7 @@
     padding-left: 30px;
 }
 
-.fullname {
+.fullName {
     color: #1C75BC;
     font-size: 1.5em;
     font-weight: bold;
@@ -57,6 +57,31 @@
 
 .nextUser:hover {
     background: #1C75BC;
+}
+
+.pagination span {
+    display: inline-block;
+    cursor: pointer;
+}
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+span.active {
+    font-weight: bold;
+    font-size: 25px;
 }
 
 
