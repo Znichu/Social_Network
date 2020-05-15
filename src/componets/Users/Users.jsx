@@ -1,6 +1,8 @@
 import React from "react";
 import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
+import Pagination from "react-bootstrap/Pagination";
+
 
 
 let Users = (props) => {
@@ -16,7 +18,7 @@ let Users = (props) => {
             </div>
             {u.followed
                 ? <button className={style.nextUser} onClick={() => {
-                    props.unsubscribe(u.id)
+                    props.unfollow(u.id)
                 }}>Unfollow</button>
                 : <button className={style.nextUser} onClick={() => {
                     props.follow(u.id)
@@ -31,13 +33,24 @@ let Users = (props) => {
         pages.push(i);
     }
 
-    let pageElement = pages.map(p => <a className={ props.currentPage === p ? style.active : null }
-        onClick={ () => { props.onPageClick(p) } }> { p } </a>);
+    // let pageElement = pages.map(p => <a className={ props.currentPage === p ? style.active : null }
+    //     onClick={ () => { props.onPageClick(p) } }> { p } </a>);
+    let pageElement = pages.map(p => <Pagination.Item className={ props.currentPage === p ? "active" : null }
+        onClick={ () => { props.onPageClick(p) } }> { p } </Pagination.Item>);
 
     return (
         <div className="container">
             <div className="row">
-                <div className={style.pagination}>{pageElement}</div>
+                <div>
+                    <Pagination>
+                        <Pagination.First/>
+                        <Pagination.Prev/>
+                        {pageElement}
+                        <Pagination.Ellipsis active={20}/>
+                        <Pagination.Next/>
+                        <Pagination.Last/>
+                    </Pagination>
+                </div>
                 {user}
             </div>
         </div>
