@@ -1,0 +1,17 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.avatar img {
+    border: 5px solid rgba(39, 170, 225, .5);
+    border-radius: 50%;
+}
+
+.fullName {
+    font-family: Roboto sans-serif;
+    font-size: 25px;
+}

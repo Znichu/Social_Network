@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
 import Pagination from "react-bootstrap/Pagination";
+import {NavLink} from "react-router-dom";
 
 
 
@@ -9,7 +10,10 @@ let Users = (props) => {
     let user = props.users.map(u =>
         <div className={style.mainContainer}>
             <div className={`${style.userCard} ${style.clearfix}`}>
-                <img src={u.photos.small != null ? u.photos.small : smallAvatar} className={style.userImg}/>
+                <NavLink to={"/profile/" + u.id}>
+                    <img src={u.photos.small != null ? u.photos.small : smallAvatar} className={style.userImg}/>
+                </NavLink>
+
                 <div className={`${style.col2} ${style.clearfix}`}>
                     <div className={style.fullName}>{u.name}</div>
                     <div className={style.status}>{u.status}</div>
