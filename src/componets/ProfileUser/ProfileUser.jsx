@@ -1,6 +1,7 @@
 import React from "react";
 import style from './ProfileUser.module.css'
 import Preloader from "../../common/Preloader/Preloader";
+import defaultImg from "../../assets/images/GAN-LOGO-NOTEXT-1-1024x1020.png";
 
 
 const ProfileUser = (props) => {
@@ -12,7 +13,7 @@ const ProfileUser = (props) => {
         <div className={style.wrapper}>
             <div className={style.profile}>
                 <div className={style.avatar}>
-                    <img src={props.profile.photos.small} alt=""/>
+                    <img src={props.profile.photos.large !== null ? props.profile.photos.large : defaultImg} alt=""/>
                 </div>
                 <div className={style.fullName}>
                     <span>{props.profile.fullName}</span>

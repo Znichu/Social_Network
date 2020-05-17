@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from "./componets/Header/Header";
 import Navbar from "./componets/Navbar/Navbar";
 import Profile from "./componets/Profile/Profile";
 import News from "./componets/News/News";
@@ -12,6 +11,7 @@ import DialogsContainer from "./componets/Diologs/DialogsContainer";
 import FriendsContainer from "./componets/Friends/FriendsContainer";
 import UsersContainer from "./componets/Users/UsersContainer";
 import ProfileUserContainer from "./componets/ProfileUser/ProfileUserContainer";
+import HeaderContainer from "./componets/Header/HeaderContainer";
 
 
 const App = (props) => {
@@ -19,7 +19,7 @@ const App = (props) => {
         <div className="container">
             <div className="row">
                 <div className="col-lg-12">
-                    <Header/>
+                    <HeaderContainer />
                 </div>
                 <div className="col-lg-4">
                     <Profile/>
@@ -31,7 +31,7 @@ const App = (props) => {
                         <Route path="/myposts" render={() => <MyPostsContainer />}/>
                         <Route path="/dialogs" render={() => <DialogsContainer />}/>
                         <Route path="/users" render={() => <UsersContainer />}/>
-                        <Route path="/profile" render={() => <ProfileUserContainer />}/>
+                        <Route path="/profile/:userId" render={() => <ProfileUserContainer />}/>
                         <Route path="/news" component={News}/>
                         <Route path="/music" component={Music}/>
                         <Route path="/setting" component={Setting}/>

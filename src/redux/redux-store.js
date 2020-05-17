@@ -4,13 +4,15 @@ import MessageReducer from "./messages-reducer";
 import friendsReducer from "./friend-reducer";
 import UsersReducer from "./users-reducer";
 import ProfileReducer from "./profile-reducer";
+import AuthReducer from "./auth-reducer";
 
 let reducers = combineReducers({
     myPostsPage: PostsReducer,
     messagesPage: MessageReducer,
     friendsBlock: friendsReducer,
     usersPage: UsersReducer,
-    profileUser: ProfileReducer
+    profileUser: ProfileReducer,
+    auth: AuthReducer
     });
 
 
