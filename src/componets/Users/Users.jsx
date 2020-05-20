@@ -3,6 +3,7 @@ import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
 import Pagination from "react-bootstrap/Pagination";
 import {NavLink} from "react-router-dom";
+import {followAPI} from "../../api/api";
 
 
 
@@ -21,11 +22,26 @@ let Users = (props) => {
                 </div>
             </div>
             {u.followed
-                ? <button className={style.nextUser} onClick={() => {
-                    props.unfollow(u.id)
+                ? <button disabled={props.followInProgress.some(id => id === u.id )} className={style.nextUser} onClick={() => {
+                    props.followingInProgress(true, u.id);
+                    followAPI.unfollow(u.id)
+                        .then(data => {
+                            if (  data.resultCode === 0 ) {
+                                props.unfollow(u.id)
+                            }
+                            props.followingInProgress(false, u.id);
+                        });
                 }}>Unfollow</button>
-                : <button className={style.nextUser} onClick={() => {
-                    props.follow(u.id)
+
+                : <button disabled={props.followInProgress.some(id => id === u.id )} className={style.nextUser} onClick={ () => {
+                    props.followingInProgress(true, u.id);
+                    followAPI.follow(u.id)
+                        .then( data => {
+                            if (  data.resultCode === 0 ) {
+                                props.follow(u.id)
+                            }
+                            props.followingInProgress(false, u.id);
+                        });
                 }}>Follow</button>
             }
         </div>);
@@ -50,7 +66,7 @@ let Users = (props) => {
                         <Pagination.First/>
                         <Pagination.Prev/>
                         {pageElement}
-                        <Pagination.Ellipsis active={20}/>
+                        <Pagination.Ellipsis/>
                         <Pagination.Next/>
                         <Pagination.Last/>
                     </Pagination>
