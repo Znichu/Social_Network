@@ -3,11 +3,8 @@ import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
 import Pagination from "react-bootstrap/Pagination";
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../api/api";
 
-
-
-let Users = (props) => {
+const Users = (props) => {
     let user = props.users.map(u =>
         <div className={style.mainContainer}>
             <div className={`${style.userCard} ${style.clearfix}`}>
@@ -22,27 +19,13 @@ let Users = (props) => {
                 </div>
             </div>
             {u.followed
-                ? <button disabled={props.followInProgress.some(id => id === u.id )} className={style.nextUser} onClick={() => {
-                    props.followingInProgress(true, u.id);
-                    followAPI.unfollow(u.id)
-                        .then(data => {
-                            if (  data.resultCode === 0 ) {
-                                props.unfollow(u.id)
-                            }
-                            props.followingInProgress(false, u.id);
-                        });
-                }}>Unfollow</button>
+                ? <button disabled={ props.followInProgress.some(id => id === u.id ) }
+                          className={ style.nextUser }
+                          onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
 
-                : <button disabled={props.followInProgress.some(id => id === u.id )} className={style.nextUser} onClick={ () => {
-                    props.followingInProgress(true, u.id);
-                    followAPI.follow(u.id)
-                        .then( data => {
-                            if (  data.resultCode === 0 ) {
-                                props.follow(u.id)
-                            }
-                            props.followingInProgress(false, u.id);
-                        });
-                }}>Follow</button>
+                : <button disabled={ props.followInProgress.some(id => id === u.id ) }
+                          className={ style.nextUser }
+                          onClick={ () => { props.follow(u.id) }}>Follow</button>
             }
         </div>);
 
@@ -53,10 +36,11 @@ let Users = (props) => {
         pages.push(i);
     }
 
-    // let pageElement = pages.map(p => <a className={ props.currentPage === p ? style.active : null }
-    //     onClick={ () => { props.onPageClick(p) } }> { p } </a>);
-    let pageElement = pages.map(p => <Pagination.Item className={ props.currentPage === p ? "active" : null }
-        onClick={ () => { props.onPageClick(p) } }> { p } </Pagination.Item>);
+    let pageElement = pages.map(p =>  <Pagination.Item
+                                                className={ props.currentPage === p ? "active" : null }
+                                                onClick={ () => { props.onPageClick(p) } }>
+                                                { p }
+                                        </Pagination.Item>);
 
     return (
         <div className="container">
