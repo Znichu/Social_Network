@@ -23,7 +23,7 @@ const App = (props) => {
                     <HeaderContainer />
                 </div>
                 <div className="col-lg-4">
-                    <Profile/>
+                    <Profile status={'HelLo my Friends'} />
                     <Navbar/>
                     <FriendsContainer />
                 </div>
@@ -43,6 +43,6 @@ const App = (props) => {
         </div>
 
     );
-}
+};
 
 export default App;

@@ -34,3 +34,10 @@ ul.my_profile li {
     font-size: 12px;
     text-align: left;
 }
+
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}

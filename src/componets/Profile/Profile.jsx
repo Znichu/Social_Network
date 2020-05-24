@@ -2,20 +2,44 @@ import s from "./Profile.module.css";
 import React from "react";
 
 
-const Profile = () => {
-    return(
-        <div className={s.profile_card}>
-            <img className={s.profile_photo}
-                 src="https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"
-                 alt="" />
-            <h5>Sergey Neplashov</h5>
-            <ul className={s.my_profile}>
-                <li>Date of Birth: 05.08.1991</li>
-                <li>City: Slavgorod</li>
-                <li>Education: GGU Skoriny</li>
-                <li>Web site:</li>
-            </ul>
-        </div>
-    );
+class Profile extends React.Component {
+
+    state = {
+        editMode: false
+    };
+
+    activateEditMode = () => {
+        this.setState( {editMode: true} )
+    };
+
+    deactivateEditMode = () => {
+        this.setState( {editMode: false} )
+    };
+
+    render() {
+        return (
+            <div className={s.profile_card}>
+                <img className={s.profile_photo}
+                     src="https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"
+                     alt=""/>
+                <h5>Sergey Neplashov</h5>
+                <div className={s.status}>
+                    {!this.state.editMode &&
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    }
+                    {this.state.editMode &&
+                    <input autoFocus={true} onBlur={this.deactivateEditMode} value={ this.props.status } type="text"/>
+                    }
+
+                </div>
+                <ul className={s.my_profile}>
+                    <li>Date of Birth: 05.08.1991</li>
+                    <li>City: Slavgorod</li>
+                    <li>Education: GGU Skoriny</li>
+                </ul>
+            </div>
+        );
+    }
 }
+
 export default Profile;
