@@ -2,29 +2,8 @@ import React from "react";
 import {addMessageActionCreator, onMessageChangeActionCreator} from "../../redux/messages-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {withRedirect} from "../../hoc/hoc";
 
-
-// const DialogsContainer = (props) => {
-//     let state = props.store.getState();
-//
-//     let sendNewMessage = () => { //отправка сообщения
-//         props.store.dispatch(addMessageActionCreator());
-//     };
-//
-//     let onMessageChange = (text) => {
-//         let action = onMessageChangeActionCreator(text);
-//         props.store.dispatch(action);
-//     };
-//
-//
-//     return ( <Dialogs
-//         sendNewMessage={sendNewMessage}
-//         onMessageChange={onMessageChange}
-//         dialogs={state.messagesPage.dialogs}
-//         newMessageText={state.messagesPage.newMessageText}
-//         messages={state.messagesPage.messages}
-//     /> );
-// }
 
 
 let mapStateToProps = (state) => {
@@ -47,6 +26,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
- const DialogsContainer = connect (mapStateToProps, mapDispatchToProps)(Dialogs);
+let Redirect = withRedirect(Dialogs);
+
+const DialogsContainer = connect (mapStateToProps, mapDispatchToProps)(Redirect);
 
 export default DialogsContainer;

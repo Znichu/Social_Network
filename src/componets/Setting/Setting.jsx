@@ -1,4 +1,5 @@
 import React from "react";
+import {withRedirect} from "../../hoc/hoc";
 
 const Setting = () => {
     return (
@@ -6,6 +7,8 @@ const Setting = () => {
             Setting
         </div>
     )
-}
+};
 
-export default Setting;
+let Redirect = withRedirect(Setting);
+
+export default Redirect;

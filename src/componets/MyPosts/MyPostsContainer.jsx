@@ -2,6 +2,7 @@ import React from "react";
 import {addPostActionCreator, onPostChangeActionCreator} from "../../redux/posts-reducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
+import {withRedirect} from "../../hoc/hoc";
 
 
 // const MyPostsContainer = (props) => {
@@ -44,6 +45,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-const MyPostsContainer = connect (mapStateToProps, mapDispatchToProps) (MyPosts);
+let Redirect = withRedirect(MyPosts);
+
+const MyPostsContainer = connect (mapStateToProps, mapDispatchToProps) (Redirect);
 
 export default MyPostsContainer;
