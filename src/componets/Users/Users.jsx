@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
-import Pagination from "react-bootstrap/Pagination";
+import Pagination from 'react-bootstrap/Pagination'
 import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
@@ -36,23 +36,26 @@ const Users = (props) => {
         pages.push(i);
     }
 
-    let pageElement = pages.map(p =>  <Pagination.Item
-                                                className={ props.currentPage === p ? "active" : null }
-                                                onClick={ () => { props.onPageClick(p) } }>
-                                                { p }
-                                        </Pagination.Item>);
+    let pageElement = pages.map(p =>  {
+        if (p == 1 || p == props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
+            return (<Pagination.Item
+                className={ props.currentPage === p ? "active" : null }
+                onClick={ () => { props.onPageClick(p) } }>
+                { p }
+            </Pagination.Item>);
+        }
+    });
 
     return (
         <div className="container">
             <div className="row">
-                <div>
+                <div className={style.paginationWrapper}>
                     <Pagination>
-                        <Pagination.First/>
-                        <Pagination.Prev/>
+                        <Pagination.First />
+                        <Pagination.Prev />
                         {pageElement}
-                        <Pagination.Ellipsis/>
-                        <Pagination.Next/>
-                        <Pagination.Last/>
+                        <Pagination.Next />
+                        <Pagination.Last />
                     </Pagination>
                 </div>
                 {user}
