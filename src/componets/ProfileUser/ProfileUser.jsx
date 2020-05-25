@@ -18,6 +18,9 @@ const ProfileUser = (props) => {
                 <div className={style.fullName}>
                     <span>{props.profile.fullName}</span>
                 </div>
+                <div>
+                    <span>{props.status}</span>
+                </div>
                 <div className={style.contact}>
                 </div>
             </div>

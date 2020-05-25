@@ -13,6 +13,7 @@ import UsersContainer from "./componets/Users/UsersContainer";
 import ProfileUserContainer from "./componets/ProfileUser/ProfileUserContainer";
 import HeaderContainer from "./componets/Header/HeaderContainer";
 import Login from "./componets/Login/Login";
+import ProfileContainer from "./componets/Profile/ProfileContainer";
 
 
 const App = (props) => {
@@ -23,7 +24,7 @@ const App = (props) => {
                     <HeaderContainer />
                 </div>
                 <div className="col-lg-4">
-                    <Profile status={'HelLo my Friends'} />
+                    <ProfileContainer />
                     <Navbar/>
                     <FriendsContainer />
                 </div>

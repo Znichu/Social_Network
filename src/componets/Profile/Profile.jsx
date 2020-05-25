@@ -5,15 +5,29 @@ import React from "react";
 class Profile extends React.Component {
 
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
+
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     activateEditMode = () => {
-        this.setState( {editMode: true} )
+        this.setState( {editMode: true} );
+
     };
 
     deactivateEditMode = () => {
-        this.setState( {editMode: false} )
+        this.setState( {editMode: false} );
+        this.props.updateMyStatus(this.state.status);
+    };
+
+    onChangeInput = (e) => {
+          this.setState( {status: e.currentTarget.value})
     };
 
     render() {
@@ -25,18 +39,21 @@ class Profile extends React.Component {
                 <h5>Sergey Neplashov</h5>
                 <div className={s.status}>
                     {!this.state.editMode &&
-                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                        <span className={s.statusTitle} onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                     }
                     {this.state.editMode &&
-                    <input autoFocus={true} onBlur={this.deactivateEditMode} value={ this.props.status } type="text"/>
+                    <input onChange={this.onChangeInput} autoFocus={true} onBlur={this.deactivateEditMode} value={ this.state.status } type="text"/>
                     }
 
                 </div>
-                <ul className={s.my_profile}>
-                    <li>Date of Birth: 05.08.1991</li>
-                    <li>City: Slavgorod</li>
-                    <li>Education: GGU Skoriny</li>
-                </ul>
+                {/*<div>*/}
+                {/*    <ul className={s.my_profile}>*/}
+                {/*        <li>Date of Birth: 05.08.1991</li>*/}
+                {/*        <li>City: Slavgorod</li>*/}
+                {/*        <li>Education: GGU Skoriny</li>*/}
+                {/*    </ul>*/}
+                {/*</div>*/}
+
             </div>
         );
     }

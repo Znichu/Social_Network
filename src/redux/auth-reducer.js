@@ -3,7 +3,7 @@ import {authAPI} from "../api/api";
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 
 let initialState = {
-    userId: null,
+    userId: 8204,
     email: null,
     login: null,
     isAuth: false
