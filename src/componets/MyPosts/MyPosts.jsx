@@ -1,45 +1,44 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {Field, reduxForm} from "redux-form";
 
 
 const MyPosts = (props) => {
     let postsElement =
         props.posts.posts.map(p => <Post message={p.message} likes={p.likesCount}/>);
 
-    let newPostElement = React.createRef();
-
-    let onAddPost = () => { // функция обработки onClick
-        props.addPost(); //
-    };
-
-    let onPostChange = () => { //обработчик onChange
-        let text = newPostElement.current.value; //берет текст из значения поля для ввода
-        props.onPostChange(text); //значение textarea передается в аргументы функции, которая находится в state и прокинута сюда через пропс
+    let addPosts = (values) => { // функция обработки onClick
+        props.addPost(values.textMyPost); //
     };
 
     return (
 
         <div className="container">
             <div className={s.create_post}>
-
                 <div className={s.form_group}>
-                    <textarea onChange={onPostChange} ref={newPostElement} className={s.form_control}
-                              name="texts" id="exampleTextarea" cols="30"
-                              rows="1" value={props.posts.newPostText} placeholder='Что у Вас нового?'/>
-
-                    <button onClick={onAddPost} className={s.btn_primary}>Опубликовать</button>
+                    <AddMyPostFormRedux onSubmit={addPosts}/>
                 </div>
             </div>
             <h5 style={{textAlign: "center", marginBottom: "20px", marginTop: "45px"}}>My posts</h5>
             <div>
                 {postsElement}
             </div>
-
         </div>
 
 
     );
-    debugger;
-}
+};
+
+const AddMyPostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field component="textarea" name="textMyPost" placeholder="Что у Вас нового?" className={s.form_control}/>
+            <button className={s.btn_primary}>Опубликовать</button>
+        </form>
+    )
+};
+
+const AddMyPostFormRedux = reduxForm({form: "addMyPost"})(AddMyPostForm);
+
 export default MyPosts;

@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./componets/Navbar/Navbar";
-import Profile from "./componets/Profile/Profile";
 import News from "./componets/News/News";
 import Music from "./componets/Music/Music";
 import Setting from "./componets/Setting/Setting";
@@ -35,14 +34,13 @@ const App = (props) => {
                         <Route path="/users" render={ () => <UsersContainer /> }/>
                         <Route path="/profile/:userId" render={ () => <ProfileUserContainer />}/>
                         <Route path="/login" render={ () => <Login /> }/>
-                        <Route path="/news" component={News}/>
-                        <Route path="/music" component={Music}/>
-                        <Route path="/setting" component={Setting}/>
+                        <Route path="/news" render={ () => <News /> }/>
+                        <Route path="/music" render={ () => <Music /> }/>
+                        <Route path="/setting" render={ () => <Setting /> }/>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 

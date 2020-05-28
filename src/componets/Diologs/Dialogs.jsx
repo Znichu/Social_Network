@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
+import {Field, reduxForm} from "redux-form";
 
 
 
@@ -13,40 +14,43 @@ const Dialogs = (props) => {
     let messagesElement =
         props.messages.map(m => <MessageItem message={m.message} />);
 
-    let newMessageSend = React.createRef(); //создаем реф для отработки клика по кнопке реф прописываем в textarea
-
-    let sendNewMessage = () => { //отправка сообщения
-       props.sendNewMessage();
-    };
-
-    let onMessageChange = ( ) => {
-        let text = newMessageSend.current.value;
-        props.onMessageChange(text);
+    let addMessage = (values) => {
+        props.addMessage(values.addMessageBody);
     };
 
 
     return (
-            <div className="container" style={{paddingBottom:"25px"}}>
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className={s.dialogs}>
-                            { dialogsElement }
-                        </div>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col lg-12">
-                        <div className={s.messages}>
-                            { messagesElement }
-                        </div>
-                        <div className={s.enterMessage}>
-                            <textarea onChange={onMessageChange} ref={newMessageSend} className={s.actionBoxInput}
-                                      value={props.newMessageText} placeholder='Ваше сообщение...'/>
-                            <button onClick={ sendNewMessage } className={s.send}>Send</button>
-                        </div>
+        <div className="container" style={{paddingBottom: "25px"}}>
+            <div className="row">
+                <div className="col-lg-12">
+                    <div className={s.dialogs}>
+                        {dialogsElement}
                     </div>
                 </div>
             </div>
+            <div className="row">
+                <div className="col lg-12">
+                    <div className={s.messages}>
+                        {messagesElement}
+                    </div>
+                    <div className={s.enterMessage}>
+                        <AddMessageFormRedux onSubmit={addMessage}/>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
-}
+};
+
+const AddMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <Field className={s.actionBoxInput} placeholder='Ваше сообщение...' name="addMessageBody" component="textarea" />
+            <button  className={s.send}>Send</button>
+        </form>
+    );
+};
+
+const AddMessageFormRedux = reduxForm ({ form: 'addMessageDialog'}) (AddMessageForm);
+
 export default Dialogs;

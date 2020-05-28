@@ -1,5 +1,4 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 
 let initialState = {
     dialogs: [
@@ -16,8 +15,7 @@ let initialState = {
         {id: 4, message: 'What you did now?'},
         {id: 5, message: 'Read book.'},
         {id: 6, message: 'Cool.'},
-    ],
-    newMessageText: ''
+    ]
 };
 
 const MessageReducer = (state = initialState, action) => {
@@ -29,23 +27,14 @@ const MessageReducer = (state = initialState, action) => {
             //делаем глубокую копию стэйта и сразу записываем туда новой сообщение
             return  {
               ...state,
-              newMessageText: '',
-              messages: [...state.messages, {id: 7, message: state.newMessageText}]
+              messages: [...state.messages, {id: 7, message: action.newMessageText}]
             };
         }
-        case  UPDATE_MESSAGE_TEXT: {
-            return {
-              ...state,
-              newMessageText: action.newTextMessage
-            };
-        }
-        default:
-            return state;
+        default: return state;
     }
 };
 
+export const addMessage = (newMessageText) => ( {type: ADD_MESSAGE, newMessageText} );
 
-export const addMessageActionCreator = () => ( {type: ADD_MESSAGE} );
-export const onMessageChangeActionCreator = (text) => ( {type: UPDATE_MESSAGE_TEXT, newTextMessage: text} );
 
 export default MessageReducer;

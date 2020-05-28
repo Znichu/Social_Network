@@ -1,4 +1,3 @@
-const UPDATE_POST_TEXT = "UPDATE-POST-TEXT";
 const ADD_POST = "ADD-POST";
 
 let initialState = {
@@ -18,8 +17,7 @@ let initialState = {
             message: 'Images come in all sizes. So do screens. Responsive images automatically adjust to fit the size of the screen.',
             likesCount: 105
         }
-    ],
-        newPostText: ''
+    ]
 };
 
 const PostsReducer = (state = initialState, action) => {
@@ -30,23 +28,16 @@ const PostsReducer = (state = initialState, action) => {
                 newPostText: '',
                 posts: [...state.posts, {
                     id: 4,
-                    message: state.newPostText,
+                    message: action.newPostText,
                     likesCount: 0
                 }]
             };
         }
-        case  UPDATE_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText
-            };
-        }
-        default:
-            return state;
+        default: return state;
     }
 };
 
-export const addPostActionCreator = () => ( {type: ADD_POST} );
-export const onPostChangeActionCreator = (text) => ( {type: UPDATE_POST_TEXT, newText: text} );
+export const addPost = (newPostText) => ( {type: ADD_POST, newPostText} );
+
 
 export default PostsReducer;

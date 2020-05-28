@@ -10,6 +10,10 @@ export const authAPI = {
     getAuth () {
         return instance.get("/auth/me")
             .then(response => response.data)
+    },
+    login (login, password, rememberMe) {
+        return instance.post("/auth/login" , {email: login, password: password, rememberMe: rememberMe})
+            .then(response => response.data)
     }
 };
 
