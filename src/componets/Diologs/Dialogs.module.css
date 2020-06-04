@@ -14,10 +14,7 @@
 .enterMessage .send {
     margin-top: 5px;
     padding:5px 15px;
-    background:  #4b99cf;
-    border-radius:2px;
     float:right;
-    color: white;
 }
 .dialogs {
     display: flex;

@@ -31,6 +31,9 @@ class Profile extends React.Component {
     };
 
     render() {
+
+        let status = this.state.status === "" ? "No status" : this.state.status;
+
         return (
             <div className={s.profile_card}>
                 <img className={s.profile_photo}
@@ -39,7 +42,7 @@ class Profile extends React.Component {
                 <h5>Sergey Neplashov</h5>
                 <div className={s.status}>
                     {!this.state.editMode &&
-                        <span className={s.statusTitle} onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                        <span className={s.statusTitle} onDoubleClick={this.activateEditMode}>{ status }</span>
                     }
                     {this.state.editMode &&
                     <input onChange={this.onChangeInput} autoFocus={true} onBlur={this.deactivateEditMode} value={ this.state.status } type="text"/>

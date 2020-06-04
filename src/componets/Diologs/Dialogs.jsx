@@ -3,6 +3,8 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormsControls";
+import {required} from "../../utils/Validation/FieldValidationForm";
 
 
 
@@ -45,8 +47,14 @@ const Dialogs = (props) => {
 const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field className={s.actionBoxInput} placeholder='Ваше сообщение...' name="addMessageBody" component="textarea" />
-            <button  className={s.send}>Send</button>
+            <Field
+                validate={[required]}
+                placeholder='Ваше сообщение...'
+                name="addMessageBody"
+                component={Textarea} />
+                <div className={s.send}>
+                    <button className="btn btn-primary">Отправить</button>
+                </div>
         </form>
     );
 };

@@ -7,7 +7,8 @@ import {setMyStatus, updateMyStatus} from "../../redux/myProfile-reducer";
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setMyStatus(this.props.id)
+        let id = this.props.id ? this.props.id : 8204;
+        this.props.setMyStatus(id)
     }
 
 

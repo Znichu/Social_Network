@@ -5,12 +5,16 @@ import s from "./Header.module.css";
 const Header = (props) => {
     return (
         <div className={s.header}>
-            <div>
-                {props.isAuth ? <span>{props.login}</span> : <NavLink to="/auth">Login</NavLink>}
+            <div className={s.userName}>
+                {props.isAuth
+                    ? <span>{props.login} <button onClick={props.logout} className="btn btn-primary btn-sm">logout</button></span>
+                    : <NavLink to="/auth">Login</NavLink>}
             </div>
-            <img className={s.logo} src="https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png" alt="logo"/>
+            <div className={s.logo}>
+                <img src="https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png" alt="logo"/>
+            </div>
         </div>
     )
-}
+};
 
 export default Header;

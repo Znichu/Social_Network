@@ -1,25 +1,28 @@
 .header {
+    position: relative;
     height: 60px;
     background-color: #231F20;
 }
 
+.userName {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
 .header a {
-    padding-top: 15px;
-    padding-right: 10px;
-    float: right;
-    color: white;
+    font-size: 20px;
+    color: #00CCFF;
     text-decoration: none;
     cursor: pointer;
 }
 
 .header span {
-    padding-top: 15px;
-    padding-right: 10px;
-    float: right;
-    color: white;
+    font-size: 20px;
+    color: #00CCFF;
 }
 
-.logo {
+.logo img {
     display: block;
     margin: 0 auto;
     max-width: 50px;

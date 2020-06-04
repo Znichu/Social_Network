@@ -2,7 +2,10 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
+import {maxLength, required} from "../../utils/Validation/FieldValidationForm";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
+const maxLength30 = maxLength(30);
 
 const MyPosts = (props) => {
     let postsElement =
@@ -20,7 +23,9 @@ const MyPosts = (props) => {
                     <AddMyPostFormRedux onSubmit={addPosts}/>
                 </div>
             </div>
-            <h5 style={{textAlign: "center", marginBottom: "20px", marginTop: "45px"}}>My posts</h5>
+            <div>
+                <h5 style={{textAlign: "center", marginBottom: "20px", marginTop: "45px"}}>My posts</h5>
+            </div>
             <div>
                 {postsElement}
             </div>
@@ -33,8 +38,15 @@ const MyPosts = (props) => {
 const AddMyPostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field component="textarea" name="textMyPost" placeholder="Что у Вас нового?" className={s.form_control}/>
-            <button className={s.btn_primary}>Опубликовать</button>
+            <Field
+                validate={[required, maxLength30]}
+                component={Textarea}
+                name="textMyPost"
+                placeholder="Что у Вас нового?"
+            />
+            <div className={s.btn}>
+                <button className="btn btn-primary">Опубликовать</button>
+            </div>
         </form>
     )
 };

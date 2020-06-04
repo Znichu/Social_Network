@@ -33,16 +33,9 @@ textarea.form_control {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
 }
 
-.btn_primary {
-    background: #27aae1;
-    padding: 7px 25px;
-    border: none;
-    font-size: 14px;
-    border-radius: 4px;
-    color: #fff;
+.btn {
+
     position: relative;
-    font-weight: 600;
-    outline: none;
     margin-top: 10px;
     margin-bottom: 20px;
     float: right;
