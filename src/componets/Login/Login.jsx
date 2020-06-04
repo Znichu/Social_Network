@@ -12,6 +12,11 @@ const LoginForm = (props) => {
     return (
         <div className={style.loginForm}>
             <form onSubmit={props.handleSubmit}>
+                { props.error &&
+                    <div className="alert alert-danger" role="alert">
+                        {props.error}
+                    </div>
+                }
                 <div className="form-group">
                     <label><span>Login</span></label>
                     <Field
@@ -53,7 +58,7 @@ const Login = (props) => {
     };
 
     if (props.isAuth) {
-        return <Redirect to={"/myposts"} />
+        return <Redirect to={"/myposts"}/>
     }
 
     return (
@@ -65,7 +70,7 @@ const Login = (props) => {
 };
 
 let mapStateToProps = (state) => ({
-   isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth
 });
 
 export default connect(mapStateToProps, {login})(Login);

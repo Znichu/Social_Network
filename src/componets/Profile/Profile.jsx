@@ -32,7 +32,7 @@ class Profile extends React.Component {
 
     render() {
 
-        let status = this.state.status === "" ? "No status" : this.state.status;
+        let status = this.state.status ? this.state.status : "No status";
 
         return (
             <div className={s.profile_card}>
