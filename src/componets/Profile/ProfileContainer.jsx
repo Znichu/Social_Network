@@ -6,11 +6,11 @@ import {setMyStatus, updateMyStatus} from "../../redux/myProfile-reducer";
 
 class ProfileContainer extends React.Component {
 
-    componentDidMount() {
-        // let id = this.props.id ? this.props.id : 8204;
-        this.props.setMyStatus(this.props.id);
-    }
     render() {
+        if (!this.props.isAuth) {
+            return <></>
+        }
+
         return (
             <Profile {...this.props} />
         );
@@ -18,7 +18,7 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    id: state.auth.userId,
+    isAuth: state.auth.isAuth,
     status: state.myProfile.status
 });
 

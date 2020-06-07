@@ -1,14 +1,13 @@
 import React from "react";
-
+import style from "./Preloader.module.css"
 
 const Preloader = (props) => {
     return (
-        <div className="d-flex justify-content-center">
-            <div className="spinner-border text-primary" role="status">
-                <span className="sr-only text-primary">Loading...</span>
-            </div>
+        <div className={style.container}>
+            <div className={style.loader}>Loading...</div>
         </div>
+
     );
-}
+};
 
 export default Preloader;
