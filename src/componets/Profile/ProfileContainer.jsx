@@ -1,7 +1,7 @@
 import React from "react";
-import Profile from "./Profile";
 import {connect} from "react-redux";
 import {setMyStatus, updateMyStatus} from "../../redux/myProfile-reducer";
+import ProfileHook from "./ProfileHook";
 
 
 class ProfileContainer extends React.Component {
@@ -12,7 +12,7 @@ class ProfileContainer extends React.Component {
         }
 
         return (
-            <Profile {...this.props} />
+            <ProfileHook {...this.props} />
         );
     }
 }
