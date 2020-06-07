@@ -64,7 +64,7 @@ const Login = (props) => {
     return (
         <div className={style.login}>
             <h2 className={style.title}>Login</h2>
-            <LoginReduxForm onSubmit={onSubmit} setLogin={props.setLogin}/>
+            <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     );
 };
