@@ -1,5 +1,7 @@
 import s from "./Profile.module.css";
 import React, {useEffect, useState} from "react";
+import SavePhoto from "../../common/MadalSavePhoto/SavePhoto";
+import defaultImg from "../../assets/images/GAN-LOGO-NOTEXT-1-1024x1020.png";
 
 const ProfileHook = (props) => {
 
@@ -13,7 +15,6 @@ const ProfileHook = (props) => {
     const activateEditMode = () => {
         setEditMode(true)
     };
-
     const deactivateEditMode = () => {
         setEditMode(false);
         props.updateMyStatus(status);
@@ -26,8 +27,9 @@ const ProfileHook = (props) => {
     return (
         <div className={s.profile_card}>
             <img className={s.profile_photo}
-                 src="https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"
-                 alt=""/>
+                 src={props.photos.large || defaultImg}
+                 alt="avatar"/>
+                 <SavePhoto savePhoto={props.savePhoto} />
             <h5>Sergey Neplashov</h5>
             <div className={s.status}>
                 { !editMode &&
@@ -46,7 +48,6 @@ const ProfileHook = (props) => {
             {/*        <li>Education: GGU Skoriny</li>*/}
             {/*    </ul>*/}
             {/*</div>*/}
-
         </div>
     );
 };

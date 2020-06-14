@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {setMyStatus, updateMyStatus} from "../../redux/myProfile-reducer";
+import {savePhoto, setMyStatus, updateMyStatus} from "../../redux/myProfile-reducer";
 import ProfileHook from "./ProfileHook";
 
 
@@ -19,8 +19,9 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
-    status: state.myProfile.status
+    status: state.myProfile.status,
+    photos: state.myProfile.photos
 });
 
 
-export default connect (mapStateToProps, { setMyStatus, updateMyStatus }) (ProfileContainer);
+export default connect (mapStateToProps, { setMyStatus, updateMyStatus, savePhoto }) (ProfileContainer);

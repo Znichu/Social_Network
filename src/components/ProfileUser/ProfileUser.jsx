@@ -13,7 +13,7 @@ const ProfileUser = (props) => {
         <div className={style.wrapper}>
             <div className={style.profile}>
                 <div className={style.avatar}>
-                    <img src={props.profile.photos.large !== null ? props.profile.photos.large : defaultImg} alt=""/>
+                    <img src={props.profile.photos.large || defaultImg} alt=""/>
                 </div>
                 <div className={style.fullName}>
                     <span>{props.profile.fullName}</span>
