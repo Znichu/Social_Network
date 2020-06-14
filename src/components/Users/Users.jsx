@@ -37,7 +37,7 @@ const Users = (props) => {
     }
 
     let pageElement = pages.map(p =>  {
-        if (p == 1 || p == props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
+        if (p === 1 || p === props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
             return (<Pagination.Item
                 className={ props.currentPage === p ? "active" : null }
                 onClick={ () => { props.onPageClick(p) } }>

@@ -1,5 +1,4 @@
 import {setAuth} from "./auth-reducer";
-import {setMyStatus} from "./myProfile-reducer";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 

@@ -1,0 +1,12 @@
+.mainFooter {
+    height: 80px;
+    background-color: #4DADDC;
+    margin-top: 25px;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

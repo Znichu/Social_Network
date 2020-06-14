@@ -17,7 +17,7 @@ export const withRedirect = (Component) => {
       }
   }
 
-  let ConnectRedirectContainer = connect (mapStateToProps)(RedirectContainer);
+  let ConnectRedirectContainer = connect (mapStateToProps, null)(RedirectContainer);
 
   return ConnectRedirectContainer;
 };

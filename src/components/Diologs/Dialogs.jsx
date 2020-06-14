@@ -20,7 +20,7 @@ const Dialogs = (props) => {
         props.addMessage(values.addMessageBody);
     };
 
-
+    console.log("RENDER Dialogs");
     return (
         <div className="container" style={{paddingBottom: "25px"}}>
             <div className="row">
