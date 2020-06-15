@@ -1,6 +1,6 @@
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {setMyStatus} from "./myProfile-reducer";
+import {getMyProfile, setMyStatus} from "./myProfile-reducer";
 
 const SET_AUTH_DATA = "SET_AUTH_DATA";
 
@@ -29,6 +29,7 @@ export const setAuth = () => (dispatch) => {
     return authAPI.getAuth().then(data => {
         if (data.resultCode === 0) {
             let {id, login, email} = data.data;
+            dispatch(getMyProfile(id));
             dispatch(setAuthUserData(id, login, email, true));
             dispatch(setMyStatus(id));
         }

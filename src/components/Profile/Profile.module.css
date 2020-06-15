@@ -20,16 +20,26 @@
     font-size: 18px;
 }
 
-.profile_card img.profile_photo {
+.profile_photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 5px solid #1c75bc;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     position: relative;
     top: -40px;
     height: 150px;
     width: 150px;
     border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile_photo img {
+    max-width: 100%;
+}
+
+.savePhoto {
+    position: relative;
+    top: -25px;
 }
 
 

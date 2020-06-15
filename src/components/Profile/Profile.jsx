@@ -35,7 +35,7 @@ class Profile extends React.Component {
         return (
             <div className={s.profile_card}>
                 <img className={s.profile_photo}
-                     src="https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"
+                     src={props.photos.large}
                      alt=""/>
                 <h5>Sergey Neplashov</h5>
                 <div className={s.status}>

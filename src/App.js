@@ -12,6 +12,7 @@ import Login from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
+import {getMyProfile} from "./redux/myProfile-reducer";
 
 const DialogsContainer = React.lazy(() => import('./components/Diologs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -67,11 +68,11 @@ class App extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        initialize: state.app.initialize
+        initialize: state.app.initialize,
     }
 };
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {setInitialized})
+    connect(mapStateToProps, { setInitialized, getMyProfile })
 )(App);

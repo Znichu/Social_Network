@@ -2,19 +2,34 @@ import {profileAPI} from "../api/api";
 
 const SET_MY_STATUS = "SET_MY_STATUS";
 const SET_MY_PHOTO = "SET_MY_PHOTO";
+const SET_MY_PROFILE = "SET_MY_PROFILE";
+
+
 let initialState = {
     status: "",
-    photos: null
+    profile: null
 };
 
 
 const myProfileReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_MY_STATUS: {
-            return {...state, status: action.status}
+            return {
+                ...state,
+                status: action.status
+            }
+        }
+        case SET_MY_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile
+            }
         }
         case SET_MY_PHOTO: {
-            return {...state, photos: {...action.photos}}
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            }
         }
         default:
             return state;
@@ -23,6 +38,7 @@ const myProfileReducer = (state = initialState, action) => {
 
 
 export const setMyProfileStatus = (status) => ({type: SET_MY_STATUS, status});
+export const setMyProfile = (profile) => ({type: SET_MY_PROFILE, profile});
 export const setMyPhoto = (photos) => ({type: SET_MY_PHOTO, photos});
 
 export const setMyStatus = (userId) => (dispatch) => {
@@ -30,6 +46,12 @@ export const setMyStatus = (userId) => (dispatch) => {
         .then(data => {
             dispatch(setMyProfileStatus(data));
         })
+};
+export const getMyProfile = (userId) => (dispatch) => {
+    profileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setMyProfile(data));
+        });
 };
 export const updateMyStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status)
