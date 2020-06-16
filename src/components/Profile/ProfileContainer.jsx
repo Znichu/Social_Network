@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import { savePhoto, updateMyStatus} from "../../redux/myProfile-reducer";
-import ProfileHook from "./ProfileHook";
+import {savePhoto, saveProfile, updateMyStatus} from "../../redux/myProfile-reducer";
+import MyProfile from "./MyProfile";
 
 
 class ProfileContainer extends React.Component {
@@ -11,7 +11,8 @@ class ProfileContainer extends React.Component {
             return <></>
         }
         return (
-            <ProfileHook {...this.props} />
+            <MyProfile {...this.props} />
+            /*<ProfileHook {...this.props} />*/
         );
     }
 }
@@ -23,4 +24,4 @@ let mapStateToProps = (state) => ({
 });
 
 
-export default connect (mapStateToProps, { updateMyStatus, savePhoto }) (ProfileContainer);
+export default connect (mapStateToProps, { updateMyStatus, savePhoto, saveProfile }) (ProfileContainer);

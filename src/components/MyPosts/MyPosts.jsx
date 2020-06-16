@@ -24,9 +24,6 @@ const MyPosts = React.memo(props => {
                 </div>
             </div>
             <div>
-                <h5 style={{textAlign: "center", marginBottom: "20px", marginTop: "45px"}}>My posts</h5>
-            </div>
-            <div>
                 {postsElement}
             </div>
         </div>

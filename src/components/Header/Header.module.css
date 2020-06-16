@@ -1,14 +1,14 @@
 .header {
     position: relative;
     height: 60px;
-    background-color: #231F20;
+    background-color: #224B7A;
     margin-bottom: 50px;
 }
 
 .userName {
     position: absolute;
     top: 10px;
-    left: 15px;
+    right: 15px;
 }
 
 .header a {
@@ -19,8 +19,8 @@
 }
 
 .header span {
-    font-size: 20px;
-    color: #00CCFF;
+    font-size: 15px;
+    color: #fefefe;
 }
 
 .logo img {

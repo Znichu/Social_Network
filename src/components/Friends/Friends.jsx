@@ -13,6 +13,7 @@ const Friends = (props) => {
             <div className={style.title}>
                 <p>Friends</p>
             </div>
+            <hr/>
             <div className="friends">
                 <ul className={`${style.friendsOnline} ${style.listInline}`}>
                         {friendElement}

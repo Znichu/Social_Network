@@ -1,6 +1,6 @@
 .card {
     background: linear-gradient(to bottom, rgba(39, 170, 225, .8),
-    rgba(28, 117, 188, .8));
+    rgba(28, 117, 188, .2)), url("https://cdn.comsol.com/product-new/mids-larger-less-subtle.svg") no-repeat;
     border: none;
     padding: 5px;
     margin-bottom: 20px;
@@ -35,8 +35,10 @@ ul.main_nav li a {
 }
 
 a.active {
-    color: #1A73E8;
+    width: 100%;
+    color: #224B7A;
 }
+
 
 
 

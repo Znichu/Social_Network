@@ -1,7 +1,7 @@
 import s from "./Profile.module.css";
 import React, {useEffect, useState} from "react";
 import SavePhoto from "../../common/MadalSavePhoto/SavePhoto";
-import Preloader from "../../common/Preloader/Preloader";
+
 
 const ProfileHook = (props) => {
 

@@ -7,6 +7,7 @@ import {compose} from "redux";
 let mapStateToProps = (state) => {
     return {
         posts: state.myPostsPage,
+        ava: state.myProfile.profile
     }
 };
 

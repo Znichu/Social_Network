@@ -7,7 +7,7 @@ const Post = (props) => {
         <div className={s.post_content}>
             <div className={s.post_container}>
                 <img className={`${s.profile_photo_md} ${s.pull_left}`}
-                     src="https://avatars2.githubusercontent.com/u/23550189?s=400&v=4" alt=""/>
+                     src={"https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"} alt=""/>
                 <div className={s.post_detail}>
                     <div className="user_info">
                         <h5><a href="#">Sergey Neplashov </a></h5>

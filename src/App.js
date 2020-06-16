@@ -13,6 +13,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 import {getMyProfile} from "./redux/myProfile-reducer";
+import MyProfile from "./components/Profile/MyProfile";
 
 const DialogsContainer = React.lazy(() => import('./components/Diologs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -35,17 +36,17 @@ class App extends React.Component {
         }
 
         return (
-            <div className="container">
+            <div className=" container">
                 <div className="row">
                     <div className="col-lg-12">
                         <HeaderContainer/>
                     </div>
-                    <div className="col-lg-4">
-                        <ProfileContainer/>
+                    <div className="col-lg-3">
                         <Navbar/>
                         <FriendsContainer/>
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-9">
+                        <ProfileContainer/>
                         <div className="mainContent">
                             <Suspense fallback={<div>Загрузка...</div>}>
                                 <Route path="/myposts" render={() => <MyPostsContainer/>}/>
