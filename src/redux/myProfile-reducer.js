@@ -69,11 +69,12 @@ export const savePhoto = (file) => (dispatch) => {
             }
         })
 };
-export const saveProfile = (profile) => (dispatch) => {
+export const saveProfile = (profile) => (dispatch, getState) => {
+    const userId = getState().auth.userId;
     profileAPI.saveProfile(profile)
         .then(response => {
-            debugger
             if (response.data.resultCode === 0) {
+                dispatch(getMyProfile(userId))
             }
         })
 };

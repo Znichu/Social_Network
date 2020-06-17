@@ -11,9 +11,11 @@ const MyProfileInfo = (props) => {
             <div className={style.lookingForAJob}>
                 <b>Looking for a job: </b> {props.lookingForAJob ? "Yes" : "No"}
             </div>
+            { props.lookingForAJob &&
             <div className={style.description}>
                 <b>My professional skills: </b> {props.lookingForAJobDescription}
             </div>
+            }
             <div className={style.contacts}>
                 <b>Contacts: </b>
             </div>

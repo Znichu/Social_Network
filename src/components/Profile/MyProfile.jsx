@@ -34,7 +34,7 @@ const MyProfile = (props) => {
 
     const onSubmit = (values) => {
         props.saveProfile(values);
-        deactivateEditMode(false);
+        deactivateEditProfile(false);
     };
 
     if (!props.profile) {
@@ -69,7 +69,7 @@ const MyProfile = (props) => {
                         lookingForAJobDescription={props.profile.lookingForAJobDescription}
                         aboutMe={props.profile.aboutMe}
                     />
-                    : <FormEditProfileReduxForm onSubmit={onSubmit} />
+                    : <FormEditProfileReduxForm initialValues={props.profile} onSubmit={onSubmit} />
                 }
             </div>
         </div>
