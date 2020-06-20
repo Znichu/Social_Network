@@ -1,5 +1,5 @@
 import React, {Suspense} from 'react';
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {setInitialized} from "./redux/app-reducer";
@@ -13,7 +13,7 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 import {getMyProfile} from "./redux/myProfile-reducer";
-import MyProfile from "./components/Profile/MyProfile";
+
 
 const DialogsContainer = React.lazy(() => import('./components/Diologs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
@@ -48,20 +48,23 @@ class App extends React.Component {
                     <div className="col-lg-9">
                         <ProfileContainer/>
                         <div className="mainContent">
-                            <Suspense fallback={<div>Загрузка...</div>}>
-                                <Route path="/myposts" render={() => <MyPostsContainer/>}/>
-                                <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                                <Route path="/users" render={() => <UsersContainer/>}/>
-                                <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
-                                <Route path="/login" render={() => <Login/>}/>
-                                <Route path="/news" render={() => <News/>}/>
-                                <Route path="/music" render={() => <Music/>}/>
-                                <Route path="/setting" render={() => <Setting/>}/>
-                            </Suspense>
+                            <Switch>
+                                <Suspense fallback={<div>Загрузка...</div>}>
+                                    <Route path="/" render={() => <Redirect to="/myposts"/>}/>
+                                    <Route path="/myposts" render={() => <MyPostsContainer/>}/>
+                                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                                    <Route path="/users" render={() => <UsersContainer/>}/>
+                                    <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
+                                    <Route path="/login" render={() => <Login/>}/>
+                                    <Route path="/news" render={() => <News/>}/>
+                                    <Route path="/music" render={() => <Music/>}/>
+                                    <Route path="/setting" render={() => <Setting/>}/>
+                                </Suspense>
+                            </Switch>
                         </div>
                     </div>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         );
     }
@@ -75,5 +78,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { setInitialized, getMyProfile })
+    connect(mapStateToProps, {setInitialized, getMyProfile})
 )(App);
