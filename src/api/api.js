@@ -2,7 +2,7 @@ import * as axios from "axios";
 
 const instance = axios.create ({
     withCredentials: true,
-    baseURL: "https://social-network.samuraijs.com/api/1.0/",
+    baseURL: "https://social-network.samuraijs.com/api/1.0",
     headers: {"API-KEY": "6b2fd528-e763-4090-9008-f558677adae7"}
 });
 
@@ -11,8 +11,8 @@ export const authAPI = {
         return instance.get("/auth/me")
             .then(response => response.data)
     },
-    login (email, password, rememberMe = false) {
-        return instance.post("/auth/login" , {email, password, rememberMe})
+    login (email, password, rememberMe = false, captcha = null) {
+        return instance.post("/auth/login" , {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
     logout () {
@@ -56,11 +56,18 @@ export const profileAPI = {
 
 export const followAPI = {
     follow (userId) {
-        return instance.post("follow/" + userId, {})
+        return instance.post("/follow/" + userId, {})
             .then(response => response.data)
     },
     unfollow (userId) {
-        return instance.delete("follow/" + userId)
+        return instance.delete("/follow/" + userId)
+            .then(response => response.data)
+    }
+};
+
+export const securityAPI = {
+    captchaUrl () {
+        return instance.get("/security/get-captcha-url")
             .then(response => response.data)
     }
 };

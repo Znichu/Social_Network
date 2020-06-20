@@ -12,10 +12,10 @@ const LoginForm = (props) => {
     return (
         <div className={style.loginForm}>
             <form onSubmit={props.handleSubmit}>
-                { props.error &&
-                    <div className="alert alert-danger" role="alert">
-                        {props.error}
-                    </div>
+                {props.error &&
+                <div className="alert alert-danger" role="alert">
+                    {props.error}
+                </div>
                 }
                 <div className="form-group">
                     <label><span>Login</span></label>
@@ -42,6 +42,18 @@ const LoginForm = (props) => {
                     />
                     <label className="form-check-label">Remember me</label>
                 </div>
+                {props.captchaUrl &&
+                <div className="form-group">
+                    <div className={style.captchaImg}>
+                        <img src={props.captchaUrl} alt="captcha"/>
+                    </div>
+                    <Field
+                        type={"text"}
+                        validate={[required]}
+                        component={InputLogin}
+                        name={"captcha"}/>
+                </div>
+                }
                 <div>
                     <button className="btn btn-primary">Sing In</button>
                 </div>
@@ -53,8 +65,8 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
-    let onSubmit = (value) => {
-        props.login(value.email, value.password, value.rememberMe)
+    let onSubmit = (values) => {
+        props.login(values.email, values.password, values.rememberMe, values.captcha);
     };
 
     if (props.isAuth) {
@@ -64,12 +76,13 @@ const Login = (props) => {
     return (
         <div className={style.login}>
             <h2 className={style.title}>Login</h2>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     );
 };
 
 let mapStateToProps = (state) => ({
+    captchaUrl: state.auth.captchaUrl,
     isAuth: state.auth.isAuth
 });
 

@@ -17,3 +17,11 @@
     padding: 30px;
     background: #fefefe;
 }
+.captchaImg {
+    margin: 5px;
+}
+
+.captchaImg img {
+    height: 50px;
+    width: 100px;
+}
