@@ -1,5 +1,10 @@
 const ADD_POST = "ADD-POST";
 
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
 let initialState = {
     posts: [
         {
@@ -17,10 +22,12 @@ let initialState = {
             message: 'Images come in all sizes. So do screens. Responsive images automatically adjust to fit the size of the screen.',
             likesCount: 105
         }
-    ]
+    ] as Array<PostType>,
+    newPostText: ''
 };
+type InitialStateType = typeof initialState;
 
-const PostsReducer = (state = initialState, action) => {
+const PostsReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             return {
@@ -37,7 +44,11 @@ const PostsReducer = (state = initialState, action) => {
     }
 };
 
-export const addPost = (newPostText) => ( {type: ADD_POST, newPostText} );
+type AddPostActionType = {
+    type: typeof ADD_POST
+    newPostText: string
+}
+export const addPost = (newPostText: string): AddPostActionType => ( {type: ADD_POST, newPostText} );
 
 
 export default PostsReducer;
