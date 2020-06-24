@@ -1,7 +1,12 @@
 import React from "react";
 import style from "./MessagesItem.module.css"
+import {MessageType} from "../../../type/types";
 
-const MessageItem = (props) => {
+type Props = {
+    message: string
+}
+
+const MessageItem: React.FC<Props> = (props: Props) => {
     return (
             <section>
             <div className={style.chat}>
