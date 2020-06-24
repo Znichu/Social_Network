@@ -1,7 +1,11 @@
 import React from "react";
 import style from "../Friends.module.css";
 
-const FriendItem = (props) => {
+type Props = {
+    name: string
+}
+
+const FriendItem: React.FC<Props> = (props: Props) => {
     return (
             <li>
                 <a href="#">

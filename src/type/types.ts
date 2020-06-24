@@ -35,3 +35,7 @@ export type MessageType = {
     id: number
     message: string
 }
+export type FriendsType = {
+    id: number
+    name: string
+}

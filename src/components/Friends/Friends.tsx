@@ -1,9 +1,13 @@
 import React from "react";
 import style from "./Friends.module.css"
 import FriendItem from "./Friend/Friend";
+import {FriendsType} from "../../type/types";
 
+type Props = {
+    friend: Array<FriendsType>
+}
 
-const Friends = (props) => {
+const Friends: React.FC<Props> = (props: Props) => {
 
     let friendElement =
         props.friend.map(f => <FriendItem name={f.name}/>);

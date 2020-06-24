@@ -16,7 +16,7 @@ type PropsType = {
 const Dialogs: React.FC<PropsType> = (props) => {
 
     let dialogsElement =
-        props.dialogs.map(p => <DialogItem name={p.name} id={p.id} />);
+        props.dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
 
     let messagesElement =
         props.messages.map(m => <MessageItem key={m.id} message={m.message} />);
