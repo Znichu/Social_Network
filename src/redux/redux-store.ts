@@ -10,9 +10,7 @@ import myProfileReducer from "./myProfile-reducer";
 import { reducer as formReducer } from 'redux-form';
 import AppReducer from "./app-reducer";
 
-
-
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     myPostsPage: PostsReducer,
     messagesPage: MessageReducer,
     friendsBlock: friendsReducer,
@@ -24,10 +22,15 @@ let reducers = combineReducers({
     form: formReducer
     });
 
+type State = typeof rootReducer
+export type RootState = ReturnType<State>;
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ;
 
-let store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
+let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
+// @ts-ignore
 window.store = store;
 
-export default store;
+export default store

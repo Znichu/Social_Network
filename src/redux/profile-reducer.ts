@@ -21,7 +21,7 @@ const ProfileReducer = (state = initialState, action: any): InitialStateType => 
         }
         default: return state
     }
-};
+}
 
 type SetProfileUserActionType = {
     type: typeof SET_PROFILE_USER
