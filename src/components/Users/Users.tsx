@@ -3,8 +3,21 @@ import style from "./Users.module.css";
 import smallAvatar from "../../assets/images/avatar-chase.png";
 import Pagination from 'react-bootstrap/Pagination'
 import {NavLink} from "react-router-dom";
+import {UserType} from "../../type/types";
 
-const Users = (props) => {
+type PropsType = {
+    users: Array<UserType>
+    followInProgress: Array<number>
+    totalCount: number
+    totalPageCount: number
+    currentPage: number
+    unfollow: (id: number) => void
+    follow: (id: number) => void
+    onPageClick: (page: number) => void
+}
+
+
+export const PageUsers: React.FC<PropsType> = (props: PropsType) => {
     let user = props.users.map(u =>
         <div className={style.mainContainer}>
             <div className={`${style.userCard} ${style.clearfix}`}>
@@ -62,7 +75,4 @@ const Users = (props) => {
             </div>
         </div>
     );
-};
-
-
-export default Users;
+}

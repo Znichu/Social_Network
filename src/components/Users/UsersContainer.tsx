@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { follow, followingInProgress, requestUsers, unfollow } from "../../redux/users-reducer";
-import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
 import {withRedirect} from "../../hoc/hoc";
 import {compose} from "redux";
@@ -13,16 +12,35 @@ import {
     getTotalPageCount,
     getUsers
 } from "../../redux/users-selectors";
+import {UserType} from "../../type/types";
+import {RootState} from "../../redux/redux-store";
+import {PageUsers} from "./Users";
 
+type MapStatePropsType = {
+    users: Array<UserType>
+    totalCount: number
+    totalPageCount: number
+    currentPage: number
+    isFetching: boolean
+    followInProgress: Array<number>
+}
 
+type MapDispatchPropsType = {
+    follow: ( id: number ) => void
+    unfollow: ( id: number ) => void
+    followingInProgress: () => void
+    requestUsers: ( currentPage: number, totalPageCount: number) => void
+}
 
-class UsersContainer extends React.Component {
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.totalPageCount);
+        this.props.requestUsers(this.props.currentPage, this.props.totalPageCount);
     }
 
-    onPageClick = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.totalPageCount);
+    onPageClick = (pageNumber: number) => {
+        this.props.requestUsers(pageNumber, this.props.totalPageCount);
     };
 
     render() {
@@ -30,14 +48,13 @@ class UsersContainer extends React.Component {
             <>
                 { this.props.isFetching
                     ? <Preloader/>
-                    : <Users users={this.props.users}
+                    : <PageUsers users={this.props.users}
                              unfollow={this.props.unfollow}
                              follow={this.props.follow}
                              totalCount={this.props.totalCount}
                              totalPageCount={this.props.totalPageCount}
                              currentPage={this.props.currentPage}
                              onPageClick={this.onPageClick}
-                             followingInProgress={this.props.followingInProgress}
                              followInProgress={this.props.followInProgress}
                     />
                 }
@@ -58,7 +75,7 @@ class UsersContainer extends React.Component {
 //     }
 // };
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState): MapStatePropsType => {
     return {
         users: getUsers(state),
         totalPageCount: getTotalPageCount(state),
@@ -71,6 +88,6 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withRedirect,
-    connect(mapStateToProps, {follow, unfollow, followingInProgress, getUsers: requestUsers })
+    connect(mapStateToProps, {follow, unfollow, requestUsers })
 ) (UsersContainer);
 

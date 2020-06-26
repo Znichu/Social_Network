@@ -6,6 +6,9 @@ import {InputLogin} from "../../common/FormsControls/FormsControls";
 import style from "./Login.module.css"
 import {required} from "../../utils/Validation/FieldValidationForm";
 import {Redirect} from "react-router-dom";
+import {RootState} from "../../redux/redux-store";
+
+
 
 const LoginForm = (props) => {
 
@@ -63,6 +66,7 @@ const LoginForm = (props) => {
 };
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
+
 
 const Login = (props) => {
     let onSubmit = (values) => {

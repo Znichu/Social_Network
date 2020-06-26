@@ -4,10 +4,19 @@ import ProfileUser from "./ProfileUser";
 import {setProfile, setStatus} from "../../redux/profile-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {ProfileType} from "../../type/types";
+import {RootState} from "../../redux/redux-store";
 
 
+type PropsType = {
+    profile: ProfileType
+    status: string
+    match: any
+    setProfile: ( userId: number ) => void
+    setStatus: ( userId: number ) => void
+};
 
-class ProfileUserContainer extends React.Component {
+class ProfileUserContainer extends React.Component<PropsType> {
 
     userId = this.props.match.params.userId;
 
@@ -23,7 +32,7 @@ class ProfileUserContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: RootState) => ({
     profile: state.profileUser.profile,
     status: state.profileUser.status
 });

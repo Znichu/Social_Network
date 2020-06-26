@@ -23,7 +23,7 @@ class HeaderContainer extends React.Component<Props> {
     }
 }
 
-const mapStateToProps = (state: RootState) => ({
+const mapStateToProps = (state: RootState): MapStatePropsType => ({
     login: state.auth.login,
     isAuth: state.auth.isAuth
 });
