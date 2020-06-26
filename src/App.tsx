@@ -12,18 +12,25 @@ import Login from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
-import {getMyProfile} from "./redux/myProfile-reducer";
+import {RootState} from "./redux/redux-store";
 
 
-const DialogsContainer = React.lazy(() => import('./components/Diologs/DialogsContainer'));
+// @ts-ignore
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+// @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
 const Music = React.lazy(() => import('./components/Music/Music'));
 const Setting = React.lazy(() => import('./components/Setting/Setting'));
 const News = React.lazy(() => import('./components/News/News'));
 
 
-class App extends React.Component {
+type PropsType = {
+    initialize: boolean
+    setInitialized: () => void
+}
+
+class App extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.setInitialized();
@@ -70,13 +77,10 @@ class App extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: RootState) => {
     return {
         initialize: state.app.initialize,
     }
 };
 
-export default compose(
-    withRouter,
-    connect(mapStateToProps, {setInitialized, getMyProfile})
-)(App);
+export default compose( withRouter, connect(mapStateToProps, { setInitialized }) )(App);

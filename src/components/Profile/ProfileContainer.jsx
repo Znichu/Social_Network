@@ -12,7 +12,6 @@ class ProfileContainer extends React.Component {
         }
         return (
             <MyProfile {...this.props} />
-            /*<ProfileHook {...this.props} />*/
         );
     }
 }
