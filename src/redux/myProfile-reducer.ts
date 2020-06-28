@@ -1,5 +1,7 @@
 import {profileAPI} from "../api/api";
 import {PhotosType, ProfileType} from "../type/types";
+import {ThunkAction} from "redux-thunk";
+import {RootState} from "./redux-store";
 
 const SET_MY_STATUS = "SET_MY_STATUS";
 const SET_MY_PHOTO = "SET_MY_PHOTO";
@@ -13,7 +15,7 @@ let initialState = {
 type InitialStateType = typeof initialState;
 
 
-const myProfileReducer = (state = initialState, action: any): InitialStateType => {
+const myProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_MY_STATUS: {
             return {
@@ -38,12 +40,14 @@ const myProfileReducer = (state = initialState, action: any): InitialStateType =
     }
 };
 
+type ActionsTypes = SetMyProfileStatusActionType | SetMyProfileActionType | SetMyPhotoActionTYpe
+
 type SetMyProfileStatusActionType = {
     type: typeof SET_MY_STATUS
     status: string
 }
 export const setMyProfileStatus = (status: string): SetMyProfileStatusActionType => ({type: SET_MY_STATUS, status});
-type SetMyProfileActionType ={
+type SetMyProfileActionType = {
     type: typeof SET_MY_PROFILE
     profile: ProfileType
 }
@@ -54,42 +58,40 @@ type SetMyPhotoActionTYpe = {
 }
 export const setMyPhoto = (photos: PhotosType): SetMyPhotoActionTYpe => ({type: SET_MY_PHOTO, photos});
 
-export const setMyStatus = (userId: number) => (dispatch: any) => {
-    profileAPI.getStatus(userId)
-        .then((data: string) => {
-            dispatch(setMyProfileStatus(data));
-        })
-};
-export const getMyProfile = (userId: number) => (dispatch: any) => {
-    profileAPI.getProfile(userId)
-        .then((data: any) => {
-            dispatch(setMyProfile(data));
-        });
-};
-export const updateMyStatus = (status: string) => (dispatch: any) => {
-    profileAPI.updateStatus(status)
-        .then((response: { data: { resultCode: number; }; }) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setMyProfileStatus(status));
-            }
-        })
-};
-export const savePhoto = (file: any) => (dispatch: any) => {
-    profileAPI.savePhoto(file)
-        .then((response: { data: { resultCode: number; data: { photos: any; }; }; }) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setMyPhoto(response.data.data.photos));
-            }
-        })
-};
-export const saveProfile = (profile: ProfileType) => (dispatch: any, getState:any) => {
-    const userId = getState().auth.userId;
-    profileAPI.saveProfile(profile)
-        .then((response: { data: { resultCode: number; }; }) => {
-            if (response.data.resultCode === 0) {
-                dispatch(getMyProfile(userId))
-            }
-        })
-};
+
+type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
+
+export const setMyStatus = (userId: number): ThunkType =>
+    async (dispatch) => {
+        let data = await profileAPI.getStatus(userId);
+        dispatch(setMyProfileStatus(data))
+    };
+export const getMyProfile = (userId: number | null): ThunkType =>
+    async (dispatch) => {
+        let data = await profileAPI.getProfile(userId);
+        dispatch(setMyProfile(data))
+    };
+export const updateMyStatus = (status: string): ThunkType =>
+    async (dispatch) => {
+        let response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === 0) {
+            dispatch(setMyProfileStatus(status));
+        }
+    };
+export const savePhoto = (file: any): ThunkType =>
+    async (dispatch) => {
+        let response = await profileAPI.savePhoto(file);
+        if (response.data.resultCode === 0) {
+            dispatch(setMyPhoto(response.data.data.photos));
+        }
+    };
+export const saveProfile = (profile: ProfileType): ThunkType =>
+    async (dispatch, getState) => {
+        const userId = getState().auth.userId;
+        let response = await profileAPI.saveProfile(profile);
+        if (response.data.resultCode === 0) {
+            await dispatch(getMyProfile(userId))
+        }
+    };
 
 export default myProfileReducer;

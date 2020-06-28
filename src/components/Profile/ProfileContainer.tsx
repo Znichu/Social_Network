@@ -8,7 +8,7 @@ import {ProfileType} from "../../type/types";
 type PropsType = {
     isAuth: boolean
     status: string
-    profile: null | ProfileType
+    profile: ProfileType | null
     updateMyStatus: (status: string) => void
     savePhoto: (file: any) => void
     saveProfile: (profile: ProfileType) => void

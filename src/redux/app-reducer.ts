@@ -1,6 +1,8 @@
 import {setAuth} from "./auth-reducer";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AnyAction} from "redux";
+import {RootState} from "./redux-store";
+import {getMyProfile} from "./myProfile-reducer";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 
@@ -20,7 +22,8 @@ const AppReducer = (state = initialState, action: InitializeActionType): Initial
                 initialize: true,
             }
         }
-        default: return state
+        default:
+            return state
     }
 };
 
@@ -29,12 +32,14 @@ type InitializeActionType = {
 }
 export const initialize = (): InitializeActionType => ({type: SET_INITIALIZED});
 
-export const setInitialized = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-    const promise = await dispatch(setAuth());
-    Promise.all([promise])
-        .then( () => {
+type ThunkType = ThunkAction<Promise<void>, RootState, {}, InitializeActionType>
+
+export const setInitialized = (): ThunkType => async (dispatch) => {
+    const promiseAuth = await dispatch(setAuth());
+    Promise.all([promiseAuth])
+        .then(() => {
             dispatch(initialize())
-    });
+        });
 };
 
 export default AppReducer;

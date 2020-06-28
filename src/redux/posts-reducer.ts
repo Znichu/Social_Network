@@ -27,7 +27,7 @@ let initialState = {
 };
 type InitialStateType = typeof initialState;
 
-const PostsReducer = (state = initialState, action: any): InitialStateType => {
+const PostsReducer = (state = initialState, action: AddPostActionType): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             return {
