@@ -1,14 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import style from './MyProfile.module.css'
 import MyProfileInfo from "./MyProfileInfo";
 import FormEditProfileReduxForm from "../../common/FormEditProfileData/FormEditProfile";
+import {ProfileType} from "../../type/types";
 
 
-const MyProfile = (props) => {
+type PropsType = {
+    status: string
+    profile: null | ProfileType
+    updateMyStatus: (status: string) => void
+    saveProfile: (profile: ProfileType) => void
+}
 
-    const [editMode, setEditMode] = useState(false);
-    const [status, setStatus] = useState(props.status);
-    const [editProfile, setEditProfile] = useState(false);
+const MyProfile: React.FC<PropsType> = (props: PropsType) => {
+
+    const [editMode, setEditMode] = useState<boolean>(false);
+    const [status, setStatus] = useState<string>(props.status);
+    const [editProfile, setEditProfile] = useState<boolean>(false);
 
     useEffect(() => {
         setStatus(props.status)
@@ -28,13 +36,13 @@ const MyProfile = (props) => {
         props.updateMyStatus(status);
     };
 
-    const onChangeInput = (e) => {
-        setStatus(e.currentTarget.value)
+    const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+        setStatus(event.currentTarget.value)
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = (values: any) => {
         props.saveProfile(values);
-        deactivateEditProfile(false);
+        deactivateEditProfile();
     };
 
     if (!props.profile) {

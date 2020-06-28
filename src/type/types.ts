@@ -10,6 +10,7 @@ export type ProfileType = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
+    aboutMe: string
     contacts: ContactsType
     photos: PhotosType
 }
@@ -24,8 +25,8 @@ export type ContactsType = {
     mainLink: string
 }
 export type PhotosType = {
-    small: null | string
-    large: null |string
+    small: string
+    large: string
 }
 export type DialogType = {
     id: number

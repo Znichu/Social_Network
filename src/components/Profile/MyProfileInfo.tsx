@@ -1,8 +1,14 @@
 import React from "react";
 import style from './MyProfile.module.css'
 
+type PropsType = {
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    activateEditProfile: () => void
+}
 
-const MyProfileInfo = (props) => {
+const MyProfileInfo: React.FC<PropsType> = (props: PropsType) => {
     return (
         <>
             <div className={style.aboutMe}>
