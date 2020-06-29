@@ -73,12 +73,12 @@ export const getMyProfile = (userId: number | null): ThunkType =>
     };
 export const updateMyStatus = (status: string): ThunkType =>
     async (dispatch) => {
-        let response = await profileAPI.updateStatus(status);
-        if (response.data.resultCode === 0) {
+        let data = await profileAPI.updateStatus(status);
+        if (data.resultCode === 0) {
             dispatch(setMyProfileStatus(status));
         }
     };
-export const savePhoto = (file: any): ThunkType =>
+export const savePhoto = (file: File): ThunkType =>
     async (dispatch) => {
         let response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) {
@@ -88,8 +88,8 @@ export const savePhoto = (file: any): ThunkType =>
 export const saveProfile = (profile: ProfileType): ThunkType =>
     async (dispatch, getState) => {
         const userId = getState().auth.userId;
-        let response = await profileAPI.saveProfile(profile);
-        if (response.data.resultCode === 0) {
+        let data = await profileAPI.saveProfile(profile);
+        if (data.resultCode === 0) {
             await dispatch(getMyProfile(userId))
         }
     };

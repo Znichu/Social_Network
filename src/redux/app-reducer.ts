@@ -1,8 +1,6 @@
 import {setAuth} from "./auth-reducer";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "redux";
+import {ThunkAction} from "redux-thunk";
 import {RootState} from "./redux-store";
-import {getMyProfile} from "./myProfile-reducer";
 
 const SET_INITIALIZED = "SET_INITIALIZED";
 

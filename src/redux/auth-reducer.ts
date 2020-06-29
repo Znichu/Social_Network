@@ -8,7 +8,7 @@ const SET_AUTH_DATA = "SET_AUTH_DATA";
 const SET_CAPTCHA_URL_SUCCESS = "SET_CAPTCHA_URL_SUCCESS";
 
 type InitialStateType = {
-    userId: null | number
+    userId: number | null
     email: null | string
     login: null | string
     isAuth: boolean
@@ -72,7 +72,7 @@ export const setAuth = (): ThunkType => {
     }
 };
 
-export const login = (email: string, password: number, rememberMe: boolean, captcha: string): ThunkType =>
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
     async (dispatch) => {
         let data = await authAPI.login(email, password, rememberMe, captcha);
         if (data.resultCode === 0) {
