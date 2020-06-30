@@ -4,7 +4,6 @@ import MyProfileInfo from "./MyProfileInfo";
 import FormEditProfileReduxForm from "../../common/FormEditProfileData/FormEditProfile";
 import {ProfileType} from "../../type/types";
 
-
 type PropsType = {
     status: string
     profile: ProfileType | null
@@ -40,7 +39,7 @@ const MyProfile: React.FC<PropsType> = (props: PropsType) => {
         setStatus(event.currentTarget.value)
     };
 
-    const onSubmit = (values: any) => {
+    const onSubmit = (values: ProfileType) => {
         props.saveProfile(values);
         deactivateEditProfile();
     };
@@ -70,14 +69,14 @@ const MyProfile: React.FC<PropsType> = (props: PropsType) => {
                     }
                 </div>
                 <hr/>
-                { !editProfile
+                {!editProfile
                     ? <MyProfileInfo
                         activateEditProfile={activateEditProfile}
                         lookingForAJob={props.profile.lookingForAJob}
                         lookingForAJobDescription={props.profile.lookingForAJobDescription}
                         aboutMe={props.profile.aboutMe}
                     />
-                    : <FormEditProfileReduxForm initialValues={props.profile} onSubmit={onSubmit} />
+                    : <FormEditProfileReduxForm initialValues={props.profile} onSubmit={onSubmit}/>
                 }
             </div>
         </div>

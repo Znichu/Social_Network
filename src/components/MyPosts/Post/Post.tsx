@@ -1,16 +1,25 @@
 import React from "react";
 import s from "./Post.module.css"
+import {ProfileType} from "../../../type/types";
 
+type PropsType = {
+    likes: number
+    message: string
+    avatar: ProfileType | null
+}
 
-const Post = (props) => {
+const Post: React.FC<PropsType> = (props:PropsType) => {
+
+    const avatar = props.avatar?.photos.small;
+
     return (
         <div className={s.post_content}>
             <div className={s.post_container}>
                 <img className={`${s.profile_photo_md} ${s.pull_left}`}
-                     src={"https://avatars2.githubusercontent.com/u/23550189?s=400&v=4"} alt=""/>
+                     src={avatar} alt="avatarUser"/>
                 <div className={s.post_detail}>
-                    <div className="user_info">
-                        <h5><a href="#">Sergey Neplashov </a></h5>
+                    <div className={s.userInfo}>
+                        <h5>{props.avatar?.fullName}</h5>
                         <p className={s.text_muted}>Published about 3 mins ago</p>
                     </div>
                 </div>
@@ -24,4 +33,5 @@ const Post = (props) => {
         </div>
     );
 }
-export default Post;
+
+export default Post

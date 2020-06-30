@@ -38,3 +38,7 @@ img.profile_photo_md {
     float: left;
     padding: 10px 0;
 }
+
+.userInfo {
+    color: #1c75bc;
+}

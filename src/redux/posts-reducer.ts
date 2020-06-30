@@ -1,10 +1,8 @@
+import {PostType} from "../type/types";
+
 const ADD_POST = "ADD-POST";
 
-type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
+
 let initialState = {
     posts: [
         {

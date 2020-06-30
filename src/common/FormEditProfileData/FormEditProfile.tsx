@@ -1,10 +1,11 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import style from "../../components/Profile/MyProfile.module.css";
 import {InputLogin, Textarea} from "../FormsControls/FormsControls";
+import {ProfileType} from "../../type/types";
 
 
-const FormEditProfile = (props) => {
+const FormEditProfile: React.FC<InjectedFormProps<ProfileType>> = (props) => {
     return(
         <form onSubmit={props.handleSubmit}>
             <div className={style.fullName}>
@@ -47,6 +48,6 @@ const FormEditProfile = (props) => {
     );
 }
 
-const FormEditProfileReduxForm = reduxForm({form: "edit-profile"})(FormEditProfile);
+const FormEditProfileReduxForm = reduxForm<ProfileType>({form: "edit-profile"})(FormEditProfile);
 
 export default FormEditProfileReduxForm

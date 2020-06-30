@@ -2,7 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {required} from "../../utils/Validation/FieldValidationForm";
 import {DialogType, MessageType} from "../../type/types";
@@ -13,7 +13,11 @@ type PropsType = {
     addMessage: ( addMessageBody: string) => void
 }
 
-const Dialogs: React.FC<PropsType> = (props) => {
+type AddMessageFormType = {
+    addMessageBody: string
+}
+
+const Dialogs: React.FC<PropsType> = (props:PropsType) => {
 
     let dialogsElement =
         props.dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
@@ -21,7 +25,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
     let messagesElement =
         props.messages.map(m => <MessageItem key={m.id} message={m.message} />);
 
-    let addMessage = (values: any) => {
+    let addMessage = (values: AddMessageFormType) => {
         props.addMessage(values.addMessageBody);
     };
 
@@ -48,7 +52,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
     );
 };
 
-const AddMessageForm = (props: any) => {
+const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <Field
@@ -63,6 +67,6 @@ const AddMessageForm = (props: any) => {
     );
 };
 
-const AddMessageFormRedux = reduxForm ({ form: 'addMessageDialog'}) (AddMessageForm);
+const AddMessageFormRedux = reduxForm<AddMessageFormType> ({ form: 'addMessageDialog'}) (AddMessageForm);
 
 export default Dialogs;

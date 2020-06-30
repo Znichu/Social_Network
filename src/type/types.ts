@@ -40,3 +40,8 @@ export type FriendsType = {
     id: number
     name: string
 }
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}

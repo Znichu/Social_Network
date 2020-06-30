@@ -72,7 +72,7 @@ export const setAuth = (): ThunkType => {
     }
 };
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType =>
     async (dispatch) => {
         let data = await authAPI.login(email, password, rememberMe, captcha);
         if (data.resultCode === 0) {
