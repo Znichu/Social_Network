@@ -1,56 +1,51 @@
 import {profileAPI} from "../api/api";
 import {ProfileType} from "../type/types";
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "./redux-store";
-
-const SET_PROFILE_USER = "SET_PROFILE_USER";
-const SET_STATUS = "SET_STATUS";
-
+import {InferActionTypes, RootState} from "./redux-store";
 
 const initialState = {
     profile: null as ProfileType | null,
     status: ''
 };
-type InitialStateType = typeof initialState;
+
 
 const ProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case SET_PROFILE_USER: {
-            return {...state, profile: action.profile}
+        case "SN/PROFILE/SET_PROFILE_USER": {
+            return {
+                ...state,
+                profile: action.profile
+            }
         }
-        case SET_STATUS: {
-            return {...state, status: action.status}
+        case "SN/PROFILE/SET_STATUS": {
+            return {
+                ...state,
+                status: action.status
+            }
         }
         default:
             return state
     }
 }
 
-
-type ActionsTypes = SetProfileUserActionType | SetStatusUserActionType
-
-type SetProfileUserActionType = {
-    type: typeof SET_PROFILE_USER
-    profile: ProfileType
+export const actions = {
+    setProfileUser: (profile: ProfileType) => ({type: "SN/PROFILE/SET_PROFILE_USER", profile} as const),
+    setStatusUser: (status: string) => ({type: "SN/PROFILE/SET_STATUS", status } as const)
 }
-export const setProfileUser = (profile: ProfileType): SetProfileUserActionType => ({type: SET_PROFILE_USER, profile});
-type SetStatusUserActionType = {
-    type: typeof SET_STATUS
-    status: string
-}
-export const setStatusUser = (status: string): SetStatusUserActionType => ({type: SET_STATUS, status});
 
-
-type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
-
-export const setProfile = (userId: number): ThunkType => async (dispatch: any) => {
+//Thunk
+export const setProfile = (userId: number): ThunkType => async (dispatch) => {
     let data = await profileAPI.getProfile(userId);
-    dispatch(setProfileUser(data))
+    dispatch(actions.setProfileUser(data))
 };
 
-export const setStatus = (userId: number): ThunkType => async (dispatch: any) => {
+export const setStatus = (userId: number): ThunkType => async (dispatch) => {
     let data = await profileAPI.getStatus(userId);
-    dispatch(setStatusUser(data))
+    dispatch(actions.setStatusUser(data))
 };
 
 export default ProfileReducer;
+
+type InitialStateType = typeof initialState
+type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
+type ActionsTypes = InferActionTypes<typeof actions>

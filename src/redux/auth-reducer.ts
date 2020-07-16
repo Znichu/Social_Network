@@ -2,31 +2,20 @@ import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {getMyProfile, setMyStatus} from "./myProfile-reducer";
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "./redux-store";
+import {InferActionTypes, RootState} from "./redux-store";
 
-const SET_AUTH_DATA = "SET_AUTH_DATA";
-const SET_CAPTCHA_URL_SUCCESS = "SET_CAPTCHA_URL_SUCCESS";
-
-type InitialStateType = {
-    userId: number | null
-    email: null | string
-    login: null | string
-    isAuth: boolean
-    captchaUrl: null | string
-}
-
-let initialState: InitialStateType = {
-    userId: null,
-    email: null,
-    login: null,
+let initialState = {
+    userId: null as (number | null),
+    email: null as (null | string),
+    login: null as (null | string),
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null as (null | string)
 };
 
-const AuthReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+const AuthReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_CAPTCHA_URL_SUCCESS:
-        case SET_AUTH_DATA:
+        case "SN/AUTH/SET_AUTH_DATA":
+        case  "SN/AUTH/SET_CAPTCHA_URL_SUCCESS":
             return {
                 ...state,
                 ...action.payload
@@ -36,29 +25,14 @@ const AuthReducer = (state = initialState, action: ActionsTypes): InitialStateTy
     }
 };
 
-type ActionsTypes = SetAuthUserDataType | SetCaptchaSuccessType
-type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
+export const actions = {
+    setAuthUserData: (userId: number | null, login: string | null, email: string | null, isAuth: boolean)=>
+        ({type: "SN/AUTH/SET_AUTH_DATA", payload: {userId, login, email, isAuth}} as const ),
+    setCaptchaSuccess: (captchaUrl: string) => ({type: "SN/AUTH/SET_CAPTCHA_URL_SUCCESS", payload: {captchaUrl}} as const )
+}
 
 
-type PayloadType = {
-    userId: null | number
-    email: null | string
-    login: null | string
-    isAuth: boolean
-}
-type SetAuthUserDataType = {
-    type: typeof SET_AUTH_DATA
-    payload: PayloadType
-}
-export const setAuthUserData = (userId: number | null, login: string | null, email: string | null, isAuth: boolean):
-    SetAuthUserDataType => ({type: SET_AUTH_DATA, payload: {userId, login, email, isAuth}});
-
-type SetCaptchaSuccessType = {
-    type: typeof SET_CAPTCHA_URL_SUCCESS
-    payload: { captchaUrl: string }
-}
-export const setCaptchaSuccess = (captchaUrl: string):
-    SetCaptchaSuccessType => ({type: SET_CAPTCHA_URL_SUCCESS, payload: {captchaUrl}});
+//Thunk
 
 export const setAuth = (): ThunkType => {
     return async (dispatch) => {
@@ -66,7 +40,7 @@ export const setAuth = (): ThunkType => {
         if (data.resultCode === 0) {
             let {id, login, email} = data.data;
             dispatch(getMyProfile(id));
-            dispatch(setAuthUserData(id, login, email, true));
+            dispatch(actions.setAuthUserData(id, login, email, true));
             dispatch(setMyStatus(id));
         }
     }
@@ -87,18 +61,20 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
         }
     };
 
-export const logout = (): ThunkType =>
-    async (dispatch) => {
+export const logout = (): ThunkType => async (dispatch) => {
         let data = await authAPI.logout();
         if (data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null, false))
+            dispatch(actions.setAuthUserData(null, null, null, false))
         }
     };
 
-export const getCaptchaUrl = (): ThunkType =>
-    async (dispatch) => {
+export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
         let data = await securityAPI.captchaUrl();
-        dispatch(setCaptchaSuccess(data.url))
+        dispatch(actions.setCaptchaSuccess(data.url))
     };
 
 export default AuthReducer;
+
+type InitialStateType = typeof initialState
+type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsType>
+type ActionsType = InferActionTypes<typeof actions>

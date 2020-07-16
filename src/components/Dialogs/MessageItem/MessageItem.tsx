@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./MessagesItem.module.css"
-import {MessageType} from "../../../type/types";
 
 type Props = {
     message: string

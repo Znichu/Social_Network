@@ -1,35 +1,28 @@
 import {profileAPI} from "../api/api";
 import {PhotosType, ProfileType} from "../type/types";
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "./redux-store";
-
-const SET_MY_STATUS = "SET_MY_STATUS";
-const SET_MY_PHOTO = "SET_MY_PHOTO";
-const SET_MY_PROFILE = "SET_MY_PROFILE";
-
+import {InferActionTypes, RootState} from "./redux-store";
 
 let initialState = {
-    status: "",
+    status: '',
     profile: null as ProfileType | null
 };
-type InitialStateType = typeof initialState;
-
 
 const myProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case SET_MY_STATUS: {
+        case "SN/MYPROFILE/SET_MY_STATUS": {
             return {
                 ...state,
                 status: action.status
             }
         }
-        case SET_MY_PROFILE: {
+        case "SN/MYPROFILE/SET_MY_PROFILE": {
             return {
                 ...state,
                 profile: action.profile
             }
         }
-        case SET_MY_PHOTO: {
+        case "SN/MYPROFILE/SET_MY_PHOTO": {
             return {
                 ...state,
                 profile: {...state.profile, photos: action.photos} as ProfileType
@@ -40,49 +33,35 @@ const myProfileReducer = (state = initialState, action: ActionsTypes): InitialSt
     }
 };
 
-type ActionsTypes = SetMyProfileStatusActionType | SetMyProfileActionType | SetMyPhotoActionTYpe
-
-type SetMyProfileStatusActionType = {
-    type: typeof SET_MY_STATUS
-    status: string
+export const actions = {
+    setMyProfileStatus: (status: string) => ({type: "SN/MYPROFILE/SET_MY_STATUS", status} as const ),
+    setMyProfile: (profile: ProfileType) => ({type: "SN/MYPROFILE/SET_MY_PROFILE", profile} as const ),
+    setMyPhoto: (photos: PhotosType) => ({type: "SN/MYPROFILE/SET_MY_PHOTO", photos} as const )
 }
-export const setMyProfileStatus = (status: string): SetMyProfileStatusActionType => ({type: SET_MY_STATUS, status});
-type SetMyProfileActionType = {
-    type: typeof SET_MY_PROFILE
-    profile: ProfileType
-}
-export const setMyProfile = (profile: ProfileType): SetMyProfileActionType => ({type: SET_MY_PROFILE, profile});
-type SetMyPhotoActionTYpe = {
-    type: typeof SET_MY_PHOTO
-    photos: PhotosType
-}
-export const setMyPhoto = (photos: PhotosType): SetMyPhotoActionTYpe => ({type: SET_MY_PHOTO, photos});
 
-
-type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
-
+//Thunk
 export const setMyStatus = (userId: number): ThunkType =>
     async (dispatch) => {
         let data = await profileAPI.getStatus(userId);
-        dispatch(setMyProfileStatus(data))
+        dispatch(actions.setMyProfileStatus(data))
     };
 export const getMyProfile = (userId: number | null): ThunkType =>
     async (dispatch) => {
         let data = await profileAPI.getProfile(userId);
-        dispatch(setMyProfile(data))
+        dispatch(actions.setMyProfile(data))
     };
 export const updateMyStatus = (status: string): ThunkType =>
     async (dispatch) => {
         let data = await profileAPI.updateStatus(status);
         if (data.resultCode === 0) {
-            dispatch(setMyProfileStatus(status));
+            dispatch(actions.setMyProfileStatus(status));
         }
     };
 export const savePhoto = (file: File): ThunkType =>
     async (dispatch) => {
         let response = await profileAPI.savePhoto(file);
         if (response.data.resultCode === 0) {
-            dispatch(setMyPhoto(response.data.data.photos));
+            dispatch(actions.setMyPhoto(response.data.data.photos));
         }
     };
 export const saveProfile = (profile: ProfileType): ThunkType =>
@@ -95,3 +74,8 @@ export const saveProfile = (profile: ProfileType): ThunkType =>
     };
 
 export default myProfileReducer;
+
+//Type
+type InitialStateType = typeof initialState;
+type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
+type ActionsTypes = InferActionTypes<typeof actions>

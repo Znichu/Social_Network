@@ -1,7 +1,5 @@
 import {PostType} from "../type/types";
-
-const ADD_POST = "ADD-POST";
-
+import {InferActionTypes} from "./redux-store";
 
 let initialState = {
     posts: [
@@ -23,11 +21,11 @@ let initialState = {
     ] as Array<PostType>,
     newPostText: ''
 };
-type InitialStateType = typeof initialState;
 
-const PostsReducer = (state = initialState, action: AddPostActionType): InitialStateType => {
+
+const PostsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case ADD_POST: {
+        case "SN/POST/ADD-POST": {
             return {
                 ...state,
                 newPostText: '',
@@ -42,11 +40,10 @@ const PostsReducer = (state = initialState, action: AddPostActionType): InitialS
     }
 };
 
-type AddPostActionType = {
-    type: typeof ADD_POST
-    newPostText: string
+export const actions = {
+    addPost: (newPostText: string) => ( {type: "SN/POST/ADD-POST", newPostText} as const )
 }
-export const addPost = (newPostText: string): AddPostActionType => ( {type: ADD_POST, newPostText} );
-
 
 export default PostsReducer;
+type ActionsType = InferActionTypes<typeof actions>
+type InitialStateType = typeof initialState;

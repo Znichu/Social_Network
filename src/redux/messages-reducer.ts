@@ -1,4 +1,5 @@
 import {DialogType, MessageType} from "../type/types";
+import {InferActionTypes} from "./redux-store";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 
@@ -21,7 +22,7 @@ let initialState = {
     ] as Array<MessageType>
 };
 
-type InitialStateType = typeof initialState;
+
 
 const MessageReducer = (state = initialState, action: AddMessageActionType): InitialStateType => {
 
@@ -39,11 +40,12 @@ const MessageReducer = (state = initialState, action: AddMessageActionType): Ini
     }
 };
 
-type AddMessageActionType = {
-    type: typeof ADD_MESSAGE
-    newMessageText: string
+export const actions = {
+    addMessage: (newMessageText: string) => ( {type: ADD_MESSAGE, newMessageText} )
 }
-export const addMessage = (newMessageText: string): AddMessageActionType => ( {type: ADD_MESSAGE, newMessageText} );
 
 
 export default MessageReducer;
+
+type InitialStateType = typeof initialState;
+type AddMessageActionType = InferActionTypes<typeof actions>

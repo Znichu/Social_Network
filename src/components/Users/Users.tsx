@@ -22,7 +22,7 @@ export const PageUsers: React.FC<PropsType> = (props: PropsType) => {
         <div className={style.mainContainer}>
             <div className={`${style.userCard} ${style.clearfix}`}>
                 <NavLink to={"/profile/" + u.id}>
-                    <img src={u.photos.small != null ? u.photos.small : smallAvatar} className={style.userImg}/>
+                    <img src={u.photos.small != null ? u.photos.small : smallAvatar} className={style.userImg} alt='avatar'/>
                 </NavLink>
 
                 <div className={`${style.col2} ${style.clearfix}`}>
@@ -49,7 +49,7 @@ export const PageUsers: React.FC<PropsType> = (props: PropsType) => {
         pages.push(i);
     }
 
-    let pageElement = pages.map(p =>  {
+    let pageElement = pages.map(p => {
         if (p === 1 || p === props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
             return (<Pagination.Item
                 className={ props.currentPage === p ? "active" : null }
