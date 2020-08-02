@@ -22,8 +22,8 @@ let initialState = {
     newPostText: ''
 };
 
-
-const PostsReducer = (state = initialState, action: ActionsType): InitialStateType => {
+//Reducer
+export const PostsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case "SN/POST/ADD-POST": {
             return {
@@ -40,10 +40,11 @@ const PostsReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 };
 
+//Actions
 export const actions = {
     addPost: (newPostText: string) => ( {type: "SN/POST/ADD-POST", newPostText} as const )
 }
 
-export default PostsReducer;
+//Types
 type ActionsType = InferActionTypes<typeof actions>
 type InitialStateType = typeof initialState;

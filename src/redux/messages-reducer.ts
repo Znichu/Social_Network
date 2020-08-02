@@ -23,8 +23,8 @@ let initialState = {
 };
 
 
-
-const MessageReducer = (state = initialState, action: AddMessageActionType): InitialStateType => {
+//Reducer
+export const MessageReducer = (state = initialState, action: AddMessageActionType): InitialStateType => {
 
     switch (action.type) {
         case ADD_MESSAGE: {
@@ -40,12 +40,11 @@ const MessageReducer = (state = initialState, action: AddMessageActionType): Ini
     }
 };
 
+//Actions
 export const actions = {
     addMessage: (newMessageText: string) => ( {type: ADD_MESSAGE, newMessageText} )
 }
 
-
-export default MessageReducer;
-
+//Types
 type InitialStateType = typeof initialState;
 type AddMessageActionType = InferActionTypes<typeof actions>

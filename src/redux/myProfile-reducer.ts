@@ -8,7 +8,8 @@ let initialState = {
     profile: null as ProfileType | null
 };
 
-const myProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+//Reducer
+export const myProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "SN/MYPROFILE/SET_MY_STATUS": {
             return {
@@ -33,6 +34,7 @@ const myProfileReducer = (state = initialState, action: ActionsTypes): InitialSt
     }
 };
 
+//Actions
 export const actions = {
     setMyProfileStatus: (status: string) => ({type: "SN/MYPROFILE/SET_MY_STATUS", status} as const ),
     setMyProfile: (profile: ProfileType) => ({type: "SN/MYPROFILE/SET_MY_PROFILE", profile} as const ),
@@ -73,9 +75,7 @@ export const saveProfile = (profile: ProfileType): ThunkType =>
         }
     };
 
-export default myProfileReducer;
-
-//Type
+//Types
 type InitialStateType = typeof initialState;
 type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
 type ActionsTypes = InferActionTypes<typeof actions>

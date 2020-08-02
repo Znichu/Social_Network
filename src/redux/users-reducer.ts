@@ -12,7 +12,8 @@ let initialState = {
     followInProgress: [] as Array<number> // array of users id
 };
 
-const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+//Reducer
+export const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case "SN/USERS/FOLLOW":
             return {
@@ -55,7 +56,6 @@ const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateT
     }
 };
 
-
 //Actions
 const actions = {
     followSuccess: (userId: number) => ({type: "SN/USERS/FOLLOW", userId} as const),
@@ -79,7 +79,7 @@ export const requestUsers = (currentPage: number, totalPageCount: number): Thunk
     };
 
 export const follow = (userId: number): ThunkType =>
-    async (dispatch: any) => {
+    async (dispatch) => {
         dispatch(actions.followingInProgress(true, userId))
         let data = await followAPI.follow(userId);
         if (data.resultCode === 0) {
@@ -89,7 +89,7 @@ export const follow = (userId: number): ThunkType =>
     };
 
 export const unfollow = (userId: number): ThunkType =>
-    async (dispatch: any) => {
+    async (dispatch) => {
         dispatch(actions.followingInProgress(true, userId))
         let data = await followAPI.unfollow(userId);
         if (data.resultCode === 0) {
@@ -98,10 +98,7 @@ export const unfollow = (userId: number): ThunkType =>
         dispatch(actions.followingInProgress(false, userId))
     };
 
-
-export default UsersReducer;
-
-//Type
+//Types
 type InitialStateType = typeof initialState;
 type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsTypes>
 type ActionsTypes = InferActionTypes<typeof actions>
