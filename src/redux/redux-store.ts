@@ -31,8 +31,7 @@ export type GetActionsTypes<T extends {[key: string]: (...args: any[]) => any}> 
 
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ;
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ;
 
 let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 

@@ -23,3 +23,6 @@ export const getIsFetching = (state: RootState) => {
 export const getFollowInProgress = (state: RootState) => {
     return state.usersPage.followInProgress
 };
+export const getUsersFilter = (state: RootState) => {
+    return state.usersPage.filter
+};

@@ -23,8 +23,8 @@ export const authAPI = {
 };
 
 export const usersAPI = {
-    getUsers (currentPage: number, totalPageCount: number) {
-        return instance.get<GetUsersType>(`users?page=${currentPage}&count=${totalPageCount}`)
+    getUsers (currentPage: number, totalPageCount: number, term: string, friend: null | boolean) {
+        return instance.get<GetUsersType>(`users?page=${currentPage}&count=${totalPageCount} ${term.length === 0 ? '': `&term=${term}`}${friend === null ? '': `&friend=${friend}`}`)
             .then(response => response.data)
     }
 };

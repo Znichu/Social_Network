@@ -45,3 +45,8 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
+export type UsersFilterType = {
+    term: string
+    friend: null | boolean
+}

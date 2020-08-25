@@ -9,7 +9,11 @@ let initialState = {
     totalCount: 0,
     currentPage: 1,
     isFetching: false,
-    followInProgress: [] as Array<number> // array of users id
+    followInProgress: [] as Array<number>, // array of users id
+    filter: {
+        term: '',
+        friend: null as null | boolean
+    }
 };
 
 //Reducer
@@ -43,6 +47,12 @@ export const UsersReducer = (state = initialState, action: ActionsTypes): Initia
             return {...state, totalCount: action.totalCount};
         case "SN/USERS/TOGGLE_IS_FETCHING":
             return {...state, isFetching: action.isFetching};
+        case "SN/USERS/SET_FILTER_VALUE": {
+            return {
+                ...state,
+                filter: action.payload
+            }
+        }
         case "SN/USERS/TOGGLE_IS_FOLLOW_PROGRESS":
             return {
                 ...state,
@@ -64,15 +74,19 @@ const actions = {
     setCurrentPage: (numberPage: number) => ({type: "SN/USERS/SET_CURRENT_PAGE", numberPage} as const ),
     setTotalCount: (totalCount: number) => ({type: "SN/USERS/SET_TOTAL_COUNT", totalCount} as const ),
     toggleIsFetching: (isFetching: boolean) => ({type: "SN/USERS/TOGGLE_IS_FETCHING", isFetching} as const ),
-    followingInProgress: (isFetching: boolean, userId: number) => ({type: "SN/USERS/TOGGLE_IS_FOLLOW_PROGRESS", isFetching, userId} as const )
+    followingInProgress: (isFetching: boolean, userId: number) => ({type: "SN/USERS/TOGGLE_IS_FOLLOW_PROGRESS", isFetching, userId} as const ),
+    setFilter: (term: string, friend: null | boolean) => ({type: 'SN/USERS/SET_FILTER_VALUE', payload: {term, friend}} as const)
 }
 
 //Thunk
-export const requestUsers = (currentPage: number, totalPageCount: number): ThunkType =>
+export const changeFilterAndRequestUsers = (currentPage: number, totalPageCount: number, term: string, friend: null | boolean): ThunkType =>
     async (dispatch) => {
         dispatch(actions.setCurrentPage(currentPage));
         dispatch(actions.toggleIsFetching(true));
-        let data = await usersAPI.getUsers(currentPage, totalPageCount);
+        dispatch(actions.setFilter(term, friend));
+
+        let data = await usersAPI.getUsers(currentPage, totalPageCount, term, friend);
+
         dispatch(actions.setUsers(data.items));
         dispatch(actions.toggleIsFetching(false));
         dispatch(actions.setTotalCount(data.totalCount))

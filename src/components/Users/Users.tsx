@@ -1,9 +1,22 @@
 import React from "react";
 import style from "./Users.module.css";
-import smallAvatar from "../../assets/images/avatar-chase.png";
-import Pagination from 'react-bootstrap/Pagination'
-import {NavLink} from "react-router-dom";
 import {UserType} from "../../type/types";
+import {UsersSearchForm} from "./UsersSearchForm";
+import {UserCard} from "./UserCard";
+//material-ui
+import {createStyles, makeStyles} from "@material-ui/core";
+import Pagination from '@material-ui/lab/Pagination';
+
+const useStyles = makeStyles((theme) =>
+    createStyles({
+        root: {
+            '& > * + *': {
+                marginTop: theme.spacing(2),
+            },
+        },
+    }),
+);
+
 
 type PropsType = {
     users: Array<UserType>
@@ -14,33 +27,25 @@ type PropsType = {
     unfollow: (id: number) => void
     follow: (id: number) => void
     onPageClick: (page: number) => void
+    searchUsers: (term: string, friend: null | boolean) => void
 }
 
 
-export const PageUsers: React.FC<PropsType> = (props: PropsType) => {
-    let user = props.users.map(u =>
-        <div className={style.mainContainer}>
-            <div className={`${style.userCard} ${style.clearfix}`}>
-                <NavLink to={"/profile/" + u.id}>
-                    <img src={u.photos.small != null ? u.photos.small : smallAvatar} className={style.userImg} alt='avatar'/>
-                </NavLink>
+export const PageUsers: React.FC<PropsType> = (props) => {
 
-                <div className={`${style.col2} ${style.clearfix}`}>
-                    <div className={style.fullName}>{u.name}</div>
-                    <div className={style.status}>{u.status}</div>
-                    <div>City: <span>{"u.location.city"}, {"u.location.country"}</span></div>
-                </div>
-            </div>
-            {u.followed
-                ? <button disabled={ props.followInProgress.some(id => id === u.id ) }
-                          className={ style.nextUser }
-                          onClick={() => { props.unfollow(u.id) }}>Unfollow</button>
+    const {currentPage} = props
+    const classes = useStyles();
 
-                : <button disabled={ props.followInProgress.some(id => id === u.id ) }
-                          className={ style.nextUser }
-                          onClick={ () => { props.follow(u.id) }}>Follow</button>
-            }
-        </div>);
+    let user = props.users.map(u => <UserCard id={u.id}
+                                              status={u.status}
+                                              followed={u.followed}
+                                              name={u.name}
+                                              followInProgress={props.followInProgress}
+                                              photos={u.photos}
+                                              follow={props.follow}
+                                              unfollow={props.unfollow}
+                                              key={u.id}/>
+    );
 
 
     let pageCounter = Math.ceil(props.totalCount / props.totalPageCount);
@@ -49,27 +54,33 @@ export const PageUsers: React.FC<PropsType> = (props: PropsType) => {
         pages.push(i);
     }
 
-    let pageElement = pages.map(p => {
-        if (p === 1 || p === props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
-            return (<Pagination.Item
-                className={ props.currentPage === p ? "active" : null }
-                onClick={ () => { props.onPageClick(p) } }>
-                { p }
-            </Pagination.Item>);
-        }
-    });
+    /*    let pageElement = pages.map(p => {
+            if (p === 1 || p === props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
+                return (
+                    <Pagination.Item
+                        className={props.currentPage === p ? "active" : null}
+                        onClick={() => {
+                            props.onPageClick(p)
+                        }}>
+                        {p}
+                    </Pagination.Item>
+                );
+            }
+        });*/
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        console.log(value);
+        props.onPageClick(value);
+    }
 
     return (
         <div className="container">
             <div className="row">
                 <div className={style.paginationWrapper}>
-                    <Pagination>
-                        <Pagination.First />
-                        <Pagination.Prev />
-                        {pageElement}
-                        <Pagination.Next />
-                        <Pagination.Last />
-                    </Pagination>
+                    <div className={classes.root}>
+                        <Pagination count={pageCounter} page={props.currentPage} onChange={handleChange} color="primary"
+                                    shape="rounded"/>
+                    </div>
+                    <UsersSearchForm searchUsers={props.searchUsers}/>
                 </div>
                 {user}
             </div>
