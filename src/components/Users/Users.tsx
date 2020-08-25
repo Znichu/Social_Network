@@ -33,7 +33,6 @@ type PropsType = {
 
 export const PageUsers: React.FC<PropsType> = (props) => {
 
-    const {currentPage} = props
     const classes = useStyles();
 
     let user = props.users.map(u => <UserCard id={u.id}
@@ -49,26 +48,8 @@ export const PageUsers: React.FC<PropsType> = (props) => {
 
 
     let pageCounter = Math.ceil(props.totalCount / props.totalPageCount);
-    let pages = [];
-    for (let i = 1; i <= pageCounter; i++) {
-        pages.push(i);
-    }
 
-    /*    let pageElement = pages.map(p => {
-            if (p === 1 || p === props.totalCount || (p >= props.currentPage - 2 && p <= props.currentPage + 9)) {
-                return (
-                    <Pagination.Item
-                        className={props.currentPage === p ? "active" : null}
-                        onClick={() => {
-                            props.onPageClick(p)
-                        }}>
-                        {p}
-                    </Pagination.Item>
-                );
-            }
-        });*/
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        console.log(value);
         props.onPageClick(value);
     }
 

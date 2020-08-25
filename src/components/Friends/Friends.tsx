@@ -10,7 +10,7 @@ type Props = {
 const Friends: React.FC<Props> = (props: Props) => {
 
     let friendElement =
-        props.friend.map(f => <FriendItem name={f.name}/>);
+        props.friend.map(f => <FriendItem key={f.id} name={f.name}/>);
 
     return (
         <div className={style.friendsBlock}>

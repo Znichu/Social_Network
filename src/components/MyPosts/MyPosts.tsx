@@ -19,7 +19,7 @@ type AddPostFormType = {
 
 const MyPosts: React.FC<PropsType> = React.memo(props => {
     let postsElement =
-        props.posts.map(p => <Post avatar={props.avatar}  message={p.message} likes={p.likesCount}/>);
+        props.posts.map(p => <Post key={p.id} avatar={props.avatar}  message={p.message} likes={p.likesCount}/>);
 
     let addPosts = (values: AddPostFormType) => { // функция обработки onClick
         props.addPost(values.textMyPost); //

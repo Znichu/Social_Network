@@ -18,7 +18,7 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
     const usersSearchForm = useFormik({
         initialValues: {
             term: '',
-            friend: null
+            friend: ''
         },
         onSubmit: (values) => {
             const filter = {
