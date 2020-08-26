@@ -4,19 +4,18 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {setInitialized} from "./redux/app-reducer";
 import './App.css';
+//components
 import Navbar from "./components/Navbar/Navbar";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
-import FriendsContainer from "./components/Friends/FriendsContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
-import {RootState} from "./redux/redux-store";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-
-
-
+import {Friends} from "./components/Friends/Friends";
+//types
+import {RootState} from "./redux/redux-store";
 
 
 // @ts-ignore
@@ -54,7 +53,7 @@ class App extends React.Component<PropsType> {
                     </div>
                     <div className="col-lg-3">
                         <Navbar/>
-                        <FriendsContainer/>
+                        <Friends />
                     </div>
                     <div className="col-lg-9">
                         <ProfileContainer/>

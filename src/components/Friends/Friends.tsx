@@ -1,16 +1,14 @@
 import React from "react";
 import style from "./Friends.module.css"
 import FriendItem from "./Friend/Friend";
-import {FriendsType} from "../../type/types";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/redux-store";
 
-type Props = {
-    friend: Array<FriendsType>
-}
+export const Friends: React.FC = () => {
 
-const Friends: React.FC<Props> = (props: Props) => {
+    const friend = useSelector( (state: RootState) => state.friendsBlock.friend )
 
-    let friendElement =
-        props.friend.map(f => <FriendItem key={f.id} name={f.name}/>);
+    let friendElement = friend.map(f => <FriendItem key={f.id} name={f.name}/>);
 
     return (
         <div className={style.friendsBlock}>
@@ -26,5 +24,3 @@ const Friends: React.FC<Props> = (props: Props) => {
         </div>
     );
 }
-
-export default Friends;
