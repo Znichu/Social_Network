@@ -6,6 +6,16 @@ import {UserCard} from "./UserCard";
 //material-ui
 import {createStyles, makeStyles} from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
+import {useDispatch, useSelector} from "react-redux";
+import {
+    getCurrentPage,
+    getFollowInProgress, getIsFetching,
+    getTotalCount,
+    getTotalPageCount,
+    getUsers, getUsersFilter
+} from "../../redux/users-selectors";
+import {changeFilterAndRequestUsers, follow, unfollow} from "../../redux/users-reducer";
+import Preloader from "../../common/Preloader/Preloader";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -18,52 +28,62 @@ const useStyles = makeStyles((theme) =>
 );
 
 
-type PropsType = {
-    users: Array<UserType>
-    followInProgress: Array<number>
-    totalCount: number
-    totalPageCount: number
-    currentPage: number
-    unfollow: (id: number) => void
-    follow: (id: number) => void
-    onPageClick: (page: number) => void
-    searchUsers: (term: string, friend: null | boolean) => void
-}
+export const Users: React.FC = () => {
 
+    const users = useSelector(getUsers)
+    const followInProgress = useSelector(getFollowInProgress)
+    const totalCount = useSelector(getTotalCount)
+    const totalPageCount = useSelector(getTotalPageCount)
+    const currentPage = useSelector(getCurrentPage)
+    const filter = useSelector(getUsersFilter)
+    const isFetching = useSelector(getIsFetching)
 
-export const PageUsers: React.FC<PropsType> = (props) => {
+    const dispatch = useDispatch()
 
     const classes = useStyles();
 
-    let user = props.users.map(u => <UserCard id={u.id}
-                                              status={u.status}
-                                              followed={u.followed}
-                                              name={u.name}
-                                              followInProgress={props.followInProgress}
-                                              photos={u.photos}
-                                              follow={props.follow}
-                                              unfollow={props.unfollow}
-                                              key={u.id}/>
+    const searchUsers = (term: string, friend: null | boolean) => {
+        dispatch(changeFilterAndRequestUsers(1, totalPageCount, term, friend));
+    }
+
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        const {term, friend} = filter;
+        dispatch(changeFilterAndRequestUsers(value, totalPageCount, term, friend));
+    }
+
+    const changeFollow = (userId: number) => {
+        dispatch(follow(userId))
+    }
+
+    const changeUnfollow = (userId: number) => {
+        dispatch(unfollow(userId))
+    }
+
+    let user = users.map(u => <UserCard id={u.id}
+                                        status={u.status}
+                                        followed={u.followed}
+                                        name={u.name}
+                                        followInProgress={followInProgress}
+                                        photos={u.photos}
+                                        follow={changeFollow}
+                                        unfollow={changeUnfollow}
+                                        key={u.id}/>
     );
 
 
-    let pageCounter = Math.ceil(props.totalCount / props.totalPageCount);
-
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        props.onPageClick(value);
-    }
+    let pageCounter = Math.ceil(totalCount / totalPageCount);
 
     return (
         <div className="container">
             <div className="row">
                 <div className={style.paginationWrapper}>
                     <div className={classes.root}>
-                        <Pagination count={pageCounter} page={props.currentPage} onChange={handleChange} color="primary"
+                        <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
                                     shape="rounded"/>
                     </div>
-                    <UsersSearchForm searchUsers={props.searchUsers}/>
+                    <UsersSearchForm searchUsers={searchUsers}/>
                 </div>
-                {user}
+                {!isFetching ? user : <Preloader/>}
             </div>
         </div>
     );

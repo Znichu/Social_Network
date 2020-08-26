@@ -9,7 +9,7 @@ import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Friends} from "./components/Friends/Friends";
 import {Login} from "./components/Login/Login";
-import {ProfilePage} from "./components/Profile/ProfileContainer";
+import {ProfilePage} from "./components/Profile/ProfilePage";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 //types
@@ -17,7 +17,7 @@ import {RootState} from "./redux/redux-store";
 
 
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
 const Music = React.lazy(() => import('./components/Music/Music'));
@@ -59,7 +59,7 @@ class App extends React.Component<PropsType> {
                                     <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
                                     <Route path="/myprofile" render={() => <ProfilePage/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>
-                                    <Route path="/users" render={() => <UsersContainer/>}/>
+                                    <Route path="/users" render={() => <UsersPage/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
                                     <Route path="/login" render={() => <Login/>}/>
                                     <Route path="/news" render={() => <News/>}/>
