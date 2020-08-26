@@ -7,13 +7,13 @@ import './App.css';
 //components
 import {Header} from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
+import {Friends} from "./components/Friends/Friends";
 import {Login} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import {MyPosts} from "./components/MyPosts/MyPosts";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {Friends} from "./components/Friends/Friends";
 //types
 import {RootState} from "./redux/redux-store";
 
@@ -62,7 +62,7 @@ class App extends React.Component<PropsType> {
                             <Switch>
                                 <Suspense fallback={<div>Загрузка...</div>}>
                                     <Route path="/" render={() => <Redirect to="/myposts"/>}/>
-                                    <Route path="/myposts" render={() => <MyPostsContainer/>}/>
+                                    <Route path="/myposts" render={() => <MyPosts/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
