@@ -1,27 +1,30 @@
 import React from "react";
-import s from "./Header.module.css";
+import {useDispatch, useSelector} from "react-redux";
 import {NavLink} from "react-router-dom";
+import {logout} from "../../redux/auth-reducer";
+import style from "./Header.module.css";
+import {RootState} from "../../redux/redux-store";
 
-type PropsType ={
-    isAuth: boolean
-    login: null | string
-    logout: () => void
-}
 
-const Header: React.FC<PropsType> = (props: PropsType) => {
+export const Header: React.FC = () => {
+
+    const {login, isAuth} = useSelector( (state: RootState) => state.auth )
+
+    const dispatch = useDispatch()
+
+    const logOut = () => { dispatch(logout) }
+
     return (
-        <div className={s.header}>
-            <div className={s.userName}>
-                {props.isAuth
-                    ? <span>{props.login}
-                        <button onClick={props.logout} className="btn btn-primary btn-sm">logout</button></span>
+        <div className={style.header}>
+            <div className={style.userName}>
+                {isAuth
+                    ? <span>{login}
+                        <button onClick={logOut} className="btn btn-primary btn-sm">logout</button></span>
                     : <NavLink to="/login">Login</NavLink>}
             </div>
-            <div className={s.logo}>
+            <div className={style.logo}>
                 <img src="https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png" alt="logo"/>
             </div>
         </div>
     )
 };
-
-export default Header;
