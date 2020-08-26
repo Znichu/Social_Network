@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {InputLogin} from "../../common/FormsControls/FormsControls";
 import style from "./Login.module.css"
@@ -69,7 +69,6 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormPropsType, OwnPropsType> & 
 
 const LoginReduxForm = reduxForm<LoginFormPropsType, OwnPropsType>({form: 'login'})(LoginForm);
 
-
 type LoginFormPropsType = {
     email: string
     password: string
@@ -77,34 +76,23 @@ type LoginFormPropsType = {
     captcha: string | null
 }
 
-const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
-    let onSubmit = (values: LoginFormPropsType) => {
-        props.login(values.email, values.password, values.rememberMe, values.captcha);
+export const Login: React.FC = () => {
+
+    const {isAuth, captchaUrl} = useSelector((state: RootState) => state.auth)
+
+    const dispatch = useDispatch()
+
+    const onSubmit = (values: LoginFormPropsType) => {
+        dispatch(login(values.email, values.password, values.rememberMe, values.captcha));
     };
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/myposts"}/>
     }
-
     return (
         <div className={style.login}>
             <h2 className={style.title}>Login</h2>
-            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl}/>
         </div>
     );
-};
-
-type MapStatePropsType = {
-    captchaUrl: string | null
-    isAuth: boolean
 }
-type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-}
-
-let mapStateToProps = (state: RootState): MapStatePropsType => ({
-    captchaUrl: state.auth.captchaUrl,
-    isAuth: state.auth.isAuth
-});
-
-export default connect(mapStateToProps, {login})(Login);

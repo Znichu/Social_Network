@@ -8,7 +8,7 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import MyPostsContainer from "./components/MyPosts/MyPostsContainer";
-import Login from "./components/Login/Login";
+import {Login} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";

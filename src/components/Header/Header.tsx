@@ -8,11 +8,13 @@ import {RootState} from "../../redux/redux-store";
 
 export const Header: React.FC = () => {
 
-    const {login, isAuth} = useSelector( (state: RootState) => state.auth )
+    const {login, isAuth} = useSelector((state: RootState) => state.auth)
 
     const dispatch = useDispatch()
 
-    const logOut = () => { dispatch(logout) }
+    const logOut = () => {
+        dispatch(logout())
+    }
 
     return (
         <div className={style.header}>
