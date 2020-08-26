@@ -5,28 +5,28 @@ import MessageItem from "./MessageItem/MessageItem";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {required} from "../../utils/Validation/FieldValidationForm";
-import {DialogType, MessageType} from "../../type/types";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../redux/redux-store";
 
-type PropsType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-    addMessage: ( addMessageBody: string) => void
-}
 
 type AddMessageFormType = {
     addMessageBody: string
 }
 
-const Dialogs: React.FC<PropsType> = (props:PropsType) => {
+export const Dialogs: React.FC = () => {
+
+    const { dialogs, messages } = useSelector( (state: RootState) => state.messagesPage )
+
+    const dispatch = useDispatch()
 
     let dialogsElement =
-        props.dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
+        dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
 
     let messagesElement =
-        props.messages.map(m => <MessageItem key={m.id} message={m.message} />);
+        messages.map(m => <MessageItem key={m.id} message={m.message} />);
 
     let addMessage = (values: AddMessageFormType) => {
-        props.addMessage(values.addMessageBody);
+        dispatch(addMessage(values));
     };
 
     return (
@@ -68,5 +68,3 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) 
 };
 
 const AddMessageFormRedux = reduxForm<AddMessageFormType> ({ form: 'addMessageDialog'}) (AddMessageForm);
-
-export default Dialogs;

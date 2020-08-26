@@ -13,10 +13,14 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 import {RootState} from "./redux/redux-store";
+import {Dialogs} from "./components/Dialogs/Dialogs";
+
+
+
 
 
 // @ts-ignore
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+// const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
@@ -59,7 +63,7 @@ class App extends React.Component<PropsType> {
                                 <Suspense fallback={<div>Загрузка...</div>}>
                                     <Route path="/" render={() => <Redirect to="/myposts"/>}/>
                                     <Route path="/myposts" render={() => <MyPostsContainer/>}/>
-                                    <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                                    <Route path="/dialogs" render={() => <Dialogs/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
                                     <Route path="/login" render={() => <Login/>}/>
