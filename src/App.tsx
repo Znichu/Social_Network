@@ -6,21 +6,17 @@ import {setInitialized} from "./redux/app-reducer";
 import './App.css';
 //components
 import {Header} from "./components/Header/Header";
-import Navbar from "./components/Navbar/Navbar";
+import {Navbar} from "./components/Navbar/Navbar";
 import {Friends} from "./components/Friends/Friends";
 import {Login} from "./components/Login/Login";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import {MyPosts} from "./components/MyPosts/MyPosts";
+import {ProfilePage} from "./components/Profile/ProfileContainer";
 import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 //types
 import {RootState} from "./redux/redux-store";
 
 
-
-// @ts-ignore
-// const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
+const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
@@ -57,12 +53,11 @@ class App extends React.Component<PropsType> {
                         <Friends />
                     </div>
                     <div className="col-lg-9">
-                        <ProfileContainer/>
                         <div className="mainContent">
                             <Switch>
                                 <Suspense fallback={<div>Загрузка...</div>}>
-                                    <Route path="/" render={() => <Redirect to="/myposts"/>}/>
-                                    <Route path="/myposts" render={() => <MyPosts/>}/>
+                                    <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
+                                    <Route path="/myprofile" render={() => <ProfilePage/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>
                                     <Route path="/users" render={() => <UsersContainer/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>

@@ -3,23 +3,25 @@ import style from './MyProfile.module.css'
 import MyProfileInfo from "./MyProfileInfo";
 import FormEditProfileReduxForm from "../../common/FormEditProfileData/FormEditProfile";
 import {ProfileType} from "../../type/types";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../redux/redux-store";
+import {saveProfile, updateMyStatus} from "../../redux/myProfile-reducer";
 
-type PropsType = {
-    status: string
-    profile: ProfileType | null
-    updateMyStatus: (status: string) => void
-    saveProfile: (profile: ProfileType) => void
-}
 
-const MyProfile: React.FC<PropsType> = (props: PropsType) => {
+const MyProfile: React.FC = () => {
 
-    const [editMode, setEditMode] = useState<boolean>(false);
-    const [status, setStatus] = useState<string>(props.status);
-    const [editProfile, setEditProfile] = useState<boolean>(false);
+    const profile = useSelector((state: RootState) => state.myProfile.profile)
+    const status = useSelector((state: RootState) => state.myProfile.status )
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status]);
+        setStatus(status)
+    }, [status]);
+
+    const [editMode, setEditMode] = useState<boolean>(false);
+    const [mainStatus, setStatus] = useState<string>(status);
+    const [editProfile, setEditProfile] = useState<boolean>(false);
+
+    const dispatch = useDispatch()
 
     const activateEditProfile = () => {
         setEditProfile(true);
@@ -32,7 +34,7 @@ const MyProfile: React.FC<PropsType> = (props: PropsType) => {
     };
     const deactivateEditMode = () => {
         setEditMode(false);
-        props.updateMyStatus(status);
+        dispatch(updateMyStatus(mainStatus));
     };
 
     const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,26 +42,26 @@ const MyProfile: React.FC<PropsType> = (props: PropsType) => {
     };
 
     const onSubmit = (values: ProfileType) => {
-        props.saveProfile(values);
+        dispatch(saveProfile(values));
         deactivateEditProfile();
     };
 
-    if (!props.profile) {
+    if (!profile) {
         return <> </>
     }
     return (
         <div className={style.myProfileCard}>
             <div className={style.myProfilePhoto}>
-                <img src={props.profile.photos.large} alt="avatar"/>
+                <img src={profile.photos.large} alt="avatar"/>
             </div>
             <div className={style.myProfileInfo}>
                 <div className={style.fullName}>
-                    <h4>{props.profile.fullName}</h4>
+                    <h4>{profile.fullName}</h4>
                 </div>
                 <div className={style.status}>
                     {!editMode &&
                     <div>
-                        <span onClick={activateEditMode}>{status}</span>
+                        <span onClick={activateEditMode}>{mainStatus}</span>
                     </div>
 
                     }
@@ -72,11 +74,11 @@ const MyProfile: React.FC<PropsType> = (props: PropsType) => {
                 {!editProfile
                     ? <MyProfileInfo
                         activateEditProfile={activateEditProfile}
-                        lookingForAJob={props.profile.lookingForAJob}
-                        lookingForAJobDescription={props.profile.lookingForAJobDescription}
-                        aboutMe={props.profile.aboutMe}
+                        lookingForAJob={profile.lookingForAJob}
+                        lookingForAJobDescription={profile.lookingForAJobDescription}
+                        aboutMe={profile.aboutMe}
                     />
-                    : <FormEditProfileReduxForm initialValues={props.profile} onSubmit={onSubmit}/>
+                    : <FormEditProfileReduxForm initialValues={profile} onSubmit={onSubmit}/>
                 }
             </div>
         </div>

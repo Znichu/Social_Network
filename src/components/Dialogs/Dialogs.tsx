@@ -14,7 +14,7 @@ type AddMessageFormType = {
     addMessageBody: string
 }
 
-export const Dialogs: React.FC = () => {
+const Dialogs: React.FC = () => {
 
     const { dialogs, messages } = useSelector( (state: RootState) => state.messagesPage )
 
@@ -69,3 +69,5 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> = (props) 
 };
 
 const AddMessageFormRedux = reduxForm<AddMessageFormType> ({ form: 'addMessageDialog'}) (AddMessageForm);
+
+export default Dialogs
