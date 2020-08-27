@@ -14,6 +14,7 @@ import Preloader from "./common/Preloader/Preloader";
 import Footer from "./components/Footer/Footer";
 //types
 import {RootState} from "./redux/redux-store";
+import {LinearProgress} from "@material-ui/core";
 
 
 
@@ -57,7 +58,7 @@ class App extends React.Component<PropsType> {
                     <div className="col-lg-9">
                         <div className="mainContent">
                             <Switch>
-                                <Suspense fallback={<div>Загрузка...</div>}>
+                                <Suspense fallback={<div><LinearProgress/></div>}>
                                     <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
                                     <Route path="/myprofile" render={() => <ProfilePage/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>

@@ -6,6 +6,7 @@ import MessageItem from "./MessageItem/MessageItem";
 import {RootState} from "../../redux/redux-store";
 import style from "./Messages.module.css";
 import {AddMessageFormType, SendMessageForm} from "./SendMessageForm";
+import {LinearProgress} from "@material-ui/core";
 
 
 const Messages = () => {
@@ -17,6 +18,7 @@ const Messages = () => {
     }, [id]);
 
     const messages = useSelector((state: RootState) => state.messagesPage.messages);
+    const isFetching = useSelector((state: RootState) => state.messagesPage.isFetching)
 
     const messagesElement =
         messages.map(m => <MessageItem key={m.id} message={m.body}/>);
@@ -26,20 +28,25 @@ const Messages = () => {
     };
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-12">
-                    {messagesElement}
-                </div>
-            </div>
-            <div className="row">
-                <div className="col lg-12">
-                    <div className={style.enterMessage}>
-                        <SendMessageForm onSubmit={sendMessage}/>
+        <>
+            {isFetching
+                ? <LinearProgress/>
+                : <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            {messagesElement}
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col lg-12">
+                            <div className={style.enterMessage}>
+                                <SendMessageForm onSubmit={sendMessage}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 

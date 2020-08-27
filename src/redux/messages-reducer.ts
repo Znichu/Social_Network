@@ -2,12 +2,13 @@ import {DialogType, MessageType} from "../type/types";
 import {InferActionTypes, RootState} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
 import {dialogsApi} from "../api/dialogsApi";
+import {getIsFetching} from "./users-selectors";
 
 const initialState = {
     dialogs: [] as Array<DialogType>,
-    messages: [] as Array<MessageType>
+    messages: [] as Array<MessageType>,
+    isFetching: false
 };
-
 
 //Reducer
 export const MessageReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -25,15 +26,12 @@ export const MessageReducer = (state = initialState, action: ActionsType): Initi
                 messages: action.messagesList
             }
         }
-/*        case "SN/DIALOGS/ADD_MESSAGE": {
-            //сразу возвращаем новый объект
-            //раскукоживаем стэйт, и записываем туда обнуленный инпут
-            //делаем глубокую копию стэйта и сразу записываем туда новой сообщение
-            return  {
-              ...state,
-              messages: [...state.messages, {id: 7, message: action.newMessageText}]
-            };
-        }*/
+        case "SN/DIALOGS/TOGGLE_IS_FETCHING": {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
         default: return state;
     }
 };
@@ -41,8 +39,8 @@ export const MessageReducer = (state = initialState, action: ActionsType): Initi
 //Actions
 export const actions = {
     setDialogs: (dialogs: Array<DialogType>) => ({type: 'SN/DIALOGS/SET_DIALOGS', dialogs } as const),
-    addMessage: (newMessageText: string) => ( {type: 'SN/DIALOGS/ADD_MESSAGE', newMessageText} as const ),
-    setFriendMessages: (messagesList: Array<MessageType>) => ({type: 'SN/DIALOGS/SET_FRIEND_MESSAGES', messagesList } as const)
+    setFriendMessages: (messagesList: Array<MessageType>) => ({type: 'SN/DIALOGS/SET_FRIEND_MESSAGES', messagesList } as const),
+    toggleIsFetching: (isFetching: boolean) => ({type: 'SN/DIALOGS/TOGGLE_IS_FETCHING', isFetching} as const)
 }
 //Thunk
 export const requestDialogs = (): ThunkType => async (dispatch) => {
@@ -55,15 +53,18 @@ export const requestDialogs = (): ThunkType => async (dispatch) => {
 }
 export const getMessagesFriend = (userId: number): ThunkType => async (dispatch) => {
     try {
+        dispatch(actions.toggleIsFetching(true))
         const data = await dialogsApi.getFriendListMessages(userId)
         dispatch(actions.setFriendMessages(data.items))
     } catch (e) {
         console.log(e)
     }
+    dispatch(actions.toggleIsFetching(false))
 }
-export const sendNewMessage = (userId: number, body: string): ThunkType => async (dispatch) => {
+export const sendNewMessage = (userId: number, body: string): ThunkType => async (dispatch, getState) => {
     try {
-        const data = await dialogsApi.sendMessage(userId, body)
+        await dialogsApi.sendMessage(userId, body)
+        await dispatch(getMessagesFriend(userId))
     } catch (e) {
         console.log(e)
     }
