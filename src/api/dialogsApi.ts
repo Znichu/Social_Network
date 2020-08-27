@@ -13,7 +13,7 @@ export const dialogsApi = {
     startChatting(userId: number) {
         return instance.put(`/dialogs/${userId}`)
     },
-    sendMessage (userId: number) {
-        return instance.post(`/dialogs/${userId}/messages`)
+    sendMessage (userId: number, body: string) {
+        return instance.post(`/dialogs/${userId}/messages`, {body: body})
     }
 }

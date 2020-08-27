@@ -1,21 +1,4 @@
-.enterMessage {
-    padding:13px 0px;
-}
 
-.enterMessage .actionBoxInput {
-    border:none;
-    padding:10px 12px;
-    background:#d3d3d3;
-    width: 100%;
-    border-radius:2px;
-    height: 50px;
-}
-
-.enterMessage .send {
-    margin-top: 5px;
-    padding:5px 15px;
-    float:right;
-}
 .dialogs {
     display: flex;
     justify-content: space-between;

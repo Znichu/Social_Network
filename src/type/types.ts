@@ -24,6 +24,7 @@ export type ContactsType = {
     youtube: string
     mainLink: string
 }
+
 export type PhotosType = {
     small: string
     large: string
@@ -35,14 +36,22 @@ export type DialogType = {
     newMessagesCount: number
     photos: PhotosType
 }
+
 export type MessageType = {
-    id: number
-    message: string
+    id: string
+    body: string
+    translatedBody: null
+    addedAt: string
+    senderId: number
+    senderName: string
+    recipientId: number
+    viewed: boolean
 }
 export type FriendsType = {
     id: number
     name: string
 }
+
 export type PostType = {
     id: number
     message: string
