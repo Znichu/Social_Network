@@ -85,7 +85,7 @@ export const changeFilterAndRequestUsers = (currentPage: number, totalPageCount:
         dispatch(actions.toggleIsFetching(true));
         dispatch(actions.setFilter(term, friend));
 
-        let data = await usersAPI.getUsers(currentPage, totalPageCount, term, friend);
+        const data = await usersAPI.getUsers(currentPage, totalPageCount, term, friend);
 
         dispatch(actions.setUsers(data.items));
         dispatch(actions.toggleIsFetching(false));

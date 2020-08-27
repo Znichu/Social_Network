@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./MessageItem/MessageItem";
@@ -6,7 +6,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {required} from "../../utils/Validation/FieldValidationForm";
 import {useDispatch, useSelector} from "react-redux";
-import {actions} from "../../redux/messages-reducer";
+import {actions, requestDialogs} from "../../redux/messages-reducer";
 import {RootState} from "../../redux/redux-store";
 
 
@@ -15,18 +15,22 @@ type AddMessageFormType = {
 }
 
 const Dialogs: React.FC = () => {
+    const dispatch = useDispatch()
+
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    useEffect( () => {
+        dispatch(requestDialogs())
+    }, [])
 
     const { dialogs, messages } = useSelector( (state: RootState) => state.messagesPage )
 
-    const dispatch = useDispatch()
-
-    let dialogsElement =
+    const dialogsElement =
         dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
 
-    let messagesElement =
+    const messagesElement =
         messages.map(m => <MessageItem key={m.id} message={m.message} />);
 
-    let addNewMessage = (values: AddMessageFormType) => {
+    const addNewMessage = (values: AddMessageFormType) => {
         dispatch(actions.addMessage(values.addMessageBody));
     };
 

@@ -10,7 +10,7 @@ import {myProfileReducer} from "./myProfile-reducer";
 import { reducer as formReducer } from 'redux-form';
 import {AppReducer} from "./app-reducer";
 
-let rootReducer = combineReducers({
+const rootReducer = combineReducers({
     myPostsPage: PostsReducer,
     messagesPage: MessageReducer,
     friendsBlock: friendsReducer,

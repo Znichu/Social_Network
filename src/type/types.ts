@@ -30,7 +30,10 @@ export type PhotosType = {
 }
 export type DialogType = {
     id: number
-    name: string
+    userName: string
+    hasNewMessages: boolean
+    newMessagesCount: number
+    photos: PhotosType
 }
 export type MessageType = {
     id: number
