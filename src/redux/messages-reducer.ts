@@ -53,6 +53,13 @@ export const requestDialogs = (): ThunkType => async (dispatch) => {
         console.log(e.message)
     }
 }
+export const getMessagesFriend = (userId: number): ThunkType => async (dispatch) => {
+    try {
+        const data = await dialogsApi.getFriendListMessages(userId)
+    } catch (e) {
+        console.log(e.message)
+    }
+}
 
 //Types
 type ThunkType = ThunkAction<Promise<void>, RootState, {}, ActionsType>

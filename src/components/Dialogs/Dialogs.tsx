@@ -25,7 +25,7 @@ const Dialogs: React.FC = () => {
     const { dialogs, messages } = useSelector( (state: RootState) => state.messagesPage )
 
     const dialogsElement =
-        dialogs.map(p => <DialogItem key={p.id} name={p.name} id={p.id} />);
+        dialogs.map(p => <DialogItem key={p.id} userName={p.userName} id={p.id} photos={p.photos} />);
 
     const messagesElement =
         messages.map(m => <MessageItem key={m.id} message={m.message} />);

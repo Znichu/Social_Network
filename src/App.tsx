@@ -16,8 +16,10 @@ import Footer from "./components/Footer/Footer";
 import {RootState} from "./redux/redux-store";
 
 
+
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
+const Messages = React.lazy(() => import ("./components/Dialogs/Messages"));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
 const Music = React.lazy(() => import('./components/Music/Music'));
@@ -60,6 +62,7 @@ class App extends React.Component<PropsType> {
                                     <Route path="/myprofile" render={() => <ProfilePage/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>
                                     <Route path="/users" render={() => <UsersPage/>}/>
+                                    <Route path="/messages/:id" render={() => <Messages/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
                                     <Route path="/login" render={() => <Login/>}/>
                                     <Route path="/news" render={() => <News/>}/>
