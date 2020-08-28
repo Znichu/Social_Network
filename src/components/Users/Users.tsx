@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
-import {UsersSearchForm} from "./UsersSearchForm";
-import {UserCard} from "./UserCard";
+import {UsersSearchForm} from "./UsersSearchForm/UsersSearchForm";
+import {UserCard} from "./UserCard/UserCard";
 //material-ui
 import {createStyles, LinearProgress, makeStyles} from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';

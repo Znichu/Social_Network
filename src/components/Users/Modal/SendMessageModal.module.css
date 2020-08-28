@@ -1,0 +1,27 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 25px;
+    border-radius: 0 0 4px 4px;
+    width: 350px;
+    margin: 10px;
+}
+.avatar {
+    margin-right: 15px;
+}
+.avatar img {
+    width: 50px;
+    border-radius: 50%;
+    position: relative;
+}
+.userName {
+    line-height: 19px;
+}
+.userName span {
+    font-size: 14px;
+    color: #939598;
+}
+.modalForm {
+    margin: 0 25px 15px;
+}
