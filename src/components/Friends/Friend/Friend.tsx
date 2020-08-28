@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../Friends.module.css";
+import style from "./Friend.module.css";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -12,13 +12,14 @@ const FriendItem: React.FC<Props> = (props: Props) => {
     const {name, avatar} = props
 
     return (
-            <li>
-                <Link to='/'>
-                    <img className={style.photoFriend}
-                         src={ avatar ? avatar : `https://academvisa.ru/wp-content/uploads/2019/10/avatar-icon-images-4.png`} alt={name}/>
-                    <p>{name}</p>
+            <div className={style.friendCell}>
+                <Link className={style.friendCellAva} to='/'>
+                    <img className={style.friendCellImg} src={ avatar ? avatar : `https://academvisa.ru/wp-content/uploads/2019/10/avatar-icon-images-4.png`} alt={name}/>
                 </Link>
-            </li>
+                <div className={style.friendCellName}>
+                    <Link to={'/'}>{name}</Link>
+                </div>
+            </div>
     );
 
 }

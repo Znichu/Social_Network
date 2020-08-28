@@ -23,9 +23,13 @@ export const Friends: React.FC = () => {
                 <span className={style.friendsCount}>{totalCount}</span>
             </div>
             <div className={style.blockBody}>
-                <ul className={`${style.friendsOnline} ${style.listInline}`}>
+                <div className={style.friendsRow}>
+{/*                    <ul className={`${style.friendsOnline} ${style.listInline}`}>
+
+                    </ul>*/}
                     {friendElement}
-                </ul>
+                </div>
+
             </div>
         </div>
     );
