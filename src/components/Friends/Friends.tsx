@@ -1,24 +1,30 @@
-import React from "react";
+import React, {useEffect} from "react";
 import style from "./Friends.module.css"
 import FriendItem from "./Friend/Friend";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/redux-store";
+import {requestFriends} from "../../redux/friend-reducer";
 
 export const Friends: React.FC = () => {
+    const dispatch = useDispatch()
 
-    const friend = useSelector( (state: RootState) => state.friendsBlock.friend )
+    const {friends, totalCount} = useSelector((state: RootState) => state.friendsBlock)
 
-    let friendElement = friend.map(f => <FriendItem key={f.id} name={f.name}/>);
+    useEffect(() => {
+        dispatch(requestFriends())
+    }, [])
+
+    let friendElement = friends.map(f => <FriendItem key={f.id} name={f.name} avatar={f.photos.small} />);
 
     return (
         <div className={style.friendsBlock}>
-            <div className={style.title}>
-                <p>Friends</p>
+            <div className={style.blockHeader}>
+                <span className={style.headerLabel}>Friends</span>
+                <span className={style.friendsCount}>{totalCount}</span>
             </div>
-            <hr/>
-            <div className="friends">
+            <div className={style.blockBody}>
                 <ul className={`${style.friendsOnline} ${style.listInline}`}>
-                        {friendElement}
+                    {friendElement}
                 </ul>
             </div>
         </div>

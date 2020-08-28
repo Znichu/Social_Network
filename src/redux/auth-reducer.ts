@@ -1,8 +1,9 @@
-import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {getMyProfile, setMyStatus} from "./myProfile-reducer";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootState} from "./redux-store";
+import {authAPI} from "../api/authApi";
+import {securityAPI} from "../api/securityApi";
 
 let initialState = {
     userId: null as (number | null),
@@ -65,6 +66,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 
 export const logout = (): ThunkType => async (dispatch) => {
     let data = await authAPI.logout();
+    // @ts-ignore
     if (data.resultCode === 0) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }

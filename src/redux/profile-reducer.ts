@@ -1,7 +1,7 @@
-import {profileAPI} from "../api/api";
 import {ProfileType} from "../type/types";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootState} from "./redux-store";
+import {profileAPI} from "../api/profileApi";
 
 const initialState = {
     profile: null as ProfileType | null,

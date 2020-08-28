@@ -1,7 +1,7 @@
-import {profileAPI} from "../api/api";
 import {PhotosType, ProfileType} from "../type/types";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootState} from "./redux-store";
+import {profileAPI} from "../api/profileApi";
 
 let initialState = {
     status: '',

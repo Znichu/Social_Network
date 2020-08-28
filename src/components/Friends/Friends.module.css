@@ -1,17 +1,37 @@
 .friendsBlock {
-    background: linear-gradient(to bottom, rgba(39, 170, 225, .8),
-    rgba(28, 117, 188, .2)), url("https://cdn.comsol.com/product-new/mids-larger-less-subtle.svg") no-repeat;
+    background: #ffffff;
     box-shadow: 0px 1px 15px 0px rgba(51, 51, 51, 0.2);
     margin-top: 10px;
     border-radius: 4px;
-    padding: 0 10px;
+    overflow: hidden;
 }
 
-.title p {
-    padding-top: 5px;
-    text-align: center;
-    color: white;
-    font-size: 17px;
+.blockHeader {
+    height: 32px;
+    margin: 15px 0 0 10px;
+    padding: 0 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.headerLabel {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #0f0f0f;
+    font-size: 12.5px;
+}
+
+.friendsCount {
+    display: inline-block;
+    color: #939393;
+    font-size: 12.5px;
+    padding: 0 6px;
+    cursor: pointer;
+}
+
+.blockBody {
+    display: block;
+    padding: 6px 10px 8px;
 }
 
 .friendsOnline {

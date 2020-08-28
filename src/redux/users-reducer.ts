@@ -1,7 +1,8 @@
-import {followAPI, usersAPI} from "../api/api";
 import {UserType} from "../type/types";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootState} from "./redux-store";
+import {followAPI} from "../api/followApi";
+import {usersAPI} from "../api/usersApi";
 
 let initialState = {
     users: [] as Array<UserType>,
