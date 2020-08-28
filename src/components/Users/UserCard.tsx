@@ -30,7 +30,7 @@ export const UserCard: React.FC<PropsType> = (props) => {
                 <div className={`${style.col2} ${style.clearfix}`}>
                     <div className={style.fullName}>{name}</div>
                     <div className={style.status}>{status}</div>
-                    <div>City: <span>{"u.location.city"}, {"u.location.country"}</span></div>
+                    <span className={style.sendMsg}>Send message</span>
                 </div>
             </div>
             {followed

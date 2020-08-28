@@ -1,31 +1,29 @@
 import React from "react";
 import style from "./Users.module.css";
-import {UserType} from "../../type/types";
 import {UsersSearchForm} from "./UsersSearchForm";
 import {UserCard} from "./UserCard";
 //material-ui
-import {createStyles, makeStyles} from "@material-ui/core";
+import {createStyles, LinearProgress, makeStyles} from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
 import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
-    getFollowInProgress, getIsFetching,
+    getFollowInProgress,
+    getIsFetching,
     getTotalCount,
     getTotalPageCount,
-    getUsers, getUsersFilter
+    getUsers,
+    getUsersFilter
 } from "../../redux/users-selectors";
 import {changeFilterAndRequestUsers, follow, unfollow} from "../../redux/users-reducer";
-import Preloader from "../../common/Preloader/Preloader";
 
-const useStyles = makeStyles((theme) =>
-    createStyles({
-        root: {
-            '& > * + *': {
-                marginTop: theme.spacing(2),
-            },
-        },
-    }),
-);
+
+
+const useStyles = makeStyles({
+    root: {
+        color: '#FE6B8B',
+    }
+});
 
 
 export const Users: React.FC = () => {
@@ -74,17 +72,22 @@ export const Users: React.FC = () => {
     let pageCounter = Math.ceil(totalCount / totalPageCount);
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className={style.paginationWrapper}>
-                    <div className={classes.root}>
-                        <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
-                                    shape="rounded"/>
-                    </div>
-                    <UsersSearchForm searchUsers={searchUsers}/>
-                </div>
-                {!isFetching ? user : <Preloader/>}
+        <>
+            <div className={style.loading}>
+                {isFetching && <LinearProgress />}
             </div>
-        </div>
+            <div className="container">
+                <div className="row">
+                    <div className={style.paginationWrapper}>
+                        <div className={classes.root}>
+                            <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
+                                        shape="rounded"/>
+                        </div>
+                        <UsersSearchForm searchUsers={searchUsers}/>
+                    </div>
+                    {user}
+                </div>
+            </div>
+        </>
     );
 }

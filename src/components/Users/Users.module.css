@@ -10,6 +10,16 @@
     border-radius: 7px 7px 0 0;
     padding: 20px;
 }
+.sendMsg {
+    color: #939598;
+    cursor: pointer;
+    font-size: 12px;
+}
+.sendMsg:hover {
+
+    border-bottom: 1px solid #cccccc;
+}
+
 .clearfix::after {
     content: "";
     clear: both;
@@ -73,6 +83,9 @@ span.active {
     align-items: center;
     width: 100%;
     margin: 20px;
+}
+.loading {
+    height: 8px;
 }
 
 

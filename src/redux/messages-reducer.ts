@@ -2,7 +2,6 @@ import {DialogType, MessageType} from "../type/types";
 import {InferActionTypes, RootState} from "./redux-store";
 import {ThunkAction} from "redux-thunk";
 import {dialogsApi} from "../api/dialogsApi";
-import {getIsFetching} from "./users-selectors";
 
 const initialState = {
     dialogs: [] as Array<DialogType>,

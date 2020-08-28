@@ -1,15 +1,9 @@
 import React, {useEffect} from "react";
 import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
-import MessageItem from "./MessageItem/MessageItem";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Textarea} from "../../common/FormsControls/FormsControls";
-import {required} from "../../utils/Validation/FieldValidationForm";
 import {useDispatch, useSelector} from "react-redux";
-import {actions, requestDialogs} from "../../redux/messages-reducer";
+import {requestDialogs} from "../../redux/messages-reducer";
 import {RootState} from "../../redux/redux-store";
-
-
 
 
 const Dialogs: React.FC = () => {
