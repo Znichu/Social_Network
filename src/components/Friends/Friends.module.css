@@ -13,6 +13,9 @@
     overflow: hidden;
     cursor: pointer;
 }
+.blockHeader a {
+    text-decoration: none;
+}
 
 .headerLabel {
     overflow: hidden;

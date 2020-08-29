@@ -1,0 +1,52 @@
+.friendPhoto {
+    position: relative;
+    float: left;
+    margin: 0 15px 0 0;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+
+}
+.friendImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #f0f2f5;
+    position: static;
+}
+.friendInfo {
+    padding: 5px 10px 0 0;
+    overflow: hidden;
+}
+.friendField {
+    margin-bottom: 9px;
+    word-wrap: break-word;
+    color: #656565;
+}
+.friendTitle {
+    font-weight: 700;
+    font-size: 13px;
+    color: #2a5885;
+}
+.friendRow {
+    border-top: 1px solid #e7e8ec;
+    padding: 12px 0;
+    clear: both;
+}
+.friendRow:first-child {
+    border-top: none;
+}
+.sendMessage {
+    cursor: pointer;
+    font-size: 13px;
+    color: #2a5885;
+}
+.clearFix::after {
+    content: '.';
+    display: block;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}

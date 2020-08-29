@@ -7,7 +7,7 @@ import './App.css';
 //components
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {Friends} from "./components/Friends/Friends";
+import {FriendsBlock} from "./components/Friends/FriendsBlock";
 import {Login} from "./components/Login/Login";
 import {ProfilePage} from "./components/Profile/ProfilePage";
 import Preloader from "./common/Preloader/Preloader";
@@ -21,6 +21,7 @@ import {LinearProgress} from "@material-ui/core";
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
 const Messages = React.lazy(() => import ("./components/Dialogs/Messages"));
+const FriendsPage = React.lazy(() => import ("./components/Friends/FriendsPage"));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
 const Music = React.lazy(() => import('./components/Music/Music'));
@@ -53,7 +54,7 @@ class App extends React.Component<PropsType> {
                     </div>
                     <div className="col-lg-3">
                         <Navbar/>
-                        <Friends />
+                        <FriendsBlock />
                     </div>
                     <div className="col-lg-9">
                         <div className="mainContent">
@@ -63,6 +64,7 @@ class App extends React.Component<PropsType> {
                                     <Route path="/myprofile" render={() => <ProfilePage/>}/>
                                     <Route path="/dialogs" render={() => <Dialogs/>}/>
                                     <Route path="/users" render={() => <UsersPage/>}/>
+                                    <Route path='/allfriends' render={() => <FriendsPage/>} />
                                     <Route path="/messages/:id" render={() => <Messages/>}/>
                                     <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
                                     <Route path="/login" render={() => <Login/>}/>

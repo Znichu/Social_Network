@@ -1,8 +1,9 @@
 .header {
     position: relative;
-    height: 60px;
-    background-color: #224B7A;
-    margin-bottom: 50px;
+    background-color: #4A76A8;
+    margin-bottom: 25px;
+    height: 42px;
+    width: 100%;
 }
 
 .userName {
@@ -26,5 +27,5 @@
 .logo img {
     display: block;
     margin: 0 auto;
-    max-width: 50px;
+    max-width: 35px;
 }

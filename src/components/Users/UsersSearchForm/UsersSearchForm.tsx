@@ -1,6 +1,7 @@
 import React from 'react'
 import {useFormik} from "formik";
-import {Button, Input, MenuItem, Select, withStyles} from "@material-ui/core";
+import {Button, Input, MenuItem, Select, withStyles, FormControl, FormHelperText} from "@material-ui/core";
+import InputLabel from '@material-ui/core/InputLabel';
 import style from "./UsersSearchForm.module.css"
 
 const ColorButton = withStyles(() => ({
@@ -40,17 +41,15 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
                            onChange={usersSearchForm.handleChange}
                            value={usersSearchForm.values.term}
                     />
-
                     <Select
                         name='friend'
                         value={usersSearchForm.values.friend}
                         onChange={usersSearchForm.handleChange}
                     >
-                        <MenuItem value={'null'}>All</MenuItem>
-                        <MenuItem value={'true'}>Only followed</MenuItem>
-                        <MenuItem value={'false'}>Only unfollowed</MenuItem>
+                        <MenuItem value={'null'}>all</MenuItem>
+                        <MenuItem value={'true'}>only followed</MenuItem>
+                        <MenuItem value={'false'}>only unfollowed</MenuItem>
                     </Select>
-
                     <ColorButton
                         type="submit"
                         variant="contained"
