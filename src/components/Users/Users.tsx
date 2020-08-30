@@ -3,7 +3,7 @@ import style from "./Users.module.css";
 import {UsersSearchForm} from "./UsersSearchForm/UsersSearchForm";
 import {UserCard} from "./UserCard/UserCard";
 //material-ui
-import {createStyles, LinearProgress, makeStyles} from "@material-ui/core";
+import {LinearProgress, makeStyles} from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -16,7 +16,6 @@ import {
     getUsersFilter
 } from "../../redux/users-selectors";
 import {changeFilterAndRequestUsers, follow, unfollow} from "../../redux/users-reducer";
-
 
 
 const useStyles = makeStyles({

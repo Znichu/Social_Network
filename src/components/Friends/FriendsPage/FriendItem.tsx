@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./FriendItem.module.css"
 import {Link} from "react-router-dom";
-import camera from "../../assets/images/camera.jpeg"
+import camera from "../../../assets/images/camera.jpeg"
 
 type PropsType = {
     avatar: string
@@ -15,7 +15,7 @@ export const FriendItem: React.FC<PropsType> = React.memo((props) => {
         <div className={`${style.friendRow} ${style.clearFix}`}>
             <div className={style.friendPhoto}>
                 <Link to={'/'}>
-                    <img className={style.friendImg} src={avatar !== null ? avatar : camera} alt={name}/>
+                    <img className={style.friendImg} src={avatar || camera} alt={name}/>
                 </Link>
             </div>
             <div className={style.friendInfo}>

@@ -1,7 +1,7 @@
 import React from "react";
 import style from "../Users.module.css";
 import {NavLink} from "react-router-dom";
-import smallAvatar from "../../../assets/images/avatar-chase.png";
+import camera from "../../../assets/images/camera.jpeg";
 import {PhotosType} from "../../../type/types";
 import {SendMessageModal} from "../Modal/SendMessageModal";
 import {AddMessageFormType} from "../../Dialogs/SendMessageForm";
@@ -42,7 +42,7 @@ export const UserCard: React.FC<PropsType> = (props) => {
         <div className={style.mainContainer}>
             <div className={`${style.userCard} ${style.clearfix}`}>
                 <NavLink to={"/profile/" + id}>
-                    <img src={small != null ? small : smallAvatar} className={style.userImg} alt='avatar'/>
+                    <img src={small || camera} className={style.userImg} alt='avatar'/>
                 </NavLink>
 
                 <div className={`${style.col2} ${style.clearfix}`}>

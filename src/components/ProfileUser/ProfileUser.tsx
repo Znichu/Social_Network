@@ -1,7 +1,7 @@
 import React from "react";
 import style from './ProfileUser.module.css'
 import Preloader from "../../common/Preloader/Preloader";
-import defaultImg from "../../assets/images/GAN-LOGO-NOTEXT-1-1024x1020.png";
+import camera from "../../assets/images/camera.jpeg";
 import {ProfileType} from "../../type/types";
 
 type PropsType = {
@@ -18,7 +18,7 @@ const ProfileUser: React.FC<PropsType> = (props: PropsType) => {
         <div className={style.wrapper}>
             <div className={style.profile}>
                 <div className={style.avatar}>
-                    <img src={props.profile.photos.large || defaultImg} alt=""/>
+                    <img src={props.profile.photos.large || camera} alt=""/>
                 </div>
                 <div className={style.fullName}>
                     <span>{props.profile.fullName}</span>

@@ -1,8 +1,8 @@
 import React from "react";
-import {Dialog, DialogContent, DialogTitle} from "@material-ui/core";
+import {Dialog, DialogTitle} from "@material-ui/core";
 import {AddMessageFormType, SendMessageForm} from "../../Dialogs/SendMessageForm";
 import style from './SendMessageModal.module.css'
-import smallAvatar from "../../../assets/images/avatar-chase.png";
+import camera from "../../../assets/images/camera.jpeg";
 
 type PropsType = {
     open: boolean
@@ -23,7 +23,7 @@ export const SendMessageModal: React.FC<PropsType> = (props) => {
             <DialogTitle>New message</DialogTitle>
             <div className={style.content}>
                     <div className={style.avatar}>
-                        <img  src={avatar != null ? avatar : smallAvatar} alt={name}/>
+                        <img  src={avatar != null ? avatar : camera} alt={name}/>
                     </div>
                     <div className={style.userName}>
                         <span >{name}</span>

@@ -6,7 +6,7 @@ import {usersAPI} from "../api/usersApi";
 
 let initialState = {
     users: [] as Array<UserType>,
-    totalPageCount: 5,
+    totalPageCount: 10,
     totalCount: 0,
     currentPage: 1,
     isFetching: false,

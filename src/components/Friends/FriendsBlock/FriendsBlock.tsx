@@ -2,8 +2,8 @@ import React, {useEffect} from "react";
 import style from "./Friends.module.css"
 import FriendItem from "./Friend/Friend";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../redux/redux-store";
-import {requestFriends} from "../../redux/friend-reducer";
+import {RootState} from "../../../redux/redux-store";
+import {requestFriends} from "../../../redux/friend-reducer";
 import {Link} from "react-router-dom";
 
 export const FriendsBlock: React.FC = () => {
@@ -15,7 +15,7 @@ export const FriendsBlock: React.FC = () => {
         dispatch(requestFriends())
     }, [])
 
-    let friendElement = friends.map(f => <FriendItem key={f.id} name={f.name} avatar={f.photos.small} />);
+    let friendElement = friends.slice(0, 6).map(f => <FriendItem key={f.id} name={f.name} avatar={f.photos.small} />);
 
     return (
         <div className={style.friendsBlock}>

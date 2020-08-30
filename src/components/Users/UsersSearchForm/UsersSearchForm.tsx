@@ -1,7 +1,6 @@
 import React from 'react'
 import {useFormik} from "formik";
-import {Button, Input, MenuItem, Select, withStyles, FormControl, FormHelperText} from "@material-ui/core";
-import InputLabel from '@material-ui/core/InputLabel';
+import {Button, Input, MenuItem, Select, withStyles} from "@material-ui/core";
 import style from "./UsersSearchForm.module.css"
 
 const ColorButton = withStyles(() => ({

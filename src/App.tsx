@@ -7,7 +7,7 @@ import './App.css';
 //components
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {FriendsBlock} from "./components/Friends/FriendsBlock";
+import {FriendsBlock} from "./components/Friends/FriendsBlock/FriendsBlock";
 import {Login} from "./components/Login/Login";
 import {ProfilePage} from "./components/Profile/ProfilePage";
 import Preloader from "./common/Preloader/Preloader";
@@ -21,7 +21,7 @@ import {LinearProgress} from "@material-ui/core";
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
 const Messages = React.lazy(() => import ("./components/Dialogs/Messages"));
-const FriendsPage = React.lazy(() => import ("./components/Friends/FriendsPage"));
+const FriendsPage = React.lazy(() => import ("./components/Friends/FriendsPage/FriendsPage"));
 // @ts-ignore
 const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
 const Music = React.lazy(() => import('./components/Music/Music'));
@@ -43,7 +43,7 @@ class App extends React.Component<PropsType> {
     render() {
 
         if (!this.props.initialize) {
-            return <Preloader/>
+            return <LinearProgress />
         }
 
         return (
@@ -76,7 +76,6 @@ class App extends React.Component<PropsType> {
                         </div>
                     </div>
                 </div>
-                <Footer/>
             </div>
         );
     }
