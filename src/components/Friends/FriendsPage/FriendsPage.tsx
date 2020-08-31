@@ -12,7 +12,7 @@ const FriendsPage = React.memo(() => {
     const dispatch = useDispatch()
     const currentPage = useSelector((state: RootState) => state.friendsBlock.currentPage)
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(requestFriends())
     }, [currentPage])
 
@@ -38,16 +38,19 @@ const FriendsPage = React.memo(() => {
         }
     }, [scrollObserver, bottomBoundaryRef]);
 
-    const friends = useSelector( (state: RootState) => state.friendsBlock.friends)
+    const friends = useSelector((state: RootState) => state.friendsBlock.friends)
     const isFetching = useSelector((state: RootState) => state.friendsBlock.isFetching)
 
-    const friendsItem = friends.map(friend => <FriendItem avatar={friend.photos.small} name={friend.name} status={friend.status}/>)
+    const friendsItem = friends.map(friend => <FriendItem avatar={friend.photos.small} name={friend.name}
+                                                          status={friend.status}/>)
     return (
-        <div className={style.friendsList}>
-            { isFetching && <LinearProgress />}
-            {friendsItem}
-            <div ref={bottomBoundaryRef}></div>
-        </div>
+        <>
+            {isFetching && <LinearProgress/>}
+            <div className={style.friendsList}>
+                {friendsItem}
+                <div ref={bottomBoundaryRef}></div>
+            </div>
+        </>
     )
 })
 

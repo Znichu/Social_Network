@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         label: {
             textTransform: 'capitalize',
             fontWeight: 300,
+            fontSize: '13px',
         },
     }),
 );
@@ -70,7 +71,7 @@ export const Header: React.FC = () => {
                             <MenuItem onClick={logOut}>Logout</MenuItem>
                         </Menu>
                     </div>
-                    :                         <Button classes={{label: classes.label}}>
+                    :   <Button classes={{label: classes.label}}>
                         <NavLink to="/login">Login</NavLink>
                 </Button>}
             </div>

@@ -55,7 +55,7 @@ class App extends React.Component<PropsType> {
                     </div>
                     <div className="col-lg-3">
                         <Navbar/>
-                        <FriendsBlock />
+                        {/*<FriendsBlock />*/}
                     </div>
                     <div className="col-lg-9">
                         <div className="mainContent">
