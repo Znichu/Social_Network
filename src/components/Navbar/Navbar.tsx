@@ -9,6 +9,7 @@ export const Navbar = () => {
             <ul className={style.main_nav}>
                 <li><NavLink activeClassName={style.active} to="/myprofile">My profile</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/dialogs">Message</NavLink></li>
+                <li><NavLink activeClassName={style.active} to="/allfriends">Friends</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/users">Find users</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/news">News</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/music">Music</NavLink></li>
