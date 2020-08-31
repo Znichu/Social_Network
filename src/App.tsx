@@ -15,6 +15,7 @@ import Footer from "./components/Footer/Footer";
 //types
 import {RootState} from "./redux/redux-store";
 import {LinearProgress} from "@material-ui/core";
+import {WithAuthenticationRoute} from "./hoc/withAuthenticationRoute"
 
 
 
@@ -61,16 +62,16 @@ class App extends React.Component<PropsType> {
                             <Switch>
                                 <Suspense fallback={<div><LinearProgress/></div>}>
                                     <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
-                                    <Route path="/myprofile" render={() => <ProfilePage/>}/>
-                                    <Route path="/dialogs" render={() => <Dialogs/>}/>
-                                    <Route path="/users" render={() => <UsersPage/>}/>
-                                    <Route path='/allfriends' render={() => <FriendsPage/>} />
-                                    <Route path="/messages/:id" render={() => <Messages/>}/>
-                                    <Route path="/profile/:userId" render={() => <ProfileUserContainer/>}/>
+                                    <WithAuthenticationRoute path={'/myprofile'} component={ProfilePage} />
+                                    <WithAuthenticationRoute path="/dialogs" component={Dialogs} />
+                                    <WithAuthenticationRoute path="/users" component={UsersPage} />
+                                    <WithAuthenticationRoute path='/allfriends' component={FriendsPage} />
+                                    <WithAuthenticationRoute path="/messages/:id" component={Messages} />
+                                    <WithAuthenticationRoute path="/profile/:userId" component={ProfileUserContainer} />
                                     <Route path="/login" render={() => <Login/>}/>
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
-                                    <Route path="/setting" render={() => <Setting/>}/>
+                                    <WithAuthenticationRoute path="/setting" component={Setting} />
                                 </Suspense>
                             </Switch>
                         </div>

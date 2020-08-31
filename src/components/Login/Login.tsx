@@ -87,7 +87,7 @@ export const Login: React.FC = () => {
     };
 
     if (isAuth) {
-        return <Redirect to={"/myposts"}/>
+        return <Redirect to={"/myprofile"}/>
     }
     return (
         <div className={style.login}>

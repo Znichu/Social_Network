@@ -70,7 +70,9 @@ export const Header: React.FC = () => {
                             <MenuItem onClick={logOut}>Logout</MenuItem>
                         </Menu>
                     </div>
-                    : <NavLink to="/login">Login</NavLink>}
+                    :                         <Button classes={{label: classes.label}}>
+                        <NavLink to="/login">Login</NavLink>
+                </Button>}
             </div>
         </div>
     )
