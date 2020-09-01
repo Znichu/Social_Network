@@ -32,11 +32,9 @@ const Messages = () => {
             {isFetching
                 ? <LinearProgress/>
                 : <div className="container">
-                    <div className="row">
                         <div className="col-lg-12">
                             {messagesElement}
                         </div>
-                    </div>
                     <div className="row">
                         <div className="col lg-12">
                             <div className={style.enterMessage}>

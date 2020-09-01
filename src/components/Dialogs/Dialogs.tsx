@@ -9,24 +9,24 @@ import {RootState} from "../../redux/redux-store";
 const Dialogs: React.FC = () => {
     const dispatch = useDispatch()
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(requestDialogs())
     }, [])
 
-    const dialogs = useSelector( (state: RootState) => state.messagesPage.dialogs )
+    const dialogs = useSelector((state: RootState) => state.messagesPage.dialogs)
 
     const dialogsElement =
-        dialogs.map(p => <DialogItem key={p.id} userName={p.userName} id={p.id} photos={p.photos} />);
-
+        dialogs.map(p => <DialogItem key={p.id} userName={p.userName} id={p.id} photos={p.photos}/>);
 
 
     return (
         <div className="container" style={{paddingBottom: "25px"}}>
             <div className="row">
-                <div className="col-lg-12">
-                    <div className={style.dialogs}>
+                <div className={style.wrapper}>
+                    <div className={style.dialogsHeader}></div>
+                    <ul className={style.pageDialogs}>
                         {dialogsElement}
-                    </div>
+                    </ul>
                 </div>
             </div>
         </div>

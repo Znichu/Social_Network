@@ -1,8 +1,16 @@
-
-.dialogs {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    margin: 25px;
+.wrapper {
+    margin-top: 0;
+    padding: 28px 0 45px;
+    width: 100%;
+    height: auto;
+}
+.dialogsHeader {
+    box-shadow: 0 1px 0 0 #e7e8ec;
+}
+.pageDialogs {
+    padding-left: 10px;
+    overflow: visible;
+    box-sizing: border-box;
+    list-style: none;
+    display: block;
 }

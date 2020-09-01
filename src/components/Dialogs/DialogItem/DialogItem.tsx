@@ -2,6 +2,7 @@ import {NavLink} from "react-router-dom";
 import React from "react";
 import style from "./DialogItem.module.css";
 import {PhotosType} from "../../../type/types";
+import avatar from "../../../assets/images/camera.jpeg"
 
 type Props = {
     id: number
@@ -14,13 +15,25 @@ const DialogItem: React.FC<Props> = (props: Props) => {
     const path = "/messages/" + props.id;
 
     return (
-            <ul className={style.friendDialog}>
-                <NavLink to={path}>
-                <li className={style.other}><img alt="" src={props.photos.small !== null ? props.photos.small : `https://academvisa.ru/wp-content/uploads/2019/10/avatar-icon-images-4.png`}/><br/>
-                    {props.userName}
+        <>
+            <NavLink className={style.dialogLink} to={path}>
+                <li className={style.dialog}>
+                    <div className={style.dialogPhoto}>
+                        <div className={style.dialogImg}>
+                            <img alt="" src={props.photos.small !== null ? props.photos.small : avatar}/><br/>
+                        </div>
+                    </div>
+                    <div className={style.dialogContent}>
+                        <div className={style.dialogCw}>
+                            <div className={style.dialogDate}>5adu</div>
+                            <div className={style.dialogName}>{props.userName}</div>
+                            <div className={style.dialogPreview}>Hello</div>
+                        </div>
+
+                    </div>
                 </li>
-                </NavLink>
-            </ul>
+            </NavLink>
+        </>
     );
 }
 export default DialogItem;
