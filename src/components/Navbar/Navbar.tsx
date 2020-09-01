@@ -13,7 +13,7 @@ export const Navbar = () => {
                 <li><NavLink activeClassName={style.active} to="/users">Find users</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/news">News</NavLink></li>
                 <li><NavLink activeClassName={style.active} to="/music">Music</NavLink></li>
-                <li><NavLink activeClassName={style.active} to="/setting">Setting</NavLink></li>
+                <li><NavLink activeClassName={style.active} to="/settings">Setting</NavLink></li>
             </ul>
         </div>
     );

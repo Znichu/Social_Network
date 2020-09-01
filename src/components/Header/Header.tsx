@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import {logout} from "../../redux/auth-reducer";
 import style from "./Header.module.css";
 import {RootState} from "../../redux/redux-store";
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
         small: {
             width: theme.spacing(3),
             height: theme.spacing(3),
-            marginRight: '5px',
+            marginLeft: '5px',
         },
         label: {
             textTransform: 'capitalize',
@@ -56,8 +56,8 @@ export const Header: React.FC = () => {
                 {isAuth ?
                     <div>
                         <Button classes={{label: classes.label}} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                            <Avatar className={classes.small} src={avatar}/>
                             {userName}
+                            <Avatar className={classes.small} src={avatar}/>
                         </Button>
                         <Menu
                             id="simple-menu"
@@ -66,8 +66,9 @@ export const Header: React.FC = () => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Link className={style.settingsLink} to='/settings'>Settings</Link>
+                            </MenuItem>
                             <MenuItem onClick={logOut}>Logout</MenuItem>
                         </Menu>
                     </div>

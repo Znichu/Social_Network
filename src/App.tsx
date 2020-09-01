@@ -71,7 +71,7 @@ class App extends React.Component<PropsType> {
                                     <Route path="/login" render={() => <Login/>}/>
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
-                                    <WithAuthenticationRoute path="/setting" component={Setting} />
+                                    <WithAuthenticationRoute path="/settings" component={Setting} />
                                 </Suspense>
                             </Switch>
                         </div>
