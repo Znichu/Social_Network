@@ -52,10 +52,10 @@ const AddMyPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
                 validate={[required, maxLength30]}
                 component={Textarea}
                 name="textMyPost"
-                placeholder="Что у Вас нового?"
+                placeholder="What on your mind?"
             />
             <div className={style.btn}>
-                <button className="btn btn-primary">Опубликовать</button>
+                <button className="btn btn-primary">Post</button>
             </div>
         </form>
     )

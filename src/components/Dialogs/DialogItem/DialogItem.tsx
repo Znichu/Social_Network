@@ -16,8 +16,8 @@ const DialogItem: React.FC<Props> = (props: Props) => {
 
     return (
         <>
+        <li className={style.dialog}>
             <NavLink className={style.dialogLink} to={path}>
-                <li className={style.dialog}>
                     <div className={style.dialogPhoto}>
                         <div className={style.dialogImg}>
                             <img alt="" src={props.photos.small !== null ? props.photos.small : avatar}/><br/>
@@ -31,8 +31,8 @@ const DialogItem: React.FC<Props> = (props: Props) => {
                         </div>
 
                     </div>
-                </li>
             </NavLink>
+        </li>
         </>
     );
 }

@@ -5,6 +5,9 @@
     height: 71px;
     cursor: pointer;
     padding: 0 0 0 15px;
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 10px;
+    margin: 10px 0;
 }
 .dialogPhoto {
     padding: 11px 14px 8px 0;
@@ -33,7 +36,6 @@
 .dialogContent {
     margin-left: 64px;
     padding-right: 15px;
-    border-top: 1px solid #e7e8ec;
 }
 .dialogCw {
     position: relative;

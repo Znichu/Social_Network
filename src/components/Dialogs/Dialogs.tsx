@@ -14,6 +14,7 @@ const Dialogs: React.FC = () => {
     }, [])
 
     const dialogs = useSelector((state: RootState) => state.messagesPage.dialogs)
+    const avatar = useSelector((state: RootState) => state.myProfile.profile?.photos.small)
 
     const dialogsElement =
         dialogs.map(p => <DialogItem key={p.id} userName={p.userName} id={p.id} photos={p.photos}/>);
@@ -23,7 +24,13 @@ const Dialogs: React.FC = () => {
         <div className="container" style={{paddingBottom: "25px"}}>
             <div className="row">
                 <div className={style.wrapper}>
-                    <div className={style.dialogsHeader}></div>
+                    <div className={style.dialogsHeader}>
+                        <div className={style.dialogs_avatar}>
+                            <img className={style.dialogs_avatar__img} src={avatar} alt=""/>
+                        </div>
+                        <h4 className={style.dialogsHeader__title}>Chats</h4>
+                    </div>
+                    <div className={style.dialogsLiner}></div>
                     <ul className={style.pageDialogs}>
                         {dialogsElement}
                     </ul>

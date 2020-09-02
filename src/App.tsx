@@ -7,15 +7,13 @@ import './App.css';
 //components
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
-import {FriendsBlock} from "./components/Friends/FriendsBlock/FriendsBlock";
 import {Login} from "./components/Login/Login";
 import {ProfilePage} from "./components/Profile/ProfilePage";
-import Preloader from "./common/Preloader/Preloader";
-import Footer from "./components/Footer/Footer";
 //types
 import {RootState} from "./redux/redux-store";
 import {LinearProgress} from "@material-ui/core";
 import {WithAuthenticationRoute} from "./hoc/withAuthenticationRoute"
+import {MyPosts} from "./components/MyPosts/MyPosts";
 
 
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
@@ -53,6 +51,9 @@ class App extends React.Component<PropsType> {
                 </div>
                 <div className="container">
                     <div className="row">
+                        <div className="col-lg-12">
+                            <ProfilePage/>
+                        </div>
                         <div className="col-lg-3">
                             <Navbar/>
                         </div>
@@ -60,8 +61,9 @@ class App extends React.Component<PropsType> {
                             <div className="mainContent">
                                 <Switch>
                                     <Suspense fallback={<div><LinearProgress/></div>}>
-                                        <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
-                                        <WithAuthenticationRoute path={'/myprofile'} component={ProfilePage}/>
+                                        <Route path="/" render={() => <Redirect to="/posts"/>}/>
+                                        <Route path="/posts" render={() => <MyPosts/>}/>
+                                        {/*<WithAuthenticationRoute path={'/myprofile'} component={ProfilePage}/>*/}
                                         <WithAuthenticationRoute path="/dialogs" component={Dialogs}/>
                                         <WithAuthenticationRoute path="/users" component={UsersPage}/>
                                         <WithAuthenticationRoute path='/allfriends' component={FriendsPage}/>
