@@ -52,6 +52,9 @@ export const Header: React.FC = () => {
             <div className={style.logo}>
                 <img src="https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png" alt="logo"/>
             </div>
+            <div className={style.headerTitle}>
+                <span style={{color: "#224B7A"}}>React Social Network</span>
+            </div>
             <div className={style.userName}>
                 {isAuth ?
                     <div>

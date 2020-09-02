@@ -18,7 +18,6 @@ import {LinearProgress} from "@material-ui/core";
 import {WithAuthenticationRoute} from "./hoc/withAuthenticationRoute"
 
 
-
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
 const Messages = React.lazy(() => import ("./components/Dialogs/Messages"));
@@ -44,40 +43,42 @@ class App extends React.Component<PropsType> {
     render() {
 
         if (!this.props.initialize) {
-            return <LinearProgress />
+            return <LinearProgress/>
         }
 
         return (
-            <div className=" container">
-                <div className="row">
-                    <div className="col-lg-12">
+            <>
+                <div className="header">
                         <Header/>
-                    </div>
-                    <div className="col-lg-3">
-                        <Navbar/>
-                        {/*<FriendsBlock />*/}
-                    </div>
-                    <div className="col-lg-9">
-                        <div className="mainContent">
-                            <Switch>
-                                <Suspense fallback={<div><LinearProgress/></div>}>
-                                    <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
-                                    <WithAuthenticationRoute path={'/myprofile'} component={ProfilePage} />
-                                    <WithAuthenticationRoute path="/dialogs" component={Dialogs} />
-                                    <WithAuthenticationRoute path="/users" component={UsersPage} />
-                                    <WithAuthenticationRoute path='/allfriends' component={FriendsPage} />
-                                    <WithAuthenticationRoute path="/messages/:id" component={Messages} />
-                                    <WithAuthenticationRoute path="/profile/:userId" component={ProfileUserContainer} />
-                                    <Route path="/login" render={() => <Login/>}/>
-                                    <Route path="/news" render={() => <News/>}/>
-                                    <Route path="/music" render={() => <Music/>}/>
-                                    <WithAuthenticationRoute path="/settings" component={Setting} />
-                                </Suspense>
-                            </Switch>
+                </div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-3">
+                            <Navbar/>
+                        </div>
+                        <div className="col-lg-9">
+                            <div className="mainContent">
+                                <Switch>
+                                    <Suspense fallback={<div><LinearProgress/></div>}>
+                                        <Route path="/" render={() => <Redirect to="/myprofile"/>}/>
+                                        <WithAuthenticationRoute path={'/myprofile'} component={ProfilePage}/>
+                                        <WithAuthenticationRoute path="/dialogs" component={Dialogs}/>
+                                        <WithAuthenticationRoute path="/users" component={UsersPage}/>
+                                        <WithAuthenticationRoute path='/allfriends' component={FriendsPage}/>
+                                        <WithAuthenticationRoute path="/messages/:id" component={Messages}/>
+                                        <WithAuthenticationRoute path="/profile/:userId"
+                                                                 component={ProfileUserContainer}/>
+                                        <Route path="/login" render={() => <Login/>}/>
+                                        <Route path="/news" render={() => <News/>}/>
+                                        <Route path="/music" render={() => <Music/>}/>
+                                        <WithAuthenticationRoute path="/settings" component={Setting}/>
+                                    </Suspense>
+                                </Switch>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }
@@ -88,4 +89,4 @@ let mapStateToProps = (state: RootState) => {
     }
 };
 
-export default compose( withRouter, connect(mapStateToProps, { setInitialized }) )(App);
+export default compose(withRouter, connect(mapStateToProps, {setInitialized}))(App);
