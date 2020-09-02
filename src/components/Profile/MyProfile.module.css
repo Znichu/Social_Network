@@ -3,19 +3,17 @@
     flex-direction: row;
     justify-content: flex-start;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(39, 170, 225, .8),
-    rgba(28, 117, 188, .2)), url("https://cdn.comsol.com/product-new/mids-larger-less-subtle.svg") no-repeat;
-    background-size: auto, auto;
-    background-size: cover;
-    box-shadow: 0 1px 15px 0 rgba(51, 51, 51, 0.2);
-    margin-bottom: 20px;
-    color: #fefefe;
+    background-color: #fefefe;
+    box-shadow: 0 1px 3px 0 rgba(51, 51, 51, 0.2);
+    margin-bottom: 35px;
+    color: #656565;
     border-radius: 4px;
 }
 
 .myProfilePhoto {
     margin: 25px;
 }
+
 .myProfilePhoto img {
     width: 250px;
     height: 250px;
@@ -32,28 +30,36 @@
 .fullName {
     padding: 0 5px;
     text-transform: capitalize;
+    color: #0f0f0f;
 }
 
 .status {
     display: block;
     width: 100%;
     cursor: pointer;
+    color: #0f0f0f;
 }
+
 .status span {
     padding: 5px;
 }
+
 .aboutMe {
     padding: 5px;
 }
+
 .lookingForAJob {
     padding: 5px;
 }
+
 .description {
     padding: 5px;
 }
+
 .contacts {
     padding: 5px;
 }
+
 .editBtn {
     padding: 5px;
 }
