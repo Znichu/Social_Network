@@ -11,14 +11,48 @@
 }
 
 .myProfilePhoto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 220px;
+    height: 250px;
     margin: 25px;
 }
 
-.myProfilePhoto img {
-    width: 250px;
-    height: 250px;
-    border: 5px solid #1c75bc;
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease;
+}
 
+.myProfilePhoto:hover .overlay {
+    display: block;
+    background: rgba(0, 0, 0, .3);
+}
+
+.myProfilePhoto img {
+    width: 220px;
+    height: 250px;
+    border: 2px solid #939598;
+}
+
+.uploadButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity .35s ease;
+}
+
+.uploadButton:hover {
+    opacity: 1;
 }
 
 .myProfileInfo {

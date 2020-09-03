@@ -1,6 +1,7 @@
 import {setAuth} from "./auth-reducer";
 import {ThunkAction} from "redux-thunk";
 import {InferActionTypes, RootState} from "./redux-store";
+import {getMyProfile} from "./myProfile-reducer";
 
 const initialState = {
     initialize: false
@@ -26,9 +27,11 @@ export const actions = {
 };
 
 //Thunk
-export const setInitialized = (): ThunkType => async (dispatch) => {
+export const setInitialized = (): ThunkType => async (dispatch, getState) => {
     const promiseAuth = await dispatch(setAuth());
-    Promise.all([promiseAuth])
+    const id = getState().auth.userId;
+    const profilePromise = await dispatch(getMyProfile(id));
+        Promise.all([promiseAuth, profilePromise])
         .then(() => {
             dispatch(actions.initialize())
         });

@@ -5,7 +5,8 @@ import FormEditProfileReduxForm from "../../common/FormEditProfileData/FormEditP
 import {ProfileType} from "../../type/types";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/redux-store";
-import {saveProfile, updateMyStatus} from "../../redux/myProfile-reducer";
+import {savePhoto, saveProfile, updateMyStatus} from "../../redux/myProfile-reducer";
+import {UploadFile} from "../../common/UploadFile/UploadFile";
 
 
 const MyProfile: React.FC = () => {
@@ -41,6 +42,12 @@ const MyProfile: React.FC = () => {
         setStatus(event.currentTarget.value)
     };
 
+    const onFileChange = (event: React.ChangeEvent<HTMLInputElement> ) => {
+        const file =  event.currentTarget.files
+        // @ts-ignore
+        dispatch(savePhoto(file[0]))
+    };
+
     const onSubmit = (values: ProfileType) => {
         dispatch(saveProfile(values));
         deactivateEditProfile();
@@ -49,10 +56,13 @@ const MyProfile: React.FC = () => {
     if (!profile) {
         return <> </>
     }
+
     return (
         <div className={style.myProfileCard}>
             <div className={style.myProfilePhoto}>
                 <img src={profile.photos.large} alt="avatar"/>
+                <div className={style.overlay}></div>
+                <div className={style.uploadButton}><UploadFile onFileChange={onFileChange}/></div>
             </div>
             <div className={style.myProfileInfo}>
                 <div className={style.fullName}>

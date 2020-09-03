@@ -43,7 +43,6 @@ export const setAuth = (): ThunkType => async (dispatch) => {
     let data = await authAPI.getAuth();
     if (data.resultCode === 0) {
         let {id, login, email} = data.data;
-        dispatch(getMyProfile(id));
         dispatch(actions.setAuthUserData(id, login, email, true));
         dispatch(setMyStatus(id));
     }
