@@ -1,8 +1,9 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import style from "../../components/Profile/MyProfile.module.css";
+import style from "./FormEditProfile.module.css";
 import {InputLogin, Textarea} from "../FormsControls/FormsControls";
 import {ProfileType} from "../../type/types";
+import {CustomButton} from "../CustomButton/CustomButton";
 
 
 const FormEditProfile: React.FC<InjectedFormProps<ProfileType>> = (props) => {
@@ -41,8 +42,8 @@ const FormEditProfile: React.FC<InjectedFormProps<ProfileType>> = (props) => {
                     className="form-check-input"
                 />
             </div>
-            <div className={style.editBtn}>
-                <button className="btn btn-primary btn-sm">Save</button>
+            <div className={style.saveBtn}>
+                <CustomButton title={'Save'}/>
             </div>
         </form>
     );

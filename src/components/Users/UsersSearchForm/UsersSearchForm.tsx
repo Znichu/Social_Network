@@ -2,13 +2,14 @@ import React from 'react'
 import {useFormik} from "formik";
 import {Button, Input, MenuItem, Select, withStyles} from "@material-ui/core";
 import style from "./UsersSearchForm.module.css"
+import {CustomButton} from "../../../common/CustomButton/CustomButton";
 
 const ColorButton = withStyles(() => ({
     root: {
         color: '#ffffff',
         backgroundColor: '#0063cc',
         '&:hover': {
-            backgroundColor: '#0069d9',
+            backgroundColor: '#ffffff',
         },
     },
 }))(Button);
@@ -18,7 +19,7 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
     const usersSearchForm = useFormik({
         initialValues: {
             term: '',
-            friend: ''
+            friend: 'null'
         },
         onSubmit: (values) => {
             const filter = {
@@ -49,13 +50,7 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
                         <MenuItem value={'true'}>only followed</MenuItem>
                         <MenuItem value={'false'}>only unfollowed</MenuItem>
                     </Select>
-                    <ColorButton
-                        type="submit"
-                        variant="contained"
-                        size="small"
-                    >
-                        Search
-                    </ColorButton>
+<CustomButton title={'Search'}/>
                 </div>
             </form>
         </>

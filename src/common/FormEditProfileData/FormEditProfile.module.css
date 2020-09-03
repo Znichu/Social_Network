@@ -1,0 +1,10 @@
+.fullName, .aboutMe, .lookingForAJob, .description {
+    margin: 10px;
+}
+.lookingForAJob input {
+    margin-left: 10px;
+}
+.saveBtn {
+    margin: 8px 10px;
+    float: right;
+}

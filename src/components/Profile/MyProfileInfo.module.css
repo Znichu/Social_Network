@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.aboutMe {
+    padding: 5px;
+}
+.lookingForAJob {
+    padding: 5px;
+}
+.description {
+    padding: 5px;
+}
+.contacts {
+    padding: 5px;
+}
+.editBtn {
+    width: 27px;
+    height: 27px;
+    opacity: 0.3;
+    padding: 5px;
+    cursor: pointer;
+}
+.editBtn:hover {
+    opacity: 1;
+}

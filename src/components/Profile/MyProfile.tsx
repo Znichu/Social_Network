@@ -30,10 +30,10 @@ const MyProfile: React.FC = () => {
     const deactivateEditProfile = () => {
         setEditProfile(false);
     };
-    const activateEditMode = () => {
+    const activateEditModeStatus = () => {
         setEditMode(true)
     };
-    const deactivateEditMode = () => {
+    const deactivateEditModeStatus = () => {
         setEditMode(false);
         dispatch(updateMyStatus(mainStatus));
     };
@@ -71,13 +71,13 @@ const MyProfile: React.FC = () => {
                 <div className={style.status}>
                     {!editMode &&
                     <div>
-                        <span onClick={activateEditMode}>{mainStatus}</span>
+                        <span onClick={activateEditModeStatus}>{mainStatus}</span>
                     </div>
 
                     }
                     {editMode &&
-                    <input onChange={onChangeInput} autoFocus={true} onBlur={deactivateEditMode}
-                           value={status} type="text"/>
+                    <input onChange={onChangeInput} autoFocus={true} onBlur={deactivateEditModeStatus}
+                           value={mainStatus} type="text"/>
                     }
                 </div>
                 <hr/>

@@ -7,6 +7,7 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/redux-store";
 import {actions} from "../../redux/posts-reducer";
+import {CustomButton} from "../../common/CustomButton/CustomButton";
 
 //validator for form
 const maxLength30 = maxLength(30);
@@ -55,7 +56,7 @@ const AddMyPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
                 placeholder="What on your mind?"
             />
             <div className={style.btn}>
-                <button className="btn btn-primary">Post</button>
+                <CustomButton title={'Post'}/>
             </div>
         </form>
     )

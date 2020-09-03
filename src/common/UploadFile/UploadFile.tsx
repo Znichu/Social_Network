@@ -5,6 +5,9 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 const useStyles = makeStyles(() =>
     createStyles({
+        root: {
+          color: '#ffffff'
+        },
         input: {
             display: 'none',
         },
@@ -22,7 +25,7 @@ export const UploadFile: React.FC<PropsType>  = (props) => {
         <div >
             <input onChange={props.onFileChange} accept="image/*" className={classes.input} id="icon-button-file" type="file" />
             <label htmlFor="icon-button-file">
-                <IconButton color="primary" aria-label="upload picture" component="span">
+                <IconButton classes={{root: classes.root}} aria-label="upload picture" component="span">
                     <PhotoCamera />
                 </IconButton>
             </label>
