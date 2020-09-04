@@ -14,7 +14,7 @@ const FriendsPage = React.memo(() => {
 
     useEffect(() => {
         dispatch(requestFriends())
-    }, [currentPage])
+    }, [dispatch, currentPage])
 
     // implement infinite scrolling with intersection observer
     let bottomBoundaryRef = useRef(null);
@@ -23,7 +23,7 @@ const FriendsPage = React.memo(() => {
         node => {
             new IntersectionObserver(entries => {
                 entries.forEach(en => {
-                    if (en.intersectionRatio > 0) {
+                    if (en.intersectionRatio <= 0) {
                         dispatch(actions.serCurrentPage());
                     }
                 });

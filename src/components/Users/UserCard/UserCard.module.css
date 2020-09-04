@@ -4,26 +4,29 @@
     align-items: center;
     width: 180px;
     border-radius: 4px;
-    background-color: #e7e8ec;
+    background-color: rgba(81, 129, 184, 0.2);
     padding: 10px 0;
     margin: 12px 5px;
 }
 
 .userCardPhoto {
-    width: 150px;
-    height: 150px;
+    width: 110px;
+    height: 110px;
     margin-bottom: 10px;
 }
 .userImg {
-    width: 150px;
-    height: 150px;
+    width: 110px;
+    height: 110px;
     border-radius: 4px;
 }
-
 .fullName {
-    color: #2a5885;
+
     font-size: 15px;
+    font-weight: bold;
     margin: 5px 0;
+}
+.fullName a {
+    color: #2a5885;
 }
 .userCardBtn {
     margin: 5px;

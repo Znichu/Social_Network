@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./UserCard.module.css";
 import {NavLink} from "react-router-dom";
-import camera from "../../../assets/images/camera.jpeg";
+import noPhoto from "../../../assets/images/camera.svg";
 import {PhotosType} from "../../../type/types";
 import {CustomButton} from "../../../common/CustomButton/CustomButton";
 
@@ -26,7 +26,7 @@ export const UserCard: React.FC<PropsType> = (props) => {
             <div className={style.userCard}>
                 <div className={style.userCardPhoto}>
                     <NavLink to={"/profile/" + id}>
-                        <img src={small || camera} className={style.userImg} alt='avatar'/>
+                        <img src={small || noPhoto} className={style.userImg} alt='avatar'/>
                     </NavLink>
                 </div>
 
