@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Users.module.css";
-import {UsersSearchForm} from "./UsersSearchForm/UsersSearchForm";
+import {UsersSearchForm} from "../../common/UsersSearchForm/UsersSearchForm";
 import {UserCard} from "./UserCard/UserCard";
 //material-ui
 import {LinearProgress, makeStyles} from "@material-ui/core";
@@ -73,18 +73,24 @@ export const Users: React.FC = () => {
     return (
         <>
             <div className={style.loading}>
-                {isFetching && <LinearProgress />}
+                {isFetching && <LinearProgress/>}
             </div>
-            <div className="container">
-                <div className="row">
-                    <div className={style.paginationWrapper}>
-                        <div className={classes.root}>
-                            <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
-                                        shape="rounded"/>
-                        </div>
-                        <UsersSearchForm searchUsers={searchUsers}/>
+
+            <div className={style.usersContainer}>
+
+
+                <div className={style.usersHeader}>
+                    <UsersSearchForm searchUsers={searchUsers}/>
+                </div>
+                <div className={style.usersLiner}></div>
+                <div className={style.mainContainer}>
+                {user}
+                </div>
+                <div className={style.paginationWrapper}>
+                    <div className={classes.root}>
+                        <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
+                                    shape="rounded"/>
                     </div>
-                    {user}
                 </div>
             </div>
         </>

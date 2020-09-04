@@ -48,7 +48,7 @@ const FriendsPage = React.memo(() => {
             {isFetching && <LinearProgress/>}
             <div className={style.friendsList}>
                 {friendsItem}
-                <div ref={bottomBoundaryRef}></div>
+                <div className={style.scroll} ref={bottomBoundaryRef}></div>
             </div>
         </>
     )

@@ -1,8 +1,8 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {required} from "../../utils/Validation/FieldValidationForm";
-import {Textarea} from "../../common/FormsControls/FormsControls";
-import style from "./Dialogs.module.css";
+import {Textarea} from "../FormsControls/FormsControls";
+import style from "../../components/Dialogs/Dialogs.module.css";
 
 export type AddMessageFormType = {
     addMessageBody: string

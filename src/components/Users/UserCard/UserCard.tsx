@@ -1,12 +1,9 @@
 import React from "react";
-import style from "../Users.module.css";
+import style from "./UserCard.module.css";
 import {NavLink} from "react-router-dom";
 import camera from "../../../assets/images/camera.jpeg";
 import {PhotosType} from "../../../type/types";
-import {SendMessageModal} from "../Modal/SendMessageModal";
-import {AddMessageFormType} from "../../Dialogs/SendMessageForm";
-import {sendNewMessage} from "../../../redux/messages-reducer";
-import {useDispatch} from "react-redux";
+import {CustomButton} from "../../../common/CustomButton/CustomButton";
 
 type PropsType = {
     id: number
@@ -21,56 +18,40 @@ type PropsType = {
 
 
 export const UserCard: React.FC<PropsType> = (props) => {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
     const {id, name, status, followed, photos: {small}} = props
 
-    const dispatch = useDispatch()
-
-    const sendMessage = (values: AddMessageFormType) => {
-        dispatch(sendNewMessage(id, values.addMessageBody));
-    };
-
     return (
-        <div className={style.mainContainer}>
-            <div className={`${style.userCard} ${style.clearfix}`}>
-                <NavLink to={"/profile/" + id}>
-                    <img src={small || camera} className={style.userImg} alt='avatar'/>
-                </NavLink>
+        <>
+            <div className={style.userCard}>
+                <div className={style.userCardPhoto}>
+                    <NavLink to={"/profile/" + id}>
+                        <img src={small || camera} className={style.userImg} alt='avatar'/>
+                    </NavLink>
+                </div>
 
-                <div className={`${style.col2} ${style.clearfix}`}>
-                    <div className={style.fullName}>{name}</div>
-                    <div className={style.status}>{status}</div>
-                    <span onClick={handleClickOpen} className={style.sendMsg}>Send message</span>
-                    {open && <SendMessageModal
-                        name={name}
-                        avatar={small}
-                        open={open}
-                        handleClose={handleClose}
-                        onSubmit={sendMessage}
-                    />}
+                <div className={style.fullName}>
+                    <NavLink to={"/profile/" + id}>
+                        {name}
+                    </NavLink>
+                </div>
+                <div className={style.userCardBtn}>
+                {followed
+                    ? <CustomButton
+                        title={'Unfollow'}
+                        disabled={props.followInProgress.some(userId => userId === id)}
+                        onClick={() => {props.unfollow(id)}}
+                    />
+
+                    : <CustomButton
+                        title={'Follow'}
+                        disabled={props.followInProgress.some(userId => userId === id)}
+                        onClick={() => {props.follow(id)}}
+                    />
+                }
                 </div>
             </div>
-            {followed
-                ? <button disabled={props.followInProgress.some(userId => userId === id)}
-                          className={style.nextUser}
-                          onClick={() => {
-                              props.unfollow(id)
-                          }}>Unfollow</button>
 
-                : <button disabled={props.followInProgress.some(userId => userId === id)}
-                          className={style.nextUser}
-                          onClick={() => {
-                              props.follow(id)
-                          }}>Follow</button>
-            }
-        </div>
+        </>
     )
 }

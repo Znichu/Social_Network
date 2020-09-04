@@ -2,7 +2,7 @@ import React from 'react'
 import {useFormik} from "formik";
 import {Button, Input, MenuItem, Select, withStyles} from "@material-ui/core";
 import style from "./UsersSearchForm.module.css"
-import {CustomButton} from "../../../common/CustomButton/CustomButton";
+import {CustomButton} from "../CustomButton/CustomButton";
 
 const ColorButton = withStyles(() => ({
     root: {

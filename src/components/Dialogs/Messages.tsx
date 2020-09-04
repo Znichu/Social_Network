@@ -5,7 +5,7 @@ import {useParams} from "react-router";
 import MessageItem from "./MessageItem/MessageItem";
 import {RootState} from "../../redux/redux-store";
 import style from "./Messages.module.css";
-import {AddMessageFormType, SendMessageForm} from "./SendMessageForm";
+import {AddMessageFormType, SendMessageForm} from "../../common/SemdMessageForm/SendMessageForm";
 import {LinearProgress} from "@material-ui/core";
 
 

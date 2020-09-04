@@ -1,8 +1,8 @@
 import React from "react";
 import style from './ProfileUser.module.css'
-import Preloader from "../../common/Preloader/Preloader";
 import camera from "../../assets/images/camera.jpeg";
 import {ProfileType} from "../../type/types";
+import {LinearProgress} from "@material-ui/core";
 
 type PropsType = {
     profile: null | ProfileType
@@ -12,7 +12,7 @@ type PropsType = {
 const ProfileUser: React.FC<PropsType> = (props: PropsType) => {
 
     if (!props.profile) {
-        return <div> <Preloader /> </div>
+        return <LinearProgress />
     }
     return (
         <div className={style.wrapper}>

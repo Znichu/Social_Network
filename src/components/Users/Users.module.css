@@ -1,75 +1,33 @@
+.usersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.usersHeader {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 10px 16px 10px 16px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.usersLiner {
+    border-bottom: 1px solid #e7e8ec;
+    height: 2px;
+    width: 100%;
+}
+
 .mainContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     width: 100%;
-    margin: 20px;
+    margin: 20px 0;
 }
-.userCard {
-    background: #F1F1F1;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    border-radius: 7px 7px 0 0;
-    padding: 20px;
-}
-.sendMsg {
-    color: #939598;
-    cursor: pointer;
-    font-size: 12px;
-}
-.sendMsg:hover {
-
-    border-bottom: 1px solid #cccccc;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.userImg {
-    width: 100px;
-    border-radius: 50px;
-    diplay: bolck;
-    float: left;
-}
-
-.col2 {
-    float: left;
-    padding-left: 30px;
-}
-
-.fullName {
-    color: #1C75BC;
-    font-size: 1.5em;
-    font-weight: bold;
-    padding-bottom: 5px;
-}
-
-.status {
-    color: #069df9;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.nextUser {
-    outline: none;
-    border: none;
-    color: white;
-    background: #4A9ED2;
-    width:100%;
-    height: 50px;
-    margin-top: 0;
-    border-radius: 0 0 7px 7px;
-    display: block;
-    margin: 0 auto;
-    font-size: 1.3em;
-}
-
-.nextUser:hover {
-    background: #1C75BC;
-}
-
-
 
 span.active {
     font-weight: bold;
