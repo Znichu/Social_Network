@@ -7,7 +7,7 @@ import {usersAPI} from "../api/usersApi";
 let initialState = {
     totalPageCount: 10,
     totalCount: 0,
-    currentPage: 0,
+    currentPage: 1,
     isFetching: false,
     friends: [] as Array<UserType>
 };
