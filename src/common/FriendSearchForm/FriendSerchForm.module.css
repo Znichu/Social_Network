@@ -1,0 +1,11 @@
+.friendForm {
+    width: 100%;
+}
+
+.friendForm__input {
+    border: 0;
+    padding: 14px 44px 13px 48px;
+    width: 100%;
+    box-sizing: border-box;
+    background: url("../../assets/images/searching-magnifying-glass.png") no-repeat left;
+}

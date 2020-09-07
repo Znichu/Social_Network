@@ -1,10 +1,11 @@
 import React, {useEffect, useRef} from "react";
 import style from "./FriendsPage.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {actions, requestFriends} from "../../../redux/friend-reducer";
+import {actions, requestFriends, requestSearchFriends} from "../../../redux/friend-reducer";
 import {RootState} from "../../../redux/redux-store";
 import {FriendItem} from "./FriendItem";
 import {Loading} from "../../../common/Loading/Loading";
+import {FriendSearchForm} from "../../../common/FriendSearchForm/FriendSerchForm";
 
 
 const FriendsPage = React.memo(() => {
@@ -41,6 +42,10 @@ const FriendsPage = React.memo(() => {
         }
     }
 
+    const searchFriends = (term: string) => {
+        dispatch(requestSearchFriends(term))
+    }
+
     const friends = useSelector((state: RootState) => state.friendsBlock.friends)
     const isFetching = useSelector((state: RootState) => state.friendsBlock.isFetching)
 
@@ -48,6 +53,9 @@ const FriendsPage = React.memo(() => {
                                                           status={friend.status}/>)
     return (
         <>
+            <div className={style.friendsHeader}>
+                <FriendSearchForm searchFriends={searchFriends}/>
+            </div>
             <div className={style.friendsList}>
                 {friendsItem}
                 <div ref={loader}></div>
