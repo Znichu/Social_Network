@@ -52,7 +52,7 @@ const FriendsPage = React.memo(() => {
     const friendsItem = friends.map(friend => <FriendItem key={friend.id} avatar={friend.photos.small} name={friend.name}
                                                           status={friend.status}/>)
     return (
-        <>
+        <div className={style.friendsBlock}>
             <div className={style.friendsHeader}>
                 <FriendSearchForm searchFriends={searchFriends}/>
             </div>
@@ -61,7 +61,7 @@ const FriendsPage = React.memo(() => {
                 <div ref={loader}></div>
                 {isFetching && <Loading/>}
             </div>
-        </>
+        </div>
     )
 })
 

@@ -31,7 +31,7 @@ export const MyPosts: React.FC = React.memo( () => {
     };
 
     return (
-        <div className="container">
+        <div className={style.postBlock}>
             <div className={style.create_post}>
                 <div className={style.form_group}>
                     <AddMyPostFormRedux onSubmit={addNewPosts}/>

@@ -14,6 +14,7 @@ import {RootState} from "./redux/redux-store";
 import {LinearProgress} from "@material-ui/core";
 import {WithAuthenticationRoute} from "./hoc/withAuthenticationRoute"
 import {MyPosts} from "./components/MyPosts/MyPosts";
+import {Loading} from "./common/Loading/Loading";
 
 
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
@@ -27,11 +28,6 @@ const Setting = React.lazy(() => import('./components/Setting/Setting'));
 const News = React.lazy(() => import('./components/News/News'));
 
 
-type PropsType = {
-    initialize: boolean
-    setInitialized: () => void
-}
-
 export const App = () => {
     const dispatch = useDispatch();
 
@@ -43,19 +39,15 @@ export const App = () => {
     const isAuth = useSelector((state: RootState) => state.auth.isAuth)
 
     if (!initialize) {
-        return <LinearProgress/>
+        return <Loading/>
     }
     return (
         <>
             <div className="header">
                 <Header/>
             </div>
-            {!isAuth ? <Redirect to={'/login'}/> :
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-12">
-                        <ProfilePage/>
-                    </div>
                     <div className="col-lg-3">
                         <Navbar/>
                     </div>
@@ -63,11 +55,11 @@ export const App = () => {
                         <div className="mainContent">
                             <Switch>
                                 <Suspense fallback={<div><LinearProgress/></div>}>
-                                    <Route path="/" render={() => <Redirect to="/posts"/>}/>
-                                    <Route path="/posts" render={() => <MyPosts/>}/>
+                                    <Route path="/" render={() => <Redirect to="/my-profile"/>}/>
+                                    <WithAuthenticationRoute path="/my-profile" component={ProfilePage}/>
                                     <WithAuthenticationRoute path="/dialogs" component={Dialogs}/>
                                     <WithAuthenticationRoute path="/users" component={UsersPage}/>
-                                    <WithAuthenticationRoute path='/allfriends' component={FriendsPage}/>
+                                    <WithAuthenticationRoute path='/all-friends' component={FriendsPage}/>
                                     <WithAuthenticationRoute path="/messages/:id" component={Messages}/>
                                     <WithAuthenticationRoute path="/profile/:userId"
                                                              component={ProfileUserContainer}/>
@@ -75,15 +67,12 @@ export const App = () => {
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>
                                     <WithAuthenticationRoute path="/settings" component={Setting}/>
+                                    <Route path="/login" render={() => <Login/>}/>
                                 </Suspense>
                             </Switch>
                         </div>
                     </div>
                 </div>
-            </div>
-            }
-            <div>
-                <Route path="/login" render={() => <Login/>}/>
             </div>
         </>
     );

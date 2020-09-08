@@ -27,11 +27,9 @@ export const actions = {
 };
 
 //Thunk
-export const setInitialized = (): ThunkType => async (dispatch, getState) => {
+export const setInitialized = (): ThunkType => async (dispatch) => {
     const promiseAuth = await dispatch(setAuth());
-    const id = getState().auth.userId;
-    const profilePromise = await dispatch(getMyProfile(id));
-        Promise.all([promiseAuth, profilePromise])
+        Promise.all([promiseAuth])
         .then(() => {
             dispatch(actions.initialize())
         });

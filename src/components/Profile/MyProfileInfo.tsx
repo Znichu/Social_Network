@@ -26,9 +26,7 @@ const MyProfileInfo: React.FC<PropsType> = (props: PropsType) => {
                     <b>My professional skills: </b> {props.lookingForAJobDescription}
                 </div>
                 }
-                <div className={style.contacts}>
-                    <b>Contacts: </b>
-                </div>
+                <div className={style.contacts}></div>
             </div>
             <div className={style.editBtn}>
                 <EditSharpIcon  fontSize="small" onClick={props.activateEditProfile} />
