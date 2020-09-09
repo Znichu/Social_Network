@@ -71,28 +71,19 @@ export const Users: React.FC = () => {
     let pageCounter = Math.ceil(totalCount / totalPageCount);
 
     return (
-        <>
-            <div className={style.loading}>
-                {isFetching && <LinearProgress/>}
+        <div className={style.usersContainer}>
+            <div className={style.usersHeader}>
+                <UsersSearchForm searchUsers={searchUsers}/>
             </div>
-
-            <div className={style.usersContainer}>
-
-
-                <div className={style.usersHeader}>
-                    <UsersSearchForm searchUsers={searchUsers}/>
-                </div>
-                <div className={style.usersLiner}></div>
-                <div className={style.mainContainer}>
+            <div className={style.mainContainer}>
                 {user}
-                </div>
-                <div className={style.paginationWrapper}>
-                    <div className={classes.root}>
-                        <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
-                                    shape="rounded"/>
-                    </div>
+            </div>
+            <div className={style.paginationWrapper}>
+                <div className={classes.root}>
+                    <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
+                                shape="rounded"/>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
