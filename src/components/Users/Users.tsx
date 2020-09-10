@@ -16,6 +16,7 @@ import {
     getUsersFilter
 } from "../../redux/users-selectors";
 import {changeFilterAndRequestUsers, follow, unfollow} from "../../redux/users-reducer";
+import {Loading} from "../../common/Loading/Loading";
 
 
 const useStyles = makeStyles({
@@ -76,7 +77,7 @@ export const Users: React.FC = () => {
                 <UsersSearchForm searchUsers={searchUsers}/>
             </div>
             <div className={style.mainContainer}>
-                {user}
+                {isFetching ? <Loading/> : user}
             </div>
             <div className={style.paginationWrapper}>
                 <div className={classes.root}>

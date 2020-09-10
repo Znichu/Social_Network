@@ -1,5 +1,20 @@
 .formContainer {
-    display: inline-flex;
-    justify-content: space-evenly;
-    width: 700px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.searchInput {
+    margin: 0 10px;
+}
+.searchInput input {
+    border: none;
+    padding: 0 0 0 35px;
+    background: url("../../assets/images/searching-magnifying-glass.png") no-repeat left;
+}
+.searchSelector {
+    margin-right: 10px;
+    min-width: 120px;
+}
+.searchSelector select {
+    border: none;
 }

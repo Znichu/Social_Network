@@ -4,7 +4,7 @@ import {PhotosType, UserType} from "../type/types";
 export const instance = axios.create ({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0",
-    headers: {"API-KEY": "b8-f438-4eab-b20e-a45dfe437f13"}
+    headers: {"API-KEY": "13947ab8-f438-4eab-b20e-a45dfe437f13"}
 });
 
 

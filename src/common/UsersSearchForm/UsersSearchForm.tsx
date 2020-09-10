@@ -1,47 +1,52 @@
 import React from 'react'
 import {useFormik} from "formik";
-import {Button, Input, MenuItem, Select, withStyles} from "@material-ui/core";
+import {MenuItem, Select} from "@material-ui/core";
 import style from "./UsersSearchForm.module.css"
 import {CustomButton} from "../CustomButton/CustomButton";
+import {makeStyles} from "@material-ui/core/styles";
 
-const ColorButton = withStyles(() => ({
+const useStyles = makeStyles(() => ({
     root: {
-        color: '#ffffff',
-        backgroundColor: '#0063cc',
-        '&:hover': {
-            backgroundColor: '#ffffff',
+        color: '#818787',
+        '&::before': {
+            borderBottom: 'none',
         },
     },
-}))(Button);
+}));
 
 
 export const UsersSearchForm: React.FC<PropsType> = (props) => {
     const usersSearchForm = useFormik({
         initialValues: {
             term: '',
-            friend: 'null'
+            friend: ' '
         },
         onSubmit: (values) => {
             const filter = {
                 term: values.term,
-                friend: values.friend === "null" ? null: values.friend === "true" ? true : false
+                friend: values.friend === "null" ? null : values.friend === "true" ? true : false
             }
-            props.searchUsers(filter.term, filter.friend );
+            props.searchUsers(filter.term, filter.friend);
             console.table(filter)
         },
     });
 
+    const classes = useStyles();
+
     return (
         <>
-            <form onSubmit={usersSearchForm.handleSubmit}>
+            <form style={{width: "100%"}} onSubmit={usersSearchForm.handleSubmit}>
                 <div className={style.formContainer}>
-                    <Input placeholder="Enter name"
-                           inputProps={{'aria-label': 'description'}}
+                    <div className={style.searchInput}>
+                    <input placeholder="Enter name"
+                           type="text"
                            name="term"
                            onChange={usersSearchForm.handleChange}
                            value={usersSearchForm.values.term}
+
                     />
-                    <Select
+                    </div>
+{/*                    <Select
                         name='friend'
                         value={usersSearchForm.values.friend}
                         onChange={usersSearchForm.handleChange}
@@ -49,8 +54,23 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
                         <MenuItem value={'null'}>all</MenuItem>
                         <MenuItem value={'true'}>only followed</MenuItem>
                         <MenuItem value={'false'}>only unfollowed</MenuItem>
-                    </Select>
-<CustomButton title={'Search'}/>
+                    </Select>*/}
+                    <div className={style.searchSelector}>
+                        <Select
+                            name='friend'
+                            value={usersSearchForm.values.friend}
+                            onChange={usersSearchForm.handleChange}
+                            classes={{root: classes.root}}
+                        >
+                            <MenuItem value={" "} disabled>
+                                Parameters
+                            </MenuItem>
+                            <MenuItem value={'null'}>all</MenuItem>
+                            <MenuItem value={'true'}>only followed</MenuItem>
+                            <MenuItem value={'false'}>only unfollowed</MenuItem>
+                        </Select>
+                    </div>
+                    <CustomButton title={'Search'}/>
                 </div>
             </form>
         </>
