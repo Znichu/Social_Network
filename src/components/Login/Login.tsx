@@ -63,6 +63,10 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormPropsType, OwnPropsType> & 
                     <button className="btn btn-primary">Sing In</button>
                 </div>
             </form>
+            <div className={style.info}>
+                <span>Email: free@samuraijs.com</span>
+                <span>Password: free</span>
+            </div>
         </div>
     );
 };
@@ -87,7 +91,7 @@ export const Login: React.FC = () => {
     };
 
     if (isAuth) {
-        return <Redirect to={"/posts"}/>
+        return <Redirect to={"/my-profile"}/>
     }
     return (
         <div className={style.login}>
