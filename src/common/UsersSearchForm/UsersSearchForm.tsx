@@ -6,11 +6,14 @@ import {CustomButton} from "../CustomButton/CustomButton";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-    root: {
+    select: {
         color: '#818787',
-        '&::before': {
-            borderBottom: 'none',
+        '&:before': {
+            borderBottom: "none",
         },
+        '&:after': {
+            borderBottom: "none",
+        }
     },
 }));
 
@@ -38,29 +41,20 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
             <form style={{width: "100%"}} onSubmit={usersSearchForm.handleSubmit}>
                 <div className={style.formContainer}>
                     <div className={style.searchInput}>
-                    <input placeholder="Enter name"
-                           type="text"
-                           name="term"
-                           onChange={usersSearchForm.handleChange}
-                           value={usersSearchForm.values.term}
+                        <input placeholder="Enter name"
+                               type="text"
+                               name="term"
+                               onChange={usersSearchForm.handleChange}
+                               value={usersSearchForm.values.term}
 
-                    />
+                        />
                     </div>
-{/*                    <Select
-                        name='friend'
-                        value={usersSearchForm.values.friend}
-                        onChange={usersSearchForm.handleChange}
-                    >
-                        <MenuItem value={'null'}>all</MenuItem>
-                        <MenuItem value={'true'}>only followed</MenuItem>
-                        <MenuItem value={'false'}>only unfollowed</MenuItem>
-                    </Select>*/}
                     <div className={style.searchSelector}>
                         <Select
                             name='friend'
                             value={usersSearchForm.values.friend}
                             onChange={usersSearchForm.handleChange}
-                            classes={{root: classes.root}}
+                            className={classes.select}
                         >
                             <MenuItem value={" "} disabled>
                                 Parameters
