@@ -1,7 +1,6 @@
 import React, {Suspense, useEffect} from 'react';
-import {Redirect, Route, Switch, withRouter} from "react-router-dom";
-import {compose} from "redux";
-import {connect, useDispatch, useSelector} from "react-redux";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import {setInitialized} from "./redux/app-reducer";
 import './App.css';
 //components
@@ -13,7 +12,6 @@ import {ProfilePage} from "./components/Profile/ProfilePage";
 import {RootState} from "./redux/redux-store";
 import {LinearProgress} from "@material-ui/core";
 import {WithAuthenticationRoute} from "./hoc/withAuthenticationRoute"
-import {MyPosts} from "./components/MyPosts/MyPosts";
 import {Loading} from "./common/Loading/Loading";
 
 
@@ -21,8 +19,7 @@ const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersPage = React.lazy(() => import('./components/Users/UsersPage'));
 const Messages = React.lazy(() => import ("./components/Dialogs/Messages"));
 const FriendsPage = React.lazy(() => import ("./components/Friends/FriendsPage/FriendsPage"));
-// @ts-ignore
-const ProfileUserContainer = React.lazy(() => import('./components/ProfileUser/ProfileUserContainer'));
+const UserProfilePage = React.lazy(() => import('./components/ProfileUser/UserProfilePage'));
 const Music = React.lazy(() => import('./components/Music/Music'));
 const Setting = React.lazy(() => import('./components/Setting/Setting'));
 const News = React.lazy(() => import('./components/News/News'));
@@ -49,7 +46,7 @@ export const App = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
-                        <Navbar/>
+                        {isAuth && <Navbar/> }
                     </div>
                     <div className="col-lg-9">
                         <div className="mainContent">
@@ -62,7 +59,7 @@ export const App = () => {
                                     <WithAuthenticationRoute path='/all-friends' component={FriendsPage}/>
                                     <WithAuthenticationRoute path="/messages/:id" component={Messages}/>
                                     <WithAuthenticationRoute path="/profile/:userId"
-                                                             component={ProfileUserContainer}/>
+                                                             component={UserProfilePage}/>
 
                                     <Route path="/news" render={() => <News/>}/>
                                     <Route path="/music" render={() => <Music/>}/>

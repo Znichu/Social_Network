@@ -15,20 +15,20 @@
 }
 
 .dialogs_avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     height: 50px;
     width: 50px;
     margin-right: 12px;
+    overflow: hidden;
 }
 
 .dialogs_avatar__img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
 
 .dialogsHeader__title {
-    color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 0.5);
     font-size: 24px;
     text-overflow: ellipsis;
 }
@@ -44,4 +44,5 @@
     box-sizing: border-box;
     list-style: none;
     display: block;
+    min-height: 100vh;
 }

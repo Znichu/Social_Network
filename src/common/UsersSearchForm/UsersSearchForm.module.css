@@ -13,7 +13,7 @@
 }
 .searchSelector {
     margin-right: 10px;
-    min-width: 120px;
+    width: 135px;
 }
 .searchSelector select {
     border: none;

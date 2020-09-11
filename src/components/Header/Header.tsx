@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
                 <span style={{color: "#224B7A"}}>React Social Network</span>
             </div>
             <div className={style.userName}>
-                {isAuth ?
+                {isAuth &&
                     <div>
                         <Button classes={{label: classes.label}} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                             {userName}
@@ -75,9 +75,7 @@ export const Header: React.FC = () => {
                             <MenuItem onClick={logOut}>Logout</MenuItem>
                         </Menu>
                     </div>
-                    :   <Button classes={{label: classes.label}}>
-                        <NavLink to="/login">Login</NavLink>
-                </Button>}
+                    }
             </div>
         </div>
     )

@@ -1,17 +1,17 @@
 import React, {useEffect, useRef} from "react";
 import style from "./FriendsPage.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {actions, requestFriends, requestSearchFriends} from "../../../redux/friend-reducer";
+import {actions, requestFriends} from "../../../redux/friend-reducer";
 import {RootState} from "../../../redux/redux-store";
 import {FriendItem} from "./FriendItem";
 import {Loading} from "../../../common/Loading/Loading";
-import {FriendSearchForm} from "../../../common/FriendSearchForm/FriendSerchForm";
 
 
 const FriendsPage = React.memo(() => {
 
     const dispatch = useDispatch()
     const currentPage = useSelector((state: RootState) => state.friendsBlock.currentPage)
+    const userAvatar = useSelector((state: RootState) => state.myProfile.profile?.photos.small)
 
     useEffect(() => {
         dispatch(requestFriends())
@@ -42,10 +42,6 @@ const FriendsPage = React.memo(() => {
         }
     }
 
-    const searchFriends = (term: string) => {
-        dispatch(requestSearchFriends(term))
-    }
-
     const friends = useSelector((state: RootState) => state.friendsBlock.friends)
     const isFetching = useSelector((state: RootState) => state.friendsBlock.isFetching)
 
@@ -54,7 +50,10 @@ const FriendsPage = React.memo(() => {
     return (
         <div className={style.friendsBlock}>
             <div className={style.friendsHeader}>
-                <FriendSearchForm searchFriends={searchFriends}/>
+                <div className={style.friendsAvatar}>
+                    <img className={style.friendsAvatar__img} src={userAvatar} alt=""/>
+                </div>
+                <h4 className={style.friendsHeader__title}>Friends</h4>
             </div>
             <div className={style.friendsList}>
                 {friendsItem}

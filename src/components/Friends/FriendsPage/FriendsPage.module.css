@@ -6,13 +6,28 @@
 }
 .friendsHeader {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: 60px;
     padding: 10px 16px 10px 16px;
     overflow: hidden;
     box-sizing: border-box;
     border-bottom: 1px solid #e7e8ec;
+}
+.friendsAvatar {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    margin-right: 12px;
+}
+.friendsAvatar__img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.friendsHeader__title {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 24px;
+    text-overflow: ellipsis;
 }
 .friendsList {
     display: flex;

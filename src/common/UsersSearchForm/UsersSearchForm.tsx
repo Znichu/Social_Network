@@ -6,13 +6,22 @@ import {CustomButton} from "../CustomButton/CustomButton";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
+    root: {
+        '&:focus': {
+            backgroundColor:'#fff'
+        },
+    },
     select: {
         color: '#818787',
+        fontFamily: 'Montserrat',
         '&:before': {
             borderBottom: "none",
         },
         '&:after': {
             borderBottom: "none",
+        },
+        '&:hover': {
+            borderBottom: 'none'
         }
     },
 }));
@@ -22,7 +31,7 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
     const usersSearchForm = useFormik({
         initialValues: {
             term: '',
-            friend: ' '
+            friend: 'null'
         },
         onSubmit: (values) => {
             const filter = {
@@ -55,13 +64,14 @@ export const UsersSearchForm: React.FC<PropsType> = (props) => {
                             value={usersSearchForm.values.friend}
                             onChange={usersSearchForm.handleChange}
                             className={classes.select}
+                            classes={{root: classes.root}}
                         >
                             <MenuItem value={" "} disabled>
                                 Parameters
                             </MenuItem>
-                            <MenuItem value={'null'}>all</MenuItem>
-                            <MenuItem value={'true'}>only followed</MenuItem>
-                            <MenuItem value={'false'}>only unfollowed</MenuItem>
+                            <MenuItem value={'null'}>All users</MenuItem>
+                            <MenuItem value={'true'}>Only followed</MenuItem>
+                            <MenuItem value={'false'}>Only unfollowed</MenuItem>
                         </Select>
                     </div>
                     <CustomButton title={'Search'}/>
