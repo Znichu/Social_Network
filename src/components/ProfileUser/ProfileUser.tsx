@@ -2,7 +2,6 @@ import React from "react";
 import style from './ProfileUser.module.css'
 import camera from "../../assets/images/camera.jpeg";
 import {ProfileType} from "../../type/types";
-import {LinearProgress} from "@material-ui/core";
 import {Loading} from "../../common/Loading/Loading";
 
 type PropsType = {
@@ -30,7 +29,6 @@ const ProfileUser: React.FC<PropsType> = (props) => {
                             <span>{props.status}</span>
                         </div>
                     </div>
-
                     <hr/>
                     <div className={style.profileInfo__description}>
                     <div>

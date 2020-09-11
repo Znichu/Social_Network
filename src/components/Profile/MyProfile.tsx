@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/redux-store";
 import {savePhoto, saveProfile, updateMyStatus} from "../../redux/myProfile-reducer";
 import {UploadFile} from "../../common/UploadFile/UploadFile";
+import camera from "../../assets/images/camera.jpeg";
 
 
 const MyProfile: React.FC = () => {
@@ -60,7 +61,7 @@ const MyProfile: React.FC = () => {
     return (
         <div className={style.myProfileCard}>
             <div className={style.myProfilePhoto}>
-                <img src={profile.photos.large} alt="avatar"/>
+                <img src={profile.photos.large || camera} alt=""/>
                 <div className={style.overlay}></div>
                 <div className={style.uploadButton}><UploadFile onFileChange={onFileChange}/></div>
             </div>

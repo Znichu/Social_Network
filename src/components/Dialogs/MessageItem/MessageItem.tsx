@@ -3,39 +3,28 @@ import style from "./MessagesItem.module.css"
 import {Link} from "react-router-dom";
 
 type Props = {
+    senderId: number
     message: string
+    senderName: string
+    myId: number | null
 }
 
-const MessageItem: React.FC<Props> = (props: Props) => {
+const MessageItem: React.FC<Props> = (props) => {
+    const {senderId, message, senderName, myId} = props
+
+    const messageData = senderId === myId ? `${style.messageData} ${style.alignRight}` : style.messageData
+    const chatMessage = senderId === myId ? `${style.message} ${style.otherMessage} ${style.floatRight}` : `${style.message} ${style.myMessage}`
+
     return (
-            <section>
-            <div className={style.chat}>
-                <ul>
-                    <li className={style.other}>
-                        <Link className={style.user} to={'/'}><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></Link>
-                        <div className={style.date}>
-                            2 minutes ago
-                        </div>
-                        <div className={style.message}>
-                            <p>
-                                {props.message}
-                            </p>
-                        </div>
-                    </li>
-                    <li className={style.you}>
-                        <Link className={style.user} to='/'><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></Link>
-                        <div className={style.date}>
-                            7 minutes ago
-                        </div>
-                        <div className={style.message}>
-                            <p>
-                                {props.message}
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+        <li className={style.clearfix}>
+            <div className={messageData}>
+                <span className={style.messageData__time}>10:10 AM, Today</span> &nbsp; &nbsp;
+                <span className={style.messageData__name}>{senderName}</span>
             </div>
-            </section>
+            <div className={chatMessage}>
+                {message}
+            </div>
+        </li>
     );
 }
 

@@ -6,7 +6,6 @@ import MessageItem from "./MessageItem/MessageItem";
 import {RootState} from "../../redux/redux-store";
 import style from "./Messages.module.css";
 import {AddMessageFormType, SendMessageForm} from "../../common/SemdMessageForm/SendMessageForm";
-import {LinearProgress} from "@material-ui/core";
 
 
 const Messages = () => {
@@ -19,32 +18,33 @@ const Messages = () => {
 
     const messages = useSelector((state: RootState) => state.messagesPage.messages);
     const isFetching = useSelector((state: RootState) => state.messagesPage.isFetching)
+    const myId = useSelector((state: RootState) => state.auth.userId)
 
     const messagesElement =
-        messages.map(m => <MessageItem key={m.id} message={m.body}/>);
+        messages.map(m => <MessageItem key={m.id} myId={myId} senderName={m.senderName} senderId={m.senderId} message={m.body}/>);
 
     const sendMessage = (values: AddMessageFormType) => {
         dispatch(sendNewMessage(id, values.addMessageBody));
     };
 
     return (
-        <>
-            {isFetching
-                ? <LinearProgress/>
-                : <div className="container">
-                        <div className="col-lg-12">
-                            {messagesElement}
-                        </div>
-                    <div className="row">
-                        <div className="col lg-12">
-                            <div className={style.enterMessage}>
-                                <SendMessageForm onSubmit={sendMessage}/>
-                            </div>
-                        </div>
-                    </div>
+        <div className={style.messageContainer}>
+            <div className={style.chatHeader}>
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt=""/>
+                <div className={style.chatAbout}>
+                    <div className={style.chatWith}>Chat with Vincent Porter</div>
                 </div>
-            }
-        </>
+            </div>
+            <div className={style.chatHistory}>
+                <ul style={{listStyle: "none", padding: 0}}>
+                    {messagesElement}
+                </ul>
+            </div>
+
+            <div className={style.sendMessage}>
+                <SendMessageForm onSubmit={sendMessage}/>
+            </div>
+        </div>
     )
 }
 
