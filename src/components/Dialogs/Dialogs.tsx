@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import {useDispatch, useSelector} from "react-redux";
 import {requestDialogs} from "../../redux/messages-reducer";
 import {RootState} from "../../redux/redux-store";
+import {Loading} from "../../common/Loading/Loading";
 
 
 const Dialogs: React.FC = () => {
@@ -15,6 +16,7 @@ const Dialogs: React.FC = () => {
 
     const dialogs = useSelector((state: RootState) => state.messagesPage.dialogs)
     const avatar = useSelector((state: RootState) => state.myProfile.profile?.photos.small)
+    const isFetching = useSelector((state: RootState) => state.messagesPage.isFetching)
 
     const dialogsElement =
         dialogs.map(p => <DialogItem key={p.id} userName={p.userName} id={p.id} photos={p.photos}/>);
@@ -28,6 +30,7 @@ const Dialogs: React.FC = () => {
                 </div>
                 <h4 className={style.dialogsHeader__title}>Chats</h4>
             </div>
+            {isFetching && <Loading/>}
             <div className={style.dialogsLiner}></div>
             <ul className={style.pageDialogs}>
                 {dialogsElement}

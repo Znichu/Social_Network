@@ -2,13 +2,20 @@
     margin-bottom: 15px;
 }
 .messageData__time {
+    font-size: 11px;
     color: #a8aab1;
     padding-left: 6px;
 }
+.messageData__name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #2a5885;
+}
 .message {
-    padding: 6px 12px 7px;
+    padding: 5px 7px 3px;
     line-height: 26px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 400;
     margin-bottom: 20px;
     position: relative;
 }

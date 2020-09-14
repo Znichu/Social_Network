@@ -6,6 +6,9 @@ import MessageItem from "./MessageItem/MessageItem";
 import {RootState} from "../../redux/redux-store";
 import style from "./Messages.module.css";
 import {AddMessageFormType, SendMessageForm} from "../../common/SemdMessageForm/SendMessageForm";
+import moment from "moment";
+import noPhoto from "../../assets/images/camera.jpeg";
+import {Loading} from "../../common/Loading/Loading";
 
 
 const Messages = React.memo(() => {
@@ -22,8 +25,9 @@ const Messages = React.memo(() => {
     const dialogs = useSelector((state: RootState) => state.messagesPage.dialogs)
 
     const messagesElement =
-        messages.map(m => <MessageItem key={m.id} myId={myId} senderName={m.senderName} senderId={m.senderId} message={m.body}/>);
-    
+        messages.map(m => <MessageItem key={m.id} myId={myId} addedAt={m.addedAt} senderName={m.senderName} senderId={m.senderId} message={m.body}/>);
+
+    const chat = dialogs.filter(el => el.id == userId)
 
     const sendMessage = (values: AddMessageFormType) => {
         dispatch(sendNewMessage(userId, values.addMessageBody));
@@ -31,10 +35,14 @@ const Messages = React.memo(() => {
 
     return (
         <div className={style.messageContainer}>
+            {isFetching && <Loading/>}
             <div className={style.chatHeader}>
-                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt=""/>
+                <div className={style.chatHeader__photo}>
+                    <img src={chat[0].photos.small || noPhoto} alt=""/>
+                </div>
                 <div className={style.chatAbout}>
-                    <div className={style.chatWith}>Chat with Vincent Porter</div>
+                    <div className={style.chatWith}>Chat with {chat[0].userName}</div>
+                    <div className={style.chatAbout__date}>last seen {moment(chat[0].lastUserActivityDate).calendar()}</div>
                 </div>
             </div>
             <div className={style.chatHistory}>

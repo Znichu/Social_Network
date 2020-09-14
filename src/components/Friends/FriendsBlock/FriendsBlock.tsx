@@ -11,9 +11,9 @@ export const FriendsBlock: React.FC = () => {
 
     const {friends, totalCount} = useSelector((state: RootState) => state.friendsBlock)
 
-    useEffect(() => {
+/*    useEffect(() => {
         dispatch(requestFriends())
-    }, [])
+    }, [])*/
 
     let friendElement = friends.slice(0, 6).map(f => <FriendItem key={f.id} name={f.name} avatar={f.photos.small} />);
 

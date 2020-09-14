@@ -46,7 +46,7 @@ const FriendsPage = React.memo(() => {
     const isFetching = useSelector((state: RootState) => state.friendsBlock.isFetching)
 
     const friendsItem = friends.map(friend => <FriendItem key={friend.id} avatar={friend.photos.small} name={friend.name}
-                                                          status={friend.status}/>)
+                                                          status={friend.status} userId={friend.id}/>)
     return (
         <div className={style.friendsBlock}>
             <div className={style.friendsHeader}>

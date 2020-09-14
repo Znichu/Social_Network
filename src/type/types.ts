@@ -35,6 +35,8 @@ export type DialogType = {
     hasNewMessages: boolean
     newMessagesCount: number
     photos: PhotosType
+    lastDialogActivityDate: string
+    lastUserActivityDate: string
 }
 
 export type MessageType = {

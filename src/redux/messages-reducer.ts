@@ -44,11 +44,13 @@ export const actions = {
 //Thunk
 export const requestDialogs = (): ThunkType => async (dispatch) => {
     try {
+        dispatch(actions.toggleIsFetching(true))
         const data = await dialogsApi.getDialogs()
         dispatch(actions.setDialogs(data))
     } catch (e) {
         console.log(e)
     }
+    dispatch(actions.toggleIsFetching(false))
 }
 export const getMessagesFriend = (userId: number): ThunkType => async (dispatch) => {
     try {
@@ -62,11 +64,13 @@ export const getMessagesFriend = (userId: number): ThunkType => async (dispatch)
 }
 export const sendNewMessage = (userId: number, body: string): ThunkType => async (dispatch, getState) => {
     try {
+        dispatch(actions.toggleIsFetching(true))
         await dialogsApi.sendMessage(userId, body)
         await dispatch(getMessagesFriend(userId))
     } catch (e) {
         console.log(e)
     }
+    dispatch(actions.toggleIsFetching(false))
 }
 
 
