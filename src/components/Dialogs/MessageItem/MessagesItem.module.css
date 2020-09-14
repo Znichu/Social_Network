@@ -6,37 +6,35 @@
     padding-left: 6px;
 }
 .message {
-    color: white;
-    padding: 18px 20px;
+    padding: 6px 12px 7px;
     line-height: 26px;
     font-size: 16px;
-    border-radius: 7px;
-    margin-bottom: 30px;
-    width: 90%;
+    margin-bottom: 20px;
     position: relative;
 }
-.message:after {
-    bottom: 100%;
-    left: 7%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #86BB71;
-    border-width: 10px;
-    margin-left: -10px;
+.otherMessage {
+    width: auto;
+    max-width: 55%;
+    word-wrap: break-word;
+    color: black;
+    background: #DCE1E6;
+    float: left;
+    border-bottom-left-radius: 1.3em;
+    border-bottom-right-radius: 1.3em;
+    border-top-right-radius: 1.3em;
 }
 .myMessage {
-    background: #86BB71;
-}
-.otherMessage {
-    background: #94C2ED;
+    color: #fefefe;
+    background: #4A76A8;
+    width: auto;
+    max-width: 55%;
+    word-wrap: break-word;
+    border-bottom-right-radius: 1.3em;
+    border-bottom-left-radius: 1.3em;
+    border-top-left-radius: 1.3em;
 }
 .otherMessage:after {
-    border-bottom-color: #94C2ED;
-    left: 93%;
+
 }
 .clearfix:after {
     visibility: hidden;

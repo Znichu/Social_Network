@@ -11,7 +11,7 @@
 .chatHeader {
     width: 100%;
     padding: 20px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid #e7e8ec;
 }
 .chatHeader img {
     float: left;
@@ -29,7 +29,8 @@
     padding: 30px 30px 20px;
     border-bottom: 2px solid white;
     overflow-y: scroll;
-    height: auto;
+    scrollbar-width: none;
+    height: 700px;
     width: 100%;
 }
 .sendMessage {

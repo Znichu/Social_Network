@@ -57,7 +57,7 @@ export const App = () => {
                                     <WithAuthenticationRoute path="/dialogs" component={Dialogs}/>
                                     <WithAuthenticationRoute path="/users" component={UsersPage}/>
                                     <WithAuthenticationRoute path='/all-friends' component={FriendsPage}/>
-                                    <WithAuthenticationRoute path="/messages/:id" component={Messages}/>
+                                    <WithAuthenticationRoute path="/messages/:userId" component={Messages}/>
                                     <WithAuthenticationRoute path="/profile/:userId"
                                                              component={UserProfilePage}/>
 

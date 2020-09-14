@@ -13,7 +13,7 @@ const MessageItem: React.FC<Props> = (props) => {
     const {senderId, message, senderName, myId} = props
 
     const messageData = senderId === myId ? `${style.messageData} ${style.alignRight}` : style.messageData
-    const chatMessage = senderId === myId ? `${style.message} ${style.otherMessage} ${style.floatRight}` : `${style.message} ${style.myMessage}`
+    const chatMessage = senderId === myId ? `${style.message} ${style.myMessage} ${style.floatRight}` : `${style.message} ${style.otherMessage}`
 
     return (
         <li className={style.clearfix}>
