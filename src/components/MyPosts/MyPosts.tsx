@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm, reset} from "redux-form";
 import {maxLength, required} from "../../utils/Validation/FieldValidationForm";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {useDispatch, useSelector} from "react-redux";
@@ -28,6 +28,7 @@ export const MyPosts: React.FC = React.memo( () => {
 
     let addNewPosts = (values: AddPostFormType) => {
         dispatch(actions.addPost(values.textMyPost));
+        dispatch(reset("addMyPost"))
     };
 
     return (

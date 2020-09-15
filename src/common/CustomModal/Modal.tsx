@@ -30,6 +30,7 @@ export const Modal: React.FC<PropsType> = React.memo ((props) => {
                 <div className={style.modalRoot__paper}>
                 <div className={style.modalRoot__header}>
                     <div className={style.header__title}>New message</div>
+                    <div className={style.header__close} onClick={closeModal}>close</div>
                 </div>
                 <div className={style.modalRoot__info}>
                     <div className={style.info__photo}>

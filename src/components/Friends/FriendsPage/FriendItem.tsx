@@ -26,13 +26,13 @@ export const FriendItem: React.FC<PropsType> = React.memo((props) => {
     return (
         <div className={`${style.friendRow} ${style.clearFix}`}>
             <div className={style.friendPhoto}>
-                <Link to={'/'}>
+                <Link to={"/profile/" + userId}>
                     <img className={style.friendImg} src={avatar || noPhoto} alt={name}/>
                 </Link>
             </div>
             <div className={style.friendInfo}>
                 <div className={`${style.friendField} ${style.friendTitle}`}>
-                    <Link to={'/'}>{name}</Link>
+                    <Link to={"/profile/" + userId}>{name}</Link>
                 </div>
                 <div className={style.friendField}>
                     {status}

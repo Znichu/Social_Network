@@ -9,6 +9,7 @@ import {AddMessageFormType, SendMessageForm} from "../../common/SemdMessageForm/
 import moment from "moment";
 import noPhoto from "../../assets/images/camera.jpeg";
 import {Loading} from "../../common/Loading/Loading";
+import {reset} from "redux-form";
 
 
 const Messages = React.memo(() => {
@@ -25,30 +26,34 @@ const Messages = React.memo(() => {
     const dialogs = useSelector((state: RootState) => state.messagesPage.dialogs)
 
     const messagesElement =
-        messages.map(m => <MessageItem key={m.id} myId={myId} addedAt={m.addedAt} senderName={m.senderName} senderId={m.senderId} message={m.body}/>);
+        messages.map(m => <MessageItem key={m.id} myId={myId} addedAt={m.addedAt} senderName={m.senderName}
+                                       senderId={m.senderId} message={m.body}/>);
 
     const chat = dialogs.filter(el => el.id == userId)
 
     const sendMessage = (values: AddMessageFormType) => {
         dispatch(sendNewMessage(userId, values.addMessageBody));
+        dispatch(reset('addMessageDialog'))
     };
 
     return (
         <div className={style.messageContainer}>
-            {isFetching && <Loading/>}
             <div className={style.chatHeader}>
                 <div className={style.chatHeader__photo}>
                     <img src={chat[0].photos.small || noPhoto} alt=""/>
                 </div>
                 <div className={style.chatAbout}>
                     <div className={style.chatWith}>Chat with {chat[0].userName}</div>
-                    <div className={style.chatAbout__date}>last seen {moment(chat[0].lastUserActivityDate).calendar()}</div>
+                    <div className={style.chatAbout__date}>last
+                        seen {moment(chat[0].lastUserActivityDate).calendar()}</div>
                 </div>
             </div>
-            <div className={style.chatHistory}>
-                <ul style={{listStyle: "none", padding: 0}}>
-                    {messagesElement}
-                </ul>
+            <div className={style.chatWrapper}>
+                <div className={style.chatHistory}>
+                    <ul style={{listStyle: "none", padding: 0}}>
+                        {isFetching ? <Loading/> : messagesElement}
+                    </ul>
+                </div>
             </div>
             <div className={style.sendMessage}>
                 <SendMessageForm onSubmit={sendMessage}/>

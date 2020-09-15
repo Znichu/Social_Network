@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./Post.module.css"
 import {ProfileType} from "../../../type/types";
+import noPhoto from "../../../assets/images/camera.jpeg";
 
 type PropsType = {
     likes: number
@@ -19,7 +20,7 @@ const Post: React.FC<PropsType> = (props:PropsType) => {
                      src={avatar} alt="avatarUser"/>
                 <div className={s.post_detail}>
                     <div className={s.userInfo}>
-                        <h5>{props.avatar?.fullName}</h5>
+                        <h5>{props.avatar?.fullName || noPhoto}</h5>
                         <p className={s.text_muted}>Published about 3 mins ago</p>
                     </div>
                 </div>

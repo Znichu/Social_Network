@@ -5,6 +5,7 @@ import {actions, requestFriends} from "../../../redux/friend-reducer";
 import {RootState} from "../../../redux/redux-store";
 import {FriendItem} from "./FriendItem";
 import {Loading} from "../../../common/Loading/Loading";
+import noPhoto from "../../../assets/images/camera.jpeg";
 
 
 const FriendsPage = React.memo(() => {
@@ -51,7 +52,7 @@ const FriendsPage = React.memo(() => {
         <div className={style.friendsBlock}>
             <div className={style.friendsHeader}>
                 <div className={style.friendsAvatar}>
-                    <img className={style.friendsAvatar__img} src={userAvatar} alt=""/>
+                    <img className={style.friendsAvatar__img} src={userAvatar || noPhoto} alt=""/>
                 </div>
                 <h4 className={style.friendsHeader__title}>Friends</h4>
             </div>

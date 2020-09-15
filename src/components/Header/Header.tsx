@@ -1,11 +1,12 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {logout} from "../../redux/auth-reducer";
 import style from "./Header.module.css";
 import {RootState} from "../../redux/redux-store";
 import {Avatar, Button, createStyles, Menu, MenuItem, Theme} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import noPhoto from "../../assets/images/camera.jpeg";
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
         small: {
@@ -60,7 +61,7 @@ export const Header: React.FC = () => {
                     <div>
                         <Button classes={{label: classes.label}} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                             {userName}
-                            <Avatar className={classes.small} src={avatar}/>
+                            <Avatar className={classes.small} src={avatar || noPhoto}/>
                         </Button>
                         <Menu
                             id="simple-menu"

@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {requestDialogs} from "../../redux/messages-reducer";
 import {RootState} from "../../redux/redux-store";
 import {Loading} from "../../common/Loading/Loading";
+import noPhoto from "../../assets/images/camera.jpeg";
 
 
 const Dialogs: React.FC = () => {
@@ -26,7 +27,7 @@ const Dialogs: React.FC = () => {
         <div className={style.dialogsBlock}>
             <div className={style.dialogsHeader}>
                 <div className={style.dialogs_avatar}>
-                    <img className={style.dialogs_avatar__img} src={avatar} alt=""/>
+                    <img className={style.dialogs_avatar__img} src={avatar || noPhoto} alt=""/>
                 </div>
                 <h4 className={style.dialogsHeader__title}>Chats</h4>
             </div>
