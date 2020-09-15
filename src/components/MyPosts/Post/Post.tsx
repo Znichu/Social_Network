@@ -17,10 +17,10 @@ const Post: React.FC<PropsType> = (props:PropsType) => {
         <div className={s.post_content}>
             <div className={s.post_container}>
                 <img className={`${s.profile_photo_md} ${s.pull_left}`}
-                     src={avatar} alt="avatarUser"/>
+                     src={avatar || noPhoto} alt="avatarUser"/>
                 <div className={s.post_detail}>
                     <div className={s.userInfo}>
-                        <h5>{props.avatar?.fullName || noPhoto}</h5>
+                        <h5>{props.avatar?.fullName}</h5>
                         <p className={s.text_muted}>Published about 3 mins ago</p>
                     </div>
                 </div>

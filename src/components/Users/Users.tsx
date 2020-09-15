@@ -3,7 +3,7 @@ import style from "./Users.module.css";
 import {UsersSearchForm} from "../../common/UsersSearchForm/UsersSearchForm";
 import {UserCard} from "./UserCard/UserCard";
 //material-ui
-import {LinearProgress, makeStyles} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core";
 import Pagination from '@material-ui/lab/Pagination';
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -18,14 +18,6 @@ import {
 import {changeFilterAndRequestUsers, follow, unfollow} from "../../redux/users-reducer";
 import {Loading} from "../../common/Loading/Loading";
 
-
-const useStyles = makeStyles({
-    root: {
-        color: '#FE6B8B',
-    }
-});
-
-
 export const Users: React.FC = () => {
 
     const users = useSelector(getUsers)
@@ -37,8 +29,6 @@ export const Users: React.FC = () => {
     const isFetching = useSelector(getIsFetching)
 
     const dispatch = useDispatch()
-
-    const classes = useStyles();
 
     const searchUsers = (term: string, friend: null | boolean) => {
         dispatch(changeFilterAndRequestUsers(1, totalPageCount, term, friend));
@@ -80,9 +70,9 @@ export const Users: React.FC = () => {
                 {isFetching ? <Loading/> : user}
             </div>
             <div className={style.paginationWrapper}>
-                <div className={classes.root}>
-                    <Pagination count={pageCounter} page={currentPage} onChange={handleChange} color="primary"
-                                shape="rounded"/>
+                <div>
+                    <Pagination  count={pageCounter} page={currentPage} onChange={handleChange}
+                                shape="rounded" variant="outlined" />
                 </div>
             </div>
         </div>

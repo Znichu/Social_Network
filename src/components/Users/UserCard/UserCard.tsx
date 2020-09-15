@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./UserCard.module.css";
 import {NavLink} from "react-router-dom";
-import noPhoto from "../../../assets/images/camera.svg";
+import noPhoto from "../../../assets/images/camera.jpeg";
 import {PhotosType} from "../../../type/types";
 import {CustomButton} from "../../../common/CustomButton/CustomButton";
 
