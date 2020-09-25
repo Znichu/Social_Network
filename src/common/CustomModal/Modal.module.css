@@ -25,6 +25,7 @@
 .modalRoot__paper {
     max-width: 600px;
     max-height: calc(100% - 64px);
+    width: 80%;
     background-color: #fefefe;
     border-radius: 4px;
     color: #0f0f0f;
@@ -39,14 +40,15 @@
     justify-content: space-between;
     align-items: center;
     background-color: #5181b8;
-    padding: 16px 24px;
+    padding: 5px 15px;
 }
 .header__title {
     font-size: 15px;
     color: #fefefe;
 }
 .header__close {
-    font-size: 12px;
+    font-size: 28px;
+    font-weight: bold;
     color: #fefefe;
     cursor: pointer;
 }
